@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 m_Movement;
     public float m_Speed = 5.0f;
     public float m_RunSpeed = 2.0f;
+    private Rigidbody2D m_Rigidbody2D;
 
     // Animation variables
     private Animator m_Animator;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_Animator = GetComponent<Animator>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -38,10 +40,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        // Determine the speed multiplier based on whether the player is running or not
         float speedMultiplier;
-        // Move the player
-        Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
-        
         if (m_Run)
         {
             speedMultiplier = m_Speed * m_RunSpeed;
@@ -51,12 +51,15 @@ public class PlayerController : MonoBehaviour
             speedMultiplier = m_Speed;
         }
 
-        Vector2 newPosition = currentPosition + speedMultiplier * Time.deltaTime * m_Movement;
-        transform.position = newPosition;
+        // Move the player by setting the velocity of the Rigidbody
+        Vector2 resultingVelocity = new Vector2(
+            m_Movement.x * speedMultiplier * m_Speed, 
+            m_Rigidbody2D.velocity.y);
+            
+        m_Rigidbody2D.velocity = resultingVelocity;
 
-        // Flip the player's sprite based on the mouse position
+        // Flip the player's sprite based on the mouse position only if the player is not running
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //mousePosition.z = transform.position.z;
 
         if (mousePosition.x > transform.position.x)
         {
@@ -70,20 +73,20 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimations()
     {
-        if (m_Movement.x != 0 && !m_Run)
+        if (m_Rigidbody2D.velocity.x != 0 && !m_Run)
         {
             m_Animator.SetBool("IsWalking", true);
         }
-        else if (m_Movement.x == 0)
+        else if (m_Rigidbody2D.velocity.x == 0)
         {
             m_Animator.SetBool("IsWalking", false);
         }
         
-        if (m_Movement.x != 0 && m_Run)
+        if (m_Rigidbody2D.velocity.x != 0 && m_Run)
         {
             m_Animator.SetBool("IsRunning", true);
         }
-        else if (m_Movement.x == 0)
+        else if (m_Rigidbody2D.velocity.x == 0)
         {
             m_Animator.SetBool("IsRunning", false);
         }
