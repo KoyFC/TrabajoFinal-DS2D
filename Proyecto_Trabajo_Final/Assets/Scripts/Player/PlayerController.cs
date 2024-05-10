@@ -73,22 +73,24 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimations()
     {
-        if (m_Rigidbody2D.velocity.x != 0 && !m_Run)
-        {
-            m_Animator.SetBool("IsWalking", true);
-        }
-        else if (m_Rigidbody2D.velocity.x == 0)
+        Debug.Log(m_Movement.x);
+        if (m_Rigidbody2D.velocity.x == 0 && m_Movement.x == 0)
         {
             m_Animator.SetBool("IsWalking", false);
-        }
-        
-        if (m_Rigidbody2D.velocity.x != 0 && m_Run)
-        {
-            m_Animator.SetBool("IsRunning", true);
-        }
-        else if (m_Rigidbody2D.velocity.x == 0)
-        {
             m_Animator.SetBool("IsRunning", false);
         }
+        else if (m_Rigidbody2D.velocity.x != 0 && m_Run)
+        {
+            m_Animator.SetBool("IsRunning", true);
+            m_Animator.SetBool("IsWalking", false);
+        }
+        else if (m_Rigidbody2D.velocity.x != 0 && !m_Run)
+        {
+            m_Animator.SetBool("IsWalking", true);
+            m_Animator.SetBool("IsRunning", false);
+
+        }
+        
+        
     }
 }
