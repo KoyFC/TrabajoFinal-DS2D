@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Input variables
     private bool m_RunPressed;
     private bool m_JumpPressed;
+    private bool m_SummonLanternPressed;
     private bool m_LeftClickPressed;
     private bool m_RightClickPressed;
 
@@ -25,6 +26,12 @@ public class PlayerController : MonoBehaviour
     public Transform m_LanternHinge;
     private Vector3 m_MousePosition;
     private bool m_LanternActive;
+    public Color m_DefaultColor;
+    public Color m_Color1;
+    public Color m_Color2;
+    public Renderer m_LanternRenderer1;
+    public Renderer m_LanternRenderer2;
+    private bool m_LanternColorSwitch;
 
     private bool m_GoingRight;
     public bool GoingRight
@@ -61,6 +68,8 @@ public class PlayerController : MonoBehaviour
         {
             AimLantern();
         }
+
+        SwitchColor();
     }
 
     private void HandleInputs()
@@ -71,6 +80,7 @@ public class PlayerController : MonoBehaviour
             m_Movement.y = Input.GetAxis("Vertical");
             m_RunPressed = Input.GetKey(KeyCode.LeftShift);
             m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
+            m_SummonLanternPressed = Input.GetKeyDown(KeyCode.E);
             m_LeftClickPressed = Input.GetMouseButtonDown(0);
             m_RightClickPressed = Input.GetMouseButtonDown(1);
         }
@@ -142,8 +152,6 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimations()
     {
-        Debug.Log(m_Movement.x);
-
         if (m_Rigidbody2D.velocity.x == 0 && m_Movement.x == 0)
         {
             m_Animator.SetBool("IsWalking", false);
@@ -165,10 +173,9 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("JumpPressed");
         }
 
-        if (m_RightClickPressed)
+        if (m_SummonLanternPressed)
         {
             m_Animator.SetTrigger("ActiveLantern");
-            
         }
     }
 
@@ -200,5 +207,41 @@ public class PlayerController : MonoBehaviour
             angle += (angle < 0) ? 180 : -180;
         }
         m_LanternHinge.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    void SwitchColor() // TODO: 
+    {
+        // Change the color of both renderers to the same color and back
+        if (m_RightClickPressed)
+        {
+            // For the program to remember the last used color
+            if (m_LanternRenderer1.material.color == m_Color1) 
+            {
+                m_LanternColorSwitch = true;
+            }
+            else if (m_LanternRenderer1.material.color == m_Color2)
+            {
+                m_LanternColorSwitch = false;
+            } 
+
+            // Switch the color of the lanterns
+            if (m_LanternColorSwitch)
+            {
+                m_LanternRenderer1.material.color = m_Color2;
+                m_LanternRenderer2.material.color = m_Color2;
+            }
+            else
+            {
+                m_LanternRenderer1.material.color = m_Color1;
+                m_LanternRenderer2.material.color = m_Color1;
+            } 
+        }
+
+        // Change the color of both renderers to the default color
+        if (m_LeftClickPressed)
+        {
+            m_LanternRenderer1.material.color = m_DefaultColor;
+            m_LanternRenderer2.material.color = m_DefaultColor;
+        }      
     }
 }
