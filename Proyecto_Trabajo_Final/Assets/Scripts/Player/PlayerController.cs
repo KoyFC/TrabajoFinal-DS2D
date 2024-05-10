@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 m_Movement;
     public float m_Speed = 5.0f;
     public float m_RunSpeed = 2.0f;
-    public bool m_CanMove;
+    private bool m_CanMove;
 
     // Animation variables
     private Animator m_Animator;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject m_Lantern;
     public Transform m_LanternHinge;
     private Vector3 m_MousePosition;
-    public bool m_LanternActive;
+    private bool m_LanternActive;
 
     private bool m_GoingRight;
     public bool GoingRight
@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        m_LanternActive = true;
-
         m_CanMove = true;
         m_GoingRight = true;
         m_Animator = GetComponent<Animator>();
@@ -89,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         // Determine the speed multiplier based on whether the player is running or not
         float speedMultiplier;
-        if (m_RunPressed)
+        if (m_RunPressed && !m_LanternActive)
         {
             speedMultiplier = m_Speed * m_RunSpeed;
         }
@@ -151,17 +149,17 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetBool("IsWalking", false);
             m_Animator.SetBool("IsRunning", false);
         }
-        else if (m_Rigidbody2D.velocity.x != 0 && m_RunPressed)
-        {
-            m_Animator.SetBool("IsRunning", true);
-            m_Animator.SetBool("IsWalking", false);
-        }
-        else if (m_Rigidbody2D.velocity.x != 0 && !m_RunPressed)
+        else if (m_Rigidbody2D.velocity.x != 0 && !m_RunPressed || m_Rigidbody2D.velocity.x != 0 && m_RunPressed && m_LanternActive)
         {
             m_Animator.SetBool("IsWalking", true);
             m_Animator.SetBool("IsRunning", false);
         }
-
+        else if (m_Rigidbody2D.velocity.x != 0 && m_RunPressed && !m_LanternActive)
+        { 
+            m_Animator.SetBool("IsWalking", false);
+            m_Animator.SetBool("IsRunning", true);
+        }
+        
         if (m_JumpPressed)
         {
             m_Animator.SetTrigger("JumpPressed");
