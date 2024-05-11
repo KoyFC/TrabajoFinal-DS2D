@@ -53,11 +53,15 @@ MonoBehaviour:
   m_RunSpeed: 1.5
   m_Lantern: {fileID: 7721312724340656334}
   m_LanternHinge: {fileID: 1397733227353135100}
-  m_DefaultColor: {r: 1, g: 1, b: 1, a: 1}
-  m_Color1: {r: 1, g: 0.3529412, b: 0.5686275, a: 1}
-  m_Color2: {r: 0.3529412, g: 0.5686275, b: 1, a: 1}
   m_LanternRenderer1: {fileID: 4762913406311501609}
   m_LanternRenderer2: {fileID: 4714795447190074860}
+  m_LanternColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.54901963, b: 0.54901963, a: 1}
+  - {r: 0.54901963, g: 0.54901963, b: 1, a: 1}
+  - {r: 0.54901963, g: 1, b: 0.54901963, a: 1}
+  - {r: 1, g: 1, b: 0.23529412, a: 1}
+  m_UnlockedColors: 1
 --- !u!212 &4990416500409293905
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -299,7 +303,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5003956734164903122, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3620611284923846097, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
