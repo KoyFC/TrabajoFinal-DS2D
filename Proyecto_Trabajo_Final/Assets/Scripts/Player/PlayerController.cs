@@ -9,10 +9,16 @@ public class PlayerController : MonoBehaviour
     private Vector2 m_Movement;
     public float m_Speed = 5.0f;
     public float m_RunSpeed = 2.0f;
+    public float m_JumpForce = 10.0f;
     private bool m_CanMove;
     private Vector3 m_MousePosition;
     private Animator m_Animator;
     private Renderer m_PlayerRenderer;
+
+    // Ground check variables
+    public Transform m_GroundCheck;
+    public LayerMask m_GroundLayer;
+    private bool m_IsGrounded;
 
     // Input variables
     private bool m_RunPressed;
@@ -100,6 +106,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        // Handle jump
+        if (m_CanMove)
+        {
+            m_IsGrounded = Physics2D.OverlapBox(m_GroundCheck.position, new Vector2(0.7f, 0.08f), 0, m_GroundLayer);
+        }
+        
+        if (m_JumpPressed && m_IsGrounded)
+        {
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
+        }
+
         // Determine the speed multiplier based on whether the player is running or not
         float speedMultiplier;
         if (m_RunPressed && !m_LanternActive)
@@ -172,12 +189,12 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetBool("IsWalking", false);
             m_Animator.SetBool("IsRunning", true);
         }
-        if (m_SitPressed)
+        if (m_SitPressed && m_IsGrounded)
         {
             m_Animator.SetTrigger("SitPressed");
         }
         
-        if (m_JumpPressed)
+        if (m_JumpPressed && m_IsGrounded)
         {
             m_Animator.SetTrigger("JumpPressed");
         }
