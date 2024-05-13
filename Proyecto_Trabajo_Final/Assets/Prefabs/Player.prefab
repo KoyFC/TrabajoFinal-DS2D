@@ -52,8 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 2.3
   m_RunSpeed: 1.5
-  m_JumpForce: 900
-  m_RemainingExtraJumps: 0
+  m_JumpForce: 800
   m_MaxExtraJumps: 1
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
@@ -156,8 +155,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
-  m_AngularDrag: 0.5
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
   m_GravityScale: 4.8
   m_Material: {fileID: 6200000, guid: 1ac22c7760784104f9456e497173e032, type: 2}
   m_IncludeLayers:
