@@ -2649,7 +2649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 4849892373119046634}
-  m_HorizontalOffset: 1
+  m_HorizontalOffset: 3
   m_HorizontalSpeed: 2
   m_TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &966791683
