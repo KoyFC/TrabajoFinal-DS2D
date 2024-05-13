@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Player variables
+    [Header("Player variables")]
     private Rigidbody2D m_Rigidbody2D;
     private Vector2 m_Movement;
     public float m_Speed = 5.0f;
@@ -15,12 +15,12 @@ public class PlayerController : MonoBehaviour
     private Animator m_Animator;
     private Renderer m_PlayerRenderer;
 
-    // Ground check variables
+    [Header("Ground check variables")]
     public Transform m_GroundCheck;
     public LayerMask m_GroundLayer;
     private bool m_IsGrounded;
 
-    // Input variables
+    [Header("Input variables")]
     private bool m_RunPressed;
     private bool m_JumpPressed;
     private bool m_SitPressed;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool m_LeftClickPressed;
     private bool m_RightClickPressed;
 
-    // Lantern variables
+    [Header("Lantern variables")]
     public GameObject m_Lantern;
     public Transform m_LanternHinge; // The hinge that the lantern will rotate around
     public Renderer m_LanternRenderer1; // The lantern's light is divided into two shapes, thus 2 renderers
