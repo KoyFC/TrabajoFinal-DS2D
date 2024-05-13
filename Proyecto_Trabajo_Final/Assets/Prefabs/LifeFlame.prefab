@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5872860336810686764}
   - component: {fileID: 2398295603639418412}
   - component: {fileID: 4945428677704084751}
+  - component: {fileID: 3699897351527020381}
   m_Layer: 5
   m_Name: LifeFlame
   m_TagString: Untagged
@@ -97,3 +98,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3699897351527020381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321430502051384894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67591b18d2e35794381df1737dac462d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
