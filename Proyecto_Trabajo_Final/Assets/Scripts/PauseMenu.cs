@@ -49,8 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Close()
     {
-        Debug.Log("Closing game");
-        Application.Quit();
+        SceneManager.LoadScene("TitleScreen");
     }
 }
     
