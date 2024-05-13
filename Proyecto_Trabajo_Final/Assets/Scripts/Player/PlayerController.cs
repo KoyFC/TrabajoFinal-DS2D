@@ -5,27 +5,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Spawn variables
+    public Transform m_SpawnPoint;
+
     [Header("Player variables")]
     private Rigidbody2D m_Rigidbody2D;
     private Vector2 m_Movement;
     public float m_Speed = 5.0f;
     public float m_RunSpeed = 2.0f;
     public float m_JumpForce = 10.0f;
-    private bool m_CanMove;
-    private int m_RemainingExtraJumps;
-    //Life points and UI
-    public int m_MaxExtraJumps = 1;
-    public int m_LifePoints = 5;
-    public GameObject[] m_Flames;
-    //Knockback
     public float m_KnockbackForce;
-    //Invencible After Hit
-    public bool m_InvencibleAfterHit;
+    private bool m_CanMove;
+    private bool m_IsDead;
+    private int m_RemainingExtraJumps;
+    public int m_MaxExtraJumps = 1;
+
+    [Header("Life and UI")]
+    public int m_MaxLifePoints = 5;
+    public int m_LifePoints;
+    public GameObject[] m_Flames;
+    private bool m_InvencibleAfterHit;
     public float m_InvencibleAfterHitDuration;
-    public float m_RemainingInvencibleAfterHitDuration;
-
-    public bool m_RecieveDamage;
-
+    private float m_RemainingInvencibleAfterHitDuration;
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
@@ -76,7 +77,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        m_LifePoints = m_MaxLifePoints;
         m_CanMove = true;
+        m_IsDead = false;
         m_GoingRight = true;
         m_RemainingExtraJumps = m_MaxExtraJumps;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -88,24 +91,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HandleInputs();
-        HandleMovement();
-        HandleJump();
-        HandleAnimations();
-
-        if (m_LanternActive)
+        if (!m_IsDead)
         {
-            AimLantern();
+            HandleInputs();
+            HandleMovement();
+            HandleJump();
+            HandleAnimations();
+
+            if (m_LanternActive)
+            {
+                AimLantern();
+            }
+            SwitchLanternColor();
         }
-
-        SwitchLanternColor();
-
-        if (m_RecieveDamage == true)
-        {
-            ReceiveDamage(1, 1);
-        }
-
-        HandleKnockback();
     }
 
     // --- PLAYER METHODS ---
@@ -323,38 +321,69 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public void ReceiveDamage(int damage, float enemyXPos)
     {
         if (!m_InvencibleAfterHit)
         {
             m_LifePoints -= damage;
             m_InvencibleAfterHit = true;
+            m_CanMove = false;
 
             if (enemyXPos <= transform.position.x)
             {
-                m_Rigidbody2D.AddForce((Vector3.right + Vector3.up) * m_KnockbackForce);
+                m_Rigidbody2D.AddForce((Vector2.right + Vector2.up) * m_KnockbackForce);
             }
             else
             {
-                m_Rigidbody2D.AddForce((Vector3.left + Vector3.up) * m_KnockbackForce);
+                m_Rigidbody2D.AddForce((Vector2.left + Vector2.up) * m_KnockbackForce);
             }
         }
+
+        if (m_RemainingInvencibleAfterHitDuration > Mathf.Epsilon) // This is basically > 0
+        {
+            m_RemainingInvencibleAfterHitDuration -= Time.deltaTime;
+        }
+        else
+        {
+            m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
+            m_InvencibleAfterHit = false;
+            m_CanMove = true;
+        }
+
+        if (m_LifePoints <= 0 && !m_IsDead)
+        {
+            m_IsDead = true;
+            m_CanMove = false;
+            m_Animator.SetTrigger("Die");
+        }
+    }
+    
+    public void TriggerRevival()
+    {
+        // Revive the player at the last checkpoint AND reset the enemies (TODO)
+        
+        m_Animator.SetTrigger("Revive");
+        m_Rigidbody2D.velocity = Vector2.zero;
+        transform.position = m_SpawnPoint.position;
+        GoingRight = true;
     }
 
-    private void HandleKnockback()
+    public void StartRevival()
     {
-        if (m_InvencibleAfterHit)
+        m_LifePoints = m_MaxLifePoints;
+        m_IsDead = false;
+        m_CanMove = true;
+    }
+
+
+    // --- COLLISION METHODS ---
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (m_RemainingInvencibleAfterHitDuration > Mathf.Epsilon) // This is basically > 0
-            {
-                m_RemainingInvencibleAfterHitDuration -= Time.deltaTime;
-            }
-            else
-            {
-                m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
-                m_InvencibleAfterHit = false;
-            }
+            EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
+            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
         }
     }
 }
