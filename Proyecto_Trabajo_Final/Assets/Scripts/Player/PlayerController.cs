@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
-    private Renderer m_PlayerRenderer;
+    private SpriteRenderer m_PlayerRenderer;
 
     [Header("Life and UI")]
     public int m_MaxLifePoints = 5;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         m_RemainingExtraJumps = m_MaxExtraJumps;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
-        m_PlayerRenderer = GetComponent<Renderer>();
+        m_PlayerRenderer = GetComponent<SpriteRenderer>();
         m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
     }
@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
             HandleJump();
             HandleAnimations();
+            HandleInvincibility();
 
             if (m_LanternActive)
             {
@@ -261,11 +262,10 @@ public class PlayerController : MonoBehaviour
     
     public void ReceiveDamage(int damage, float enemyXPos)
     {
-        if (!m_InvencibleAfterHit)
+        if (!m_InvencibleAfterHit && !m_IsDead)
         {
             m_LifePoints -= damage;
             m_InvencibleAfterHit = true;
-            m_CanMove = false;
 
             if (enemyXPos <= transform.position.x)
             {
@@ -277,17 +277,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (m_RemainingInvencibleAfterHitDuration > Mathf.Epsilon) // This is basically > 0
-        {
-            m_RemainingInvencibleAfterHitDuration -= Time.deltaTime;
-        }
-        else
-        {
-            m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
-            m_InvencibleAfterHit = false;
-            m_CanMove = true;
-        }
-
         if (m_LifePoints <= 0 && !m_IsDead)
         {
             m_IsDead = true;
@@ -295,11 +284,28 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("Die");
         }
     }
+
+    private void HandleInvincibility()
+    {
+        if (m_InvencibleAfterHit)
+        {
+            if (m_RemainingInvencibleAfterHitDuration > Mathf.Epsilon) // This is basically > 0
+            {
+                m_RemainingInvencibleAfterHitDuration -= Time.deltaTime;
+            }
+            else
+            {
+                m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
+                m_InvencibleAfterHit = false;
+            }
+        }
+    }
     
     public void TriggerRevival()
     {
         // Revive the player at the last checkpoint AND reset the enemies (TODO)
         
+        m_InvencibleAfterHit = false;
         m_LanternActive = false;
         m_Lantern.SetActive(false);
         m_Animator.SetTrigger("Revive");

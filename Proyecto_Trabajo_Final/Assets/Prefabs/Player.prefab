@@ -57,9 +57,11 @@ MonoBehaviour:
   m_KnockbackForce: 200
   m_MaxExtraJumps: 1
   m_MaxLifePoints: 5
-  m_LifePoints: 10
+  m_LifePoints: 5
   m_Flames: []
-  m_InvencibleAfterHitDuration: 0
+  m_InvencibleAfterHit: 0
+  m_InvencibleAfterHitDuration: 1
+  m_RemainingInvencibleAfterHitDuration: 0
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
     serializedVersion: 2
