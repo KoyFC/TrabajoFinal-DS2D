@@ -183,25 +183,19 @@ public class PlayerController : MonoBehaviour
             m_RemainingExtraJumps = m_MaxExtraJumps;
         }
 
+        // We handle the animation here since it is related to the jump and would require extra checks in the HandleAnimations method
         if (m_IsGrounded && m_JumpPressed && m_CanMove)
         {
             m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
-            m_RemainingExtraJumps--;
+            m_Animator.SetTrigger("JumpPressed");
         }
-        else if (m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0 && m_Rigidbody2D.velocity.y < 0)
+        else if (!m_IsGrounded && m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0)
         {
-            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce * 1.4f);
+            // Set vertical velocity to 0 and then add the jump force
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
             m_RemainingExtraJumps--;
-        }
-        else if (m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0 && m_Rigidbody2D.velocity.y == 0)
-        {
-            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce * 1.25f);
-            m_RemainingExtraJumps--;
-        }
-        else if (m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0 && m_Rigidbody2D.velocity.y > 0)
-        {
-            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce * 1.08f);
-            m_RemainingExtraJumps--;
+            m_Animator.SetTrigger("JumpPressed");
         }
     }
 
@@ -225,11 +219,6 @@ public class PlayerController : MonoBehaviour
         if (m_SitPressed && m_IsGrounded)
         {
             m_Animator.SetTrigger("SitPressed");
-        }
-        
-        if (m_JumpPressed && m_IsGrounded)
-        {
-            m_Animator.SetTrigger("JumpPressed");
         }
 
         if (m_SummonLanternPressed)
