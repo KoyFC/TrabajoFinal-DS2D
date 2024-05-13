@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
-        m_UnlockedColors = 1; // The player will always start with the default color unlocked
+        //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
     }
 
@@ -372,9 +372,15 @@ public class PlayerController : MonoBehaviour
 
     private void SelectNextColor() // Select the next color in the array checking how many colors the player has unlocked.  
     {
-        if (m_UnlockedColors >= m_LanternColors.Length) // Extra check to avoid out of bounds errors
+        // Extra checks to avoid out of bounds errors
+
+        if (m_UnlockedColors >= m_LanternColors.Length) 
         {
             m_UnlockedColors = m_LanternColors.Length;
+        }
+        else if (m_UnlockedColors < 1)
+        {
+            m_UnlockedColors = 1;
         }
 
         if (m_UnlockedColors > 1) // If the number of unlocked colors is 1 (just the default), the color will not change.
