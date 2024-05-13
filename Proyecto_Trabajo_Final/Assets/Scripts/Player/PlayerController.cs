@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,19 @@ public class PlayerController : MonoBehaviour
     public float m_JumpForce = 10.0f;
     private bool m_CanMove;
     private int m_RemainingExtraJumps;
+    //Life points and UI
     public int m_MaxExtraJumps = 1;
+    public int m_LifePoints = 5;
+    public GameObject[] m_Flames;
+    //Knockback
+    public float m_KnockbackForce;
+    //Invencible After Hit
+    public bool m_InvencibleAfterHit;
+    public float m_InvencibleAfterHitDuration;
+    public float m_RemainingInvencibleAfterHitDuration;
+
+    public bool m_RecieveDamage;
+
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
@@ -70,6 +83,7 @@ public class PlayerController : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<Renderer>();
         m_UnlockedColors = 1; // The player will always start with the default color unlocked
+        m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
     }
 
     void Update()
@@ -85,6 +99,13 @@ public class PlayerController : MonoBehaviour
         }
 
         SwitchLanternColor();
+
+        if (m_RecieveDamage == true)
+        {
+            ReceiveDamage(1, 1);
+        }
+
+        HandleKnockback();
     }
 
     // --- PLAYER METHODS ---
@@ -298,6 +319,41 @@ public class PlayerController : MonoBehaviour
             if (m_CurrentColorIndex >= m_UnlockedColors)
             {
                 m_CurrentColorIndex = 1; // The color will never loop back to 0 since it is reserved for the default color, accesed with another key.
+            }
+        }
+    }
+
+
+    public void ReceiveDamage(int damage, float enemyXPos)
+    {
+        if (!m_InvencibleAfterHit)
+        {
+            m_LifePoints -= damage;
+            m_InvencibleAfterHit = true;
+
+            if (enemyXPos <= transform.position.x)
+            {
+                m_Rigidbody2D.AddForce((Vector3.right + Vector3.up) * m_KnockbackForce);
+            }
+            else
+            {
+                m_Rigidbody2D.AddForce((Vector3.left + Vector3.up) * m_KnockbackForce);
+            }
+        }
+    }
+
+    private void HandleKnockback()
+    {
+        if (m_InvencibleAfterHit)
+        {
+            if (m_RemainingInvencibleAfterHitDuration > Mathf.Epsilon) // This is basically > 0
+            {
+                m_RemainingInvencibleAfterHitDuration -= Time.deltaTime;
+            }
+            else
+            {
+                m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
+                m_InvencibleAfterHit = false;
             }
         }
     }
