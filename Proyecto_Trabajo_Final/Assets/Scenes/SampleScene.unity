@@ -5163,10 +5163,6 @@ PrefabInstance:
       propertyPath: m_SpawnPoint
       value: 
       objectReference: {fileID: 2001646843}
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_KnockbackForce
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player

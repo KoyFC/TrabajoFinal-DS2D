@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     private int m_RemainingExtraJumps;
     public int m_MaxExtraJumps = 1;
 
+    private Vector3 m_MousePosition;
+    private Animator m_Animator;
+    private Renderer m_PlayerRenderer;
+
     [Header("Life and UI")]
     public int m_MaxLifePoints = 5;
     public int m_LifePoints;
@@ -27,10 +31,6 @@ public class PlayerController : MonoBehaviour
     private bool m_InvencibleAfterHit;
     public float m_InvencibleAfterHitDuration;
     private float m_RemainingInvencibleAfterHitDuration;
-
-    private Vector3 m_MousePosition;
-    private Animator m_Animator;
-    private Renderer m_PlayerRenderer;
 
     [Header("Ground check variables")]
     public Transform m_GroundCheck;
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [Header("Lantern variables")]
     public GameObject m_Lantern;
     public Transform m_LanternHinge; // The hinge that the lantern will rotate around
+    public Renderer m_LanternRenderer0; // The lantern's main renderer
     public Renderer m_LanternRenderer1; // The lantern's light is divided into two shapes, thus 2 renderers
     public Renderer m_LanternRenderer2;
     public Color[] m_LanternColors; // Set of colors that the lantern can have
@@ -250,77 +251,14 @@ public class PlayerController : MonoBehaviour
     {
         if (m_LanternActive)
         {
-            m_PlayerRenderer.material.color = m_LanternRenderer1.material.color;
+            m_PlayerRenderer.material.color = m_LanternRenderer0.material.color;
         }
         else 
         {
             m_PlayerRenderer.material.color = m_LanternColors[0];
         }
     }
-
-    // --- LANTERN METHODS ---
-
-    public void SummonLantern() // Used in the animation event
-    {
-        if (!m_LanternActive)
-        {
-            m_LanternActive = true;
-            m_Lantern.SetActive(true);
-        }
-        else
-        {
-            m_LanternActive = false;
-            m_Lantern.SetActive(false);
-        }
-    }
-
-    private void AimLantern()
-    {
-        Vector2 direction = m_MousePosition - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Adjusting the lantern angle to point in the right direction
-        if (!GoingRight)
-        {
-            // If the player is not going right, the angle is inverted
-            angle += (angle < 0) ? 180 : -180;
-        }
-        m_LanternHinge.rotation = Quaternion.Euler(0, 0, angle);
-    }
-
-    private void SwitchLanternColor()
-    {
-        if (m_RightClickPressed) // If the right mouse button is pressed, the color will cycle through the unlocked colors (excluding default)
-        {
-            SelectNextColor();
-            m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
-            m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
-        }
-
-        if (m_LeftClickPressed) // If the left mouse button is pressed, the color will be set to the default color
-        {
-            m_LanternRenderer1.material.color = m_LanternColors[0];
-            m_LanternRenderer2.material.color = m_LanternColors[0];
-        }
-    }
-
-    private void SelectNextColor() // Select the next color in the array checking how many colors the player has unlocked.  
-    {
-        if (m_UnlockedColors >= m_LanternColors.Length) // Extra check to avoid out of bounds errors
-        {
-            m_UnlockedColors = m_LanternColors.Length;
-        }
-
-        if (m_UnlockedColors > 1) // If the number of unlocked colors is 1 (just the default), the color will not change.
-        {
-            m_CurrentColorIndex++;
-            if (m_CurrentColorIndex >= m_UnlockedColors)
-            {
-                m_CurrentColorIndex = 1; // The color will never loop back to 0 since it is reserved for the default color, accesed with another key.
-            }
-        }
-    }
-
+    
     public void ReceiveDamage(int damage, float enemyXPos)
     {
         if (!m_InvencibleAfterHit)
@@ -373,6 +311,72 @@ public class PlayerController : MonoBehaviour
         m_LifePoints = m_MaxLifePoints;
         m_IsDead = false;
         m_CanMove = true;
+    }
+
+
+    // --- LANTERN METHODS ---
+
+    public void SummonLantern() // Used in the animation event
+    {
+        if (!m_LanternActive)
+        {
+            m_LanternActive = true;
+            m_Lantern.SetActive(true);
+        }
+        else
+        {
+            m_LanternActive = false;
+            m_Lantern.SetActive(false);
+        }
+    }
+
+    private void AimLantern()
+    {
+        Vector2 direction = m_MousePosition - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Adjusting the lantern angle to point in the right direction
+        if (!GoingRight)
+        {
+            // If the player is not going right, the angle is inverted
+            angle += (angle < 0) ? 180 : -180;
+        }
+        m_LanternHinge.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    private void SwitchLanternColor()
+    {
+        if (m_RightClickPressed) // If the right mouse button is pressed, the color will cycle through the unlocked colors (excluding default)
+        {
+            SelectNextColor();
+            m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
+            m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
+            m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
+        }
+
+        if (m_LeftClickPressed) // If the left mouse button is pressed, the color will be set to the default color
+        {
+            m_LanternRenderer0.material.color = m_LanternColors[0];
+            m_LanternRenderer1.material.color = m_LanternColors[0];
+            m_LanternRenderer2.material.color = m_LanternColors[0];
+        }
+    }
+
+    private void SelectNextColor() // Select the next color in the array checking how many colors the player has unlocked.  
+    {
+        if (m_UnlockedColors >= m_LanternColors.Length) // Extra check to avoid out of bounds errors
+        {
+            m_UnlockedColors = m_LanternColors.Length;
+        }
+
+        if (m_UnlockedColors > 1) // If the number of unlocked colors is 1 (just the default), the color will not change.
+        {
+            m_CurrentColorIndex++;
+            if (m_CurrentColorIndex >= m_UnlockedColors)
+            {
+                m_CurrentColorIndex = 1; // The color will never loop back to 0 since it is reserved for the default color, accesed with another key.
+            }
+        }
     }
 
 
