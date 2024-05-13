@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
             m_Target.transform.position.y + 1, 
             transform.position.z);
 
-        // Si el player mira a la derecha, añadimos offset a la derecha (lo añadimos en X)
+        // Si el player mira a la derecha, aï¿½adimos offset a la derecha (lo aï¿½adimos en X)
         if(m_Target.localScale.x > 0f)
         {
             m_TargetPosition = new Vector3(
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
                 m_TargetPosition.y,
                 m_TargetPosition.z);
         }
-        // Si el player mira a la izquierda, añadimos offset a la izquierda (lo quitamos en x)
+        // Si el player mira a la izquierda, aï¿½adimos offset a la izquierda (lo quitamos en x)
         else
         {
             m_TargetPosition = new Vector3(
