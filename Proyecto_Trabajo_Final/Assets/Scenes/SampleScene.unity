@@ -2017,7 +2017,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -2147,7 +2147,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 14
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -2197,7 +2197,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -2227,7 +2227,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 7
-      m_TileSpriteIndex: 7
+      m_TileSpriteIndex: 12
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -2237,7 +2237,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -2287,7 +2287,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 10
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -2315,27 +2315,51 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 412db83dafb9f6a49be49eb85a6e3f9c, type: 2}
   - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 0bdf1f3619c45dd4a8f7db48a3d40027, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 144
     m_Data: {fileID: -54078894, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   - m_RefCount: 18
     m_Data: {fileID: 515555851, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 7
+    m_Data: {fileID: 508313161, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
+  - m_RefCount: 7
+    m_Data: {fileID: 1799993025, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 997710371, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1328961390, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1505342571, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 997710371, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
+    m_Data: {fileID: 175726103, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1709651411, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 931007206, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 175726103, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
-  - m_RefCount: 7
-    m_Data: {fileID: 508313161, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
-  - m_RefCount: 7
-    m_Data: {fileID: 1799993025, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
+    m_Data: {fileID: 1505342571, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 182
     m_Data:
@@ -2370,7 +2394,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -9, y: -10, z: 0}
-  m_Size: {x: 22, y: 10, z: 1}
+  m_Size: {x: 30, y: 11, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
