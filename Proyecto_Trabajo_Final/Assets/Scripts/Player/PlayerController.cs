@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public float m_RunSpeed = 2.0f;
     public float m_JumpForce = 10.0f;
     private bool m_CanMove;
+    private int m_RemainingExtraJumps;
+    public int m_MaxExtraJumps = 1;
+
     private Vector3 m_MousePosition;
     private Animator m_Animator;
     private Renderer m_PlayerRenderer;
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         m_CanMove = true;
         m_GoingRight = true;
+        m_RemainingExtraJumps = m_MaxExtraJumps;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<Renderer>();
@@ -72,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleInputs();
         HandleMovement();
+        HandleJump();
         HandleAnimations();
 
         if (m_LanternActive)
@@ -106,17 +111,15 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        // Handle jump
         if (m_CanMove)
         {
-            m_IsGrounded = Physics2D.OverlapBox(m_GroundCheck.position, new Vector2(0.7f, 0.1f), 0, m_GroundLayer); // Create a temporal square box to check if the player is grounded
+            m_IsGrounded = Physics2D.OverlapBox(
+                m_GroundCheck.position, 
+                new Vector2(1.2f, 0.35f), 
+                0, 
+                m_GroundLayer); // Create a temporal square box to check if the player is grounded
         }
         
-        if (m_JumpPressed && m_IsGrounded)
-        {
-            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
-        }
-
         // Determine the speed multiplier based on whether the player is running or not
         float speedMultiplier;
         if (m_RunPressed && !m_LanternActive)
@@ -169,6 +172,36 @@ public class PlayerController : MonoBehaviour
             {
                 GoingRight = false;
             }
+        }
+    }
+
+    private void HandleJump()
+    {
+        // Handle jump
+        if (m_IsGrounded)
+        {
+            m_RemainingExtraJumps = m_MaxExtraJumps;
+        }
+
+        if (m_IsGrounded && m_JumpPressed && m_CanMove)
+        {
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
+            m_RemainingExtraJumps--;
+        }
+        else if (m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0 && m_Rigidbody2D.velocity.y < 0)
+        {
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce * 1.4f);
+            m_RemainingExtraJumps--;
+        }
+        else if (m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0 && m_Rigidbody2D.velocity.y == 0)
+        {
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce * 1.25f);
+            m_RemainingExtraJumps--;
+        }
+        else if (m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0 && m_Rigidbody2D.velocity.y > 0)
+        {
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce * 1.08f);
+            m_RemainingExtraJumps--;
         }
     }
 
