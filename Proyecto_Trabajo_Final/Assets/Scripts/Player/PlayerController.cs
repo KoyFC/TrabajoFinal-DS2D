@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             m_IsGrounded = Physics2D.OverlapBox(
                 m_GroundCheck.position, 
-                new Vector2(1.2f, 0.35f), 
+                new Vector2(0.8f, 0.35f), 
                 0, 
                 m_GroundLayer); // Create a temporal square box to check if the player is grounded
         }
