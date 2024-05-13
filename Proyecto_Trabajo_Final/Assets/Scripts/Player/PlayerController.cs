@@ -300,6 +300,8 @@ public class PlayerController : MonoBehaviour
     {
         // Revive the player at the last checkpoint AND reset the enemies (TODO)
         
+        m_LanternActive = false;
+        m_Lantern.SetActive(false);
         m_Animator.SetTrigger("Revive");
         m_Rigidbody2D.velocity = Vector2.zero;
         transform.position = m_SpawnPoint.position;
