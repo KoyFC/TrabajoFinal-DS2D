@@ -11,14 +11,20 @@ public class PlayerController : MonoBehaviour
     [Header("Player variables")]
     private Rigidbody2D m_Rigidbody2D;
     private Vector2 m_Movement;
-    public float m_Speed = 5.0f;
-    public float m_RunSpeed = 2.0f;
-    public float m_JumpForce = 10.0f;
+
+    public float m_DefaultSpeed = 5.0f;
+    private float m_CurrentSpeed;
+    public float m_RunSpeedMultiplier = 1.5f;
+
+    public float m_DefaultJumpForce = 800.0f;
+    private float m_CurrentJumpForce;
+    private int m_RemainingExtraJumps;
+    public int m_DefaultMaxExtraJumps = 1;
+    private int m_CurrentMaxExtraJumps;
+
     public float m_KnockbackForce;
     private bool m_CanMove;
     private bool m_IsDead;
-    private int m_RemainingExtraJumps;
-    public int m_MaxExtraJumps = 1;
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
@@ -75,14 +81,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         m_LifePoints = m_MaxLifePoints;
         m_CanMove = true;
         m_IsDead = false;
         m_GoingRight = true;
-        m_RemainingExtraJumps = m_MaxExtraJumps;
+        m_RemainingExtraJumps = m_DefaultMaxExtraJumps;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
@@ -99,6 +104,7 @@ public class PlayerController : MonoBehaviour
             HandleJump();
             HandleAnimations();
             HandleInvincibility();
+            HandlePlayerBenefits();
 
             if (m_LanternActive)
             {
@@ -145,11 +151,11 @@ public class PlayerController : MonoBehaviour
         float speedMultiplier;
         if (m_RunPressed && !m_LanternActive)
         {
-            speedMultiplier = m_Speed * m_RunSpeed;
+            speedMultiplier = m_CurrentSpeed * m_RunSpeedMultiplier;
         }
         else
         {
-            speedMultiplier = m_Speed;
+            speedMultiplier = m_CurrentSpeed;
         }
 
         // Move the player by setting the velocity of the Rigidbody only if it is able to move
@@ -157,7 +163,7 @@ public class PlayerController : MonoBehaviour
         if (m_CanMove)
         {
             Vector2 resultingVelocity = new Vector2(
-                m_Movement.x * speedMultiplier * m_Speed, 
+                m_Movement.x * speedMultiplier * m_CurrentSpeed, 
                 m_Rigidbody2D.velocity.y);
             
             m_Rigidbody2D.velocity = resultingVelocity;
@@ -201,20 +207,20 @@ public class PlayerController : MonoBehaviour
         // Handle jump
         if (m_IsGrounded)
         {
-            m_RemainingExtraJumps = m_MaxExtraJumps;
+            m_RemainingExtraJumps = m_CurrentMaxExtraJumps;
         }
 
         // We handle the animation here since it is related to the jump and would require extra checks in the HandleAnimations method
         if (m_IsGrounded && m_JumpPressed && m_CanMove)
         {
-            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
+            m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce);
             m_Animator.SetTrigger("JumpPressed");
         }
         else if (!m_IsGrounded && m_JumpPressed && m_CanMove && m_RemainingExtraJumps > 0)
         {
             // Set vertical velocity to 0 and then add the jump force
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce);
+            m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce);
             m_RemainingExtraJumps--;
             m_Animator.SetTrigger("JumpPressed");
         }
@@ -257,6 +263,40 @@ public class PlayerController : MonoBehaviour
         else 
         {
             m_PlayerRenderer.material.color = m_LanternColors[0];
+        }
+    }
+
+    private void HandlePlayerBenefits()
+    {
+        if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
+        {
+            m_CurrentSpeed = m_DefaultSpeed * 1.075f;
+            m_CurrentJumpForce = m_DefaultJumpForce;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
+        {
+            m_CurrentSpeed = m_DefaultSpeed * 0.925f;
+            m_CurrentJumpForce = m_DefaultJumpForce;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
+        {
+            m_CurrentSpeed = m_DefaultSpeed * 1.15f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 0.85f;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
+        {
+            m_CurrentSpeed = m_DefaultSpeed * 0.85f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 1.15f;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps + 1;
+        }
+        else 
+        {
+            m_CurrentSpeed = m_DefaultSpeed;
+            m_CurrentJumpForce = m_DefaultJumpForce;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
     }
     

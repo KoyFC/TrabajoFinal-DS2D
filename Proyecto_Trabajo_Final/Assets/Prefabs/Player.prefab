@@ -51,14 +51,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnPoint: {fileID: 0}
-  m_Speed: 2.3
-  m_RunSpeed: 1.5
-  m_JumpForce: 800
+  m_DefaultSpeed: 2.4
+  m_RunSpeedMultiplier: 1.5
+  m_DefaultJumpForce: 825
+  m_DefaultMaxExtraJumps: 1
   m_KnockbackForce: 200
-  m_MaxExtraJumps: 1
   m_MaxLifePoints: 5
   m_LifePoints: 5
-  m_Flames: []
+  m_Flames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_InvencibleAfterHitDuration: 1
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
