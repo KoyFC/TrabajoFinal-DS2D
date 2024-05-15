@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -111,6 +112,32 @@ public class PlayerController : MonoBehaviour
                 AimLantern();
             }
             SwitchLanternColor();
+
+            if (m_LifePoints < 1)
+            {
+                Destroy(m_Flames[0].gameObject);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+
+            else if (m_LifePoints < 2)
+            {
+                Destroy(m_Flames[1].gameObject);
+            }
+
+            else if (m_LifePoints < 3)
+            {
+                Destroy(m_Flames[2].gameObject);
+            }
+
+            else if (m_LifePoints < 4)
+            {
+                Destroy(m_Flames[3].gameObject);
+            }
+
+            else if (m_LifePoints < 5)
+            {
+                Destroy(m_Flames[4].gameObject);
+            }
         }
     }
 
