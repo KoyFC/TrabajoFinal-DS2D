@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public int m_MaxLifePoints = 5;
     public int m_LifePoints;
     public GameObject[] m_Flames;
+    public Color[] m_FlameColor; // 0 is disabled, the rest will be used for extra health bars
     private bool m_InvencibleAfterHit;
     public float m_InvencibleAfterHitDuration;
     private float m_RemainingInvencibleAfterHitDuration;
@@ -112,32 +113,6 @@ public class PlayerController : MonoBehaviour
                 AimLantern();
             }
             SwitchLanternColor();
-
-            if (m_LifePoints < 1)
-            {
-                Destroy(m_Flames[0].gameObject);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-
-            else if (m_LifePoints < 2)
-            {
-                Destroy(m_Flames[1].gameObject);
-            }
-
-            else if (m_LifePoints < 3)
-            {
-                Destroy(m_Flames[2].gameObject);
-            }
-
-            else if (m_LifePoints < 4)
-            {
-                Destroy(m_Flames[3].gameObject);
-            }
-
-            else if (m_LifePoints < 5)
-            {
-                Destroy(m_Flames[4].gameObject);
-            }
         }
     }
 
@@ -298,7 +273,7 @@ public class PlayerController : MonoBehaviour
         if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
         {
             m_CurrentSpeed = m_DefaultSpeed * 1.075f;
-            m_CurrentJumpForce = m_DefaultJumpForce;
+            m_CurrentJumpForce = m_DefaultJumpForce * 1.075f;
             m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
