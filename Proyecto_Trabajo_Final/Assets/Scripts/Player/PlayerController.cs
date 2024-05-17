@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
             HandleJump();
             HandleAnimations();
+            HandleLife();
             HandleInvincibility();
             HandlePlayerBenefits();
 
@@ -301,6 +302,16 @@ public class PlayerController : MonoBehaviour
             m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
     }
+
+    private void HandleLife()
+    {
+        if (m_LifePoints <= 0 && !m_IsDead)
+        {
+            m_IsDead = true;
+            m_CanMove = false;
+            m_Animator.SetTrigger("Die");
+        }
+    }
     
     public void ReceiveDamage(int damage, float enemyXPos)
     {
@@ -317,13 +328,6 @@ public class PlayerController : MonoBehaviour
             {
                 m_Rigidbody2D.AddForce((Vector2.left + Vector2.up) * m_KnockbackForce);
             }
-        }
-
-        if (m_LifePoints <= 0 && !m_IsDead)
-        {
-            m_IsDead = true;
-            m_CanMove = false;
-            m_Animator.SetTrigger("Die");
         }
     }
 
@@ -444,6 +448,14 @@ public class PlayerController : MonoBehaviour
         {
             EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
             ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeathBox"))
+        {
+            m_LifePoints = 0;
         }
     }
 }

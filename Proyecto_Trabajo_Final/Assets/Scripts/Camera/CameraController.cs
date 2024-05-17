@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform m_Target;
     public float m_HorizontalOffset;
     public float m_HorizontalSpeed;
+    public float m_StopCamera;
 
     public Vector3 m_TargetPosition;
 
@@ -35,10 +36,12 @@ public class CameraController : MonoBehaviour
                 m_TargetPosition.z);
         }
         // Aplicamos la posicion en la camara
-        transform.position = Vector3.Lerp(
-            transform.position, 
-            m_TargetPosition,
-            Time.deltaTime * m_HorizontalSpeed
-            );
+        if (m_Target.transform.position.y > m_StopCamera)
+        {
+            transform.position = Vector3.Lerp(
+                transform.position, 
+                m_TargetPosition,
+                Time.deltaTime * m_HorizontalSpeed);
+        }
     }
 }
