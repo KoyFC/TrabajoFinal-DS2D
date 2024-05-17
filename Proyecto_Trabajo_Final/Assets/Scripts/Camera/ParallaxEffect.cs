@@ -5,7 +5,6 @@ using UnityEngine;
 public class ParallaxEffect : MonoBehaviour
 {
     [SerializeField] private float parallaxMutiplier;
-
     private Transform cameraTransform;
     private Vector3 previousCameraPosition;
     private float spriteWidth, startPosition;
