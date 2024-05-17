@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class BackgroundFollowCamera : MonoBehaviour
 {
-    public Transform m_CameraToFollow;
+    private Transform m_CameraToFollow;
     public float m_VerticalOffset = 0.0f;
+
+    void Start()
+    {
+        // Find the camera to follow using tag
+        m_CameraToFollow = GameObject.FindGameObjectWithTag("MainCamera").transform;
+
+    }
 
     // Update is called once per frame
     void LateUpdate()
