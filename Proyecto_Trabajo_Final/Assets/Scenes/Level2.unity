@@ -10988,7 +10988,7 @@ MonoBehaviour:
   m_Target: {fileID: 4849892373119046634}
   m_HorizontalOffset: 3
   m_HorizontalSpeed: 2
-  m_StopCamera: 0
+  m_StopCamera: -5
   m_TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &553629842
 GameObject:
