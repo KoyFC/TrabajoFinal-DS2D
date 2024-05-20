@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float m_KnockbackForce;
     private bool m_CanMove;
     private bool m_IsDead;
+    public bool m_ReviveTriggered;
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
@@ -345,10 +346,8 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void TriggerRevival()
+    public void TriggerRevival() // Called during death animation
     {
-        // Revive the player at the last checkpoint AND reset the enemies (TODO)
-        
         m_InvencibleAfterHit = false;
         m_LanternActive = false;
         m_Lantern.SetActive(false);
@@ -358,11 +357,22 @@ public class PlayerController : MonoBehaviour
         GoingRight = true;
     }
 
-    public void StartRevival()
+    public void StartRevival() // Called during revival animation
     {
         m_LifePoints = m_MaxLifePoints;
         m_IsDead = false;
         m_CanMove = true;
+    }
+
+    public void RespawnEnemies() // Also called during revival animation
+    {
+        m_ReviveTriggered = true;
+        Invoke("EndRevival", 0.3f);
+    }
+
+    private void EndRevival()
+    {
+        m_ReviveTriggered = false;
     }
 
 

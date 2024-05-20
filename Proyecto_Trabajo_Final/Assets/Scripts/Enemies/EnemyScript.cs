@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    public GameObject m_Player;
+    public PlayerController m_PlayerController;
     public int m_CurrentLifePoints;
     public int m_MaxLifePoints = 3;
     public int m_DamageDealtToPlayer = 1;
-    private Vector2 m_SpawnPoint;
+    public Vector3 m_SpawnPoint;
 
     public bool m_GoingRight;
     public bool GoingRight
@@ -28,8 +30,11 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
+        // ADD EVERYTHING IN HERE INSIDE SCRIPTS THAT INHERIT FROM THIS SCRIPT
         m_CurrentLifePoints = m_MaxLifePoints;
         m_SpawnPoint = transform.position;
+        m_Player = GameObject.FindGameObjectWithTag("Player");
+        m_PlayerController = m_Player.GetComponent<PlayerController>();
     }
 
     public virtual void GetDamage(int damage)

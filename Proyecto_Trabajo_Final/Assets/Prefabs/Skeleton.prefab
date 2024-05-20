@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -183,12 +183,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e6607fa1f90144bdcc7b96b091261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CurrentLifePoints: 5
+  m_Player: {fileID: 0}
+  m_PlayerController: {fileID: 0}
+  m_CurrentLifePoints: 3
   m_MaxLifePoints: 3
   m_DamageDealtToPlayer: 1
+  m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_GoingRight: 0
-  m_Player: {fileID: 0}
   m_SkeletonBehaviour: 1
   m_SkeletonSpeed: 1
-  m_FollowDistance: 1
+  m_FollowDistance: 5
   m_PatrolPoints: []

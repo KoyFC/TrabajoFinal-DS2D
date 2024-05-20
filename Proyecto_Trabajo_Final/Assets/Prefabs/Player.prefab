@@ -57,6 +57,7 @@ MonoBehaviour:
   m_DefaultJumpForce: 825
   m_DefaultMaxExtraJumps: 1
   m_KnockbackForce: 200
+  m_ReviveTriggered: 0
   m_MaxLifePoints: 8
   m_LifePoints: 8
   m_InvencibleAfterHitDuration: 1

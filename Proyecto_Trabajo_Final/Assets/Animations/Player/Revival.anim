@@ -26,7 +26,7 @@ AnimationClip:
       value: {fileID: 1370706400, guid: 4bdb340664f4a4245a5dac64b0d1c043, type: 3}
     - time: 0.5833333
       value: {fileID: -2081047989, guid: 4bdb340664f4a4245a5dac64b0d1c043, type: 3}
-    - time: 0.9166667
+    - time: 0.8333333
       value: {fileID: 276923149, guid: 4bdb340664f4a4245a5dac64b0d1c043, type: 3}
     attribute: m_Sprite
     path: 
@@ -59,7 +59,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.9166666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -79,7 +79,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.8333333
+  - time: 0
+    functionName: RespawnEnemies
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.75
     functionName: StartRevival
     data: 
     objectReferenceParameter: {fileID: 0}

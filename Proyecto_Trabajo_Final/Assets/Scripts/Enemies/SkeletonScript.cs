@@ -5,10 +5,8 @@ using UnityEngine;
 public class SkeletonScript : EnemyScript
 {
     private Animator m_Animator;
-    private BoxCollider2D m_Collider;
-    private CapsuleCollider2D m_CapsuleCollider;
+    private CapsuleCollider2D m_Collider;
     private Rigidbody2D m_Rigidbody;
-    public GameObject m_Player;
     
 
     public enum SKELETON_BEHAVIOUR
@@ -35,9 +33,13 @@ public class SkeletonScript : EnemyScript
     // Start is called before the first frame update
     void Start()
     {
+        m_CurrentLifePoints = m_MaxLifePoints;
+        m_SpawnPoint = transform.position;
+
+        m_Player = GameObject.FindGameObjectWithTag("Player");
+        m_PlayerController = m_Player.GetComponent<PlayerController>();
         m_Animator = GetComponent<Animator>();
-        m_Collider = GetComponent<BoxCollider2D>();
-        m_CapsuleCollider = GetComponent<CapsuleCollider2D>();
+        m_Collider = GetComponent<CapsuleCollider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         if (m_SkeletonBehaviour == SKELETON_BEHAVIOUR.PATROL_POINT)
         {
@@ -72,6 +74,16 @@ public class SkeletonScript : EnemyScript
             case SKELETON_BEHAVIOUR.FOLLOW_PLAYER:
                 FollowPlayer(dt);
                 break;
+        }
+
+        if (m_CurrentLifePoints <= 0)
+        {
+            DestroySkeleton();
+        }
+
+        if (m_PlayerController.m_ReviveTriggered)
+        {
+            Respawn();
         }
     }
 
@@ -217,17 +229,22 @@ public class SkeletonScript : EnemyScript
         }
     }
 
-    public void DestroySkeleton()
+    private void DestroySkeleton()
     {
         m_Collider.enabled = false;
-        m_CapsuleCollider.enabled = false;
+        m_Collider.enabled = false;
         if (m_Rigidbody.bodyType != RigidbodyType2D.Static)
         {
             m_Rigidbody.velocity = Vector2.zero;
         }
-        m_Animator.SetTrigger("Dead");
+        //m_Animator.SetTrigger("Dead");
         m_Rigidbody.isKinematic = true;
-        Destroy(gameObject, 1);
+        Invoke("DeactivateSkeleton", 1f);
+    }
+
+    private void DeactivateSkeleton()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

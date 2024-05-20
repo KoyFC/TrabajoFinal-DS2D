@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 110511836}
   - component: {fileID: 110511835}
   m_Layer: 0
-  m_Name: DeathHitbox (1)
+  m_Name: Spikes 1
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,8 +707,9 @@ GameObject:
   m_Component:
   - component: {fileID: 281186034}
   - component: {fileID: 281186033}
+  - component: {fileID: 281186035}
   m_Layer: 0
-  m_Name: DeathHitbox
+  m_Name: FallHitbox
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -746,7 +747,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 8.640785, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -757,7 +758,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 118.6, y: 1}
+  m_Size: {x: 101.31842, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &281186034
 Transform:
@@ -774,6 +775,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &281186035
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281186032}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -41.890915, y: 6.221511}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.7739716, y: 12.743422}
+  m_EdgeRadius: 0
 --- !u!1 &360546691
 GameObject:
   m_ObjectHideFlags: 0
@@ -9995,7 +10041,7 @@ GameObject:
   - component: {fileID: 1437015298}
   - component: {fileID: 1437015297}
   m_Layer: 0
-  m_Name: DeathHitbox (2)
+  m_Name: Spikes 2
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
