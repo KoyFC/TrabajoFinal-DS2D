@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform m_Target;
     public float m_HorizontalOffset;
     public float m_HorizontalSpeed;
-    public float m_StopCamera;
+    public float m_StopCamera = -5;
 
     public Vector3 m_TargetPosition;
 
