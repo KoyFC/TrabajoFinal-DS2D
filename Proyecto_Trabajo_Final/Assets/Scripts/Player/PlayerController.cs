@@ -34,8 +34,6 @@ public class PlayerController : MonoBehaviour
     [Header("Life and UI")]
     public int m_MaxLifePoints = 5;
     public int m_LifePoints;
-    public GameObject[] m_Flames;
-    public Color[] m_FlameColor; // 0 is disabled, the rest will be used for extra health bars
     private bool m_InvencibleAfterHit;
     public float m_InvencibleAfterHitDuration;
     private float m_RemainingInvencibleAfterHitDuration;
