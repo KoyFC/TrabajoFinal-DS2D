@@ -580,26 +580,10 @@ CompositeCollider2D:
         Y: -20000000
       - X: 100000000
         Y: -20000000
-      - X: 100000000
-        Y: -16250000
-      - X: 96875000
-        Y: -16250000
-      - X: 96875000
-        Y: -13125000
-      - X: 93750000
-        Y: -13125000
-      - X: 93750000
+      - X: 90000000
         Y: -10000000
-      - X: 46250000
+      - X: 50000000
         Y: -10000000
-      - X: 46250000
-        Y: -13125000
-      - X: 43125000
-        Y: -13125000
-      - X: 43125000
-        Y: -16250000
-      - X: 40000000
-        Y: -16250000
       - X: 40000000
         Y: -20000000
       - X: -90000000
@@ -612,18 +596,10 @@ CompositeCollider2D:
     m_Paths:
     - - {x: 12.99997, y: -10}
       - {x: 12.99997, y: -2}
-      - {x: 10, y: -1.9999707}
-      - {x: 9.99997, y: -1.625}
-      - {x: 9.6875, y: -1.6249707}
-      - {x: 9.68747, y: -1.3125}
-      - {x: 9.375, y: -1.3124707}
-      - {x: 9.37497, y: -1}
-      - {x: 4.625, y: -1.0000293}
-      - {x: 4.6249704, y: -1.3125}
-      - {x: 4.3125, y: -1.3125293}
-      - {x: 4.3124704, y: -1.625}
-      - {x: 4, y: -1.6250293}
-      - {x: 3.9999704, y: -2}
+      - {x: 9.999993, y: -1.9999924}
+      - {x: 8.999989, y: -1}
+      - {x: 4.9999924, y: -1.0000076}
+      - {x: 3.9999893, y: -2}
       - {x: -9, y: -2.0000293}
       - {x: -8.99997, y: -10}
   m_VertexDistance: 0.0005
@@ -2514,7 +2490,7 @@ Tilemap:
   - first: {x: 4, y: -2, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
+      m_TileIndex: 15
       m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
@@ -2579,8 +2555,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 533794c119773be4c87211650ce6e295, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: ad3a4b0267d603a489da63722095fe80, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 1731ca41621cb92468cb4b6a5121cba7, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: bd3c051d6a2226744bfa2d2f68832620, type: 2}
   - m_RefCount: 1
@@ -2603,8 +2579,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 83cf33b9af203e34ca34d079884f9e67, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 144
     m_Data: {fileID: -54078894, guid: 28a37290928cc3a428bd908ad27b2d42, type: 3}
@@ -2665,7 +2641,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {r: 6.335e-41, g: 6.335e-41, b: 6.335e-41, a: 6.335e-41}
   - m_RefCount: 0
-    m_Data: {r: 6.335e-41, g: 6.335e-41, b: 6.335e-41, a: 6.335e-41}
+    m_Data: {r: 6.5452e-41, g: 6.5452e-41, b: 6.5452e-41, a: 6.5452e-41}
   - m_RefCount: 182
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
@@ -5611,6 +5587,10 @@ PrefabInstance:
     - target: {fileID: 2559207078411772475, guid: 07e90bd9179cbc744b8fb2b0ab2cf921, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653773845171125770, guid: 07e90bd9179cbc744b8fb2b0ab2cf921, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3906030346155945731, guid: 07e90bd9179cbc744b8fb2b0ab2cf921, type: 3}
       propertyPath: m_LocalPosition.x
