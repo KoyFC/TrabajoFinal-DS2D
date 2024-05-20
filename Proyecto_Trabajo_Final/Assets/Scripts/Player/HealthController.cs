@@ -9,11 +9,11 @@ public class HealthController : MonoBehaviour
     public GameObject[] m_Flames;
     public Color[] m_Colors;
     public Animator[] m_FlameAnimators;
-    private int m_CurrentFlameIndex;
     private int i;
 
     void Update()
     {
+        // Update the flames based on the player's life points. Activate or deactivate them if the player's health is 5 or lower. Change their color if it's higher.
         for (i = 0; i < m_Flames.Length; i++)
         {
             if (m_PlayerController.m_LifePoints <= i)
@@ -26,6 +26,23 @@ public class HealthController : MonoBehaviour
                 m_Flames[i].SetActive(true);
             }
         }
+
+        if (m_PlayerController.m_LifePoints > 5)
+        {
+            for (i = m_Flames.Length; i < m_PlayerController.m_LifePoints; i++)
+            {
+                m_Flames[i - m_Flames.Length].GetComponent<Image>().color = m_Colors[1];
+            }
+
+            
+        }
+        else if (m_PlayerController.m_LifePoints <= 5)
+            {
+                for (i = 0; i < m_Flames.Length; i++)
+                {
+                    m_Flames[i].GetComponent<Image>().color = m_Colors[0];
+                }
+            }
     }
 
     IEnumerator DeactivateFlame(int index, float delayTime)

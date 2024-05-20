@@ -58,7 +58,7 @@ MonoBehaviour:
   m_DefaultMaxExtraJumps: 1
   m_KnockbackForce: 200
   m_MaxLifePoints: 5
-  m_LifePoints: 5
+  m_LifePoints: 6
   m_InvencibleAfterHitDuration: 1
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
@@ -96,8 +96,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_Colors:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.7028302, g: 0.9705184, b: 1, a: 1}
+  - {r: 1, g: 0.7264151, b: 0.24056602, a: 1}
   m_FlameAnimators:
   - {fileID: 0}
   - {fileID: 0}
