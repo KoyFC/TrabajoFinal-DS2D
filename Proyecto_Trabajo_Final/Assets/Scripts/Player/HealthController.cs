@@ -27,22 +27,18 @@ public class HealthController : MonoBehaviour
             }
         }
 
-        if (m_PlayerController.m_LifePoints > 5)
+        for (i = 0; i < m_Flames.Length; i++)
         {
-            for (i = m_Flames.Length; i < m_PlayerController.m_LifePoints; i++)
+            // The flames' color will change based on the player's life points. If the player's health is 5 or lower, the flames will be color 0. If it's higher, they will be color 1.
+            if (m_PlayerController.m_LifePoints <= m_Flames.Length || (m_PlayerController.m_LifePoints > m_Flames.Length && m_PlayerController.m_LifePoints % m_Flames.Length <= i))
             {
-                m_Flames[i - m_Flames.Length].GetComponent<Image>().color = m_Colors[1];
+                m_Flames[i].GetComponent<Image>().color = m_Colors[0];
             }
-
-            
+            else
+            {
+                m_Flames[i].GetComponent<Image>().color = m_Colors[1];
+            }
         }
-        else if (m_PlayerController.m_LifePoints <= 5)
-            {
-                for (i = 0; i < m_Flames.Length; i++)
-                {
-                    m_Flames[i].GetComponent<Image>().color = m_Colors[0];
-                }
-            }
     }
 
     IEnumerator DeactivateFlame(int index, float delayTime)

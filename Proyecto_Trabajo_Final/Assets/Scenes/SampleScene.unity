@@ -5848,10 +5848,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1176505131}
     - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_FlameAnimators.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_FlameAnimators.Array.data[0]
       value: 
       objectReference: {fileID: 1314330195}
