@@ -7,7 +7,7 @@ public class EnemyScript : MonoBehaviour
     public int m_CurrentLifePoints;
     public int m_MaxLifePoints = 3;
     public int m_DamageDealtToPlayer = 1;
-    //public HealthBarBehaviour m_HealthBar;
+    private Vector2 m_SpawnPoint;
 
     public bool m_GoingRight;
     public bool GoingRight
@@ -29,7 +29,7 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         m_CurrentLifePoints = m_MaxLifePoints;
-        //m_HealthBar.SetHealth(m_CurrentLifePoints, m_MaxLifePoints);
+        m_SpawnPoint = transform.position;
     }
 
     public virtual void GetDamage(int damage)
@@ -37,7 +37,13 @@ public class EnemyScript : MonoBehaviour
         if (m_CurrentLifePoints > 0)
         {
             m_CurrentLifePoints--;
-            //m_HealthBar.SetHealth(m_CurrentLifePoints, m_MaxLifePoints);
         }
+    }
+
+    public virtual void Respawn()
+    {
+        m_CurrentLifePoints = m_MaxLifePoints;
+        transform.position = m_SpawnPoint;
+        gameObject.SetActive(true);
     }
 }
