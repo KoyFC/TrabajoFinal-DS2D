@@ -9993,7 +9993,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.5209484, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -10004,7 +10004,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 118.6, y: 1}
+  m_Size: {x: 115.558105, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1437015298
 Transform:
@@ -11023,17 +11023,9 @@ PrefabInstance:
       propertyPath: m_SpawnPoint
       value: 
       objectReference: {fileID: 553629843}
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LanternRenderer1
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1144207648302485885, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11073,70 +11065,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8.826395
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 8.826395
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 8.826395
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 98.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2288195729443837215, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3104084293588940702, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721312724340656334, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9046241732468814307, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
