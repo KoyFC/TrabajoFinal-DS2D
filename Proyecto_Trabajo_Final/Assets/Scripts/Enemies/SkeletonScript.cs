@@ -254,4 +254,12 @@ public class SkeletonScript : EnemyScript
             GoingRight = !GoingRight;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (m_SkeletonBehaviour == SKELETON_BEHAVIOUR.PATROL_COLLISION || m_SkeletonBehaviour == SKELETON_BEHAVIOUR.FOLLOW_PLAYER)
+        {
+            GoingRight = !GoingRight;
+        }
+    }
 }
