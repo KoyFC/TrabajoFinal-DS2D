@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private bool m_JumpPressed;
     private bool m_SitPressed;
     private bool m_SummonLanternPressed;
+    private bool m_AlternateColorPressed;
     private bool m_LeftClickPressed;
     private bool m_RightClickPressed;
 
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
     public Renderer m_LanternRenderer1; // The lantern's light is divided into two shapes, thus 2 renderers
     public Renderer m_LanternRenderer2;
     public Color[] m_LanternColors; // Set of colors that the lantern can have
+    public float m_ActionCooldown;
+    public bool m_CanPerformLanternAction;
 
     private int m_CurrentColorIndex; // Index of the current color in the array
     public int m_UnlockedColors; // Number of colors that the player has unlocked
@@ -89,6 +92,7 @@ public class PlayerController : MonoBehaviour
         m_IsDead = false;
         m_GoingRight = true;
         m_RemainingExtraJumps = m_DefaultMaxExtraJumps;
+        m_CanPerformLanternAction = true;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
@@ -106,6 +110,7 @@ public class PlayerController : MonoBehaviour
             HandleAnimations();
             HandleLife();
             HandleInvincibility();
+            SwitchPlayerColor();
             HandlePlayerBenefits();
 
             if (m_LanternActive)
@@ -113,6 +118,11 @@ public class PlayerController : MonoBehaviour
                 AimLantern();
             }
             SwitchLanternColor();
+
+            if (m_LeftClickPressed)
+            {
+                LanternSpecialAction();
+            }
         }
     }
 
@@ -128,6 +138,7 @@ public class PlayerController : MonoBehaviour
             m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
             m_SitPressed = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftControl);
             m_SummonLanternPressed = Input.GetKeyDown(KeyCode.E);
+            m_AlternateColorPressed = Input.GetKeyDown(KeyCode.Q);
             m_LeftClickPressed = Input.GetMouseButtonDown(0);
             m_RightClickPressed = Input.GetMouseButtonDown(1);
         }
@@ -262,7 +273,7 @@ public class PlayerController : MonoBehaviour
         {
             m_PlayerRenderer.material.color = m_LanternRenderer0.material.color;
         }
-        else 
+        else if (!m_LanternActive && m_SitPressed)
         {
             m_PlayerRenderer.material.color = m_LanternColors[0];
         }
@@ -272,8 +283,8 @@ public class PlayerController : MonoBehaviour
     {
         if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
         {
-            m_CurrentSpeed = m_DefaultSpeed * 1.075f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 1.075f;
+            m_CurrentSpeed = m_DefaultSpeed * 0.85f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 0.95f;
             m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
@@ -284,15 +295,15 @@ public class PlayerController : MonoBehaviour
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
         {
-            m_CurrentSpeed = m_DefaultSpeed * 1.15f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 0.85f;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+            m_CurrentSpeed = m_DefaultSpeed * 0.9f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 1.1f;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps + 1;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
         {
-            m_CurrentSpeed = m_DefaultSpeed * 0.85f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 1.15f;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps + 1;
+            m_CurrentSpeed = m_DefaultSpeed * 1.1f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 0.19f;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
         else 
         {
@@ -416,11 +427,20 @@ public class PlayerController : MonoBehaviour
             m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
         }
 
-        if (m_LeftClickPressed) // If the left mouse button is pressed, the color will be set to the default color
+        if (m_AlternateColorPressed) // If the left mouse button is pressed, the color will be set to the default color
         {
-            m_LanternRenderer0.material.color = m_LanternColors[0];
-            m_LanternRenderer1.material.color = m_LanternColors[0];
-            m_LanternRenderer2.material.color = m_LanternColors[0];
+            if (m_LanternRenderer0.material.color != m_LanternColors[0])
+            {
+                m_LanternRenderer0.material.color = m_LanternColors[0];
+                m_LanternRenderer1.material.color = m_LanternColors[0];
+                m_LanternRenderer2.material.color = m_LanternColors[0];
+            }
+            else 
+            {
+                m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
+                m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
+                m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
+            }
         }
     }
 
@@ -447,6 +467,54 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void LanternSpecialAction()
+    {
+        if (!m_CanPerformLanternAction)
+        {
+            return;
+        }
+        m_CanPerformLanternAction = false;
+
+        if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White
+        {
+            // Attack
+        }
+        if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
+        {
+            // Attack with 2x damage
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
+        {
+            // Invincible for 0.8 seconds
+            m_InvencibleAfterHit = true;
+            m_RemainingInvencibleAfterHitDuration = 0.8f;
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
+        {
+            // Jump that doesn't consume extra jumps
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+            m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.1f);
+            m_Animator.SetTrigger("JumpPressed");
+            
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
+        {
+            // Invert the player's gravity and its sprite vertically
+            m_Rigidbody2D.gravityScale *= -1;
+            transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+            m_DefaultJumpForce *= -1;
+        }
+
+        
+        StartCoroutine(LanternCooldown());
+    }
+
+    private IEnumerator LanternCooldown()
+    {
+        yield return new WaitForSeconds(m_ActionCooldown);
+        m_CanPerformLanternAction = true;
+    }
+
 
     // --- COLLISION METHODS ---
 
@@ -466,7 +534,7 @@ public class PlayerController : MonoBehaviour
             EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
             ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
         }
-        
+
         if (collision.CompareTag("DeathBox"))
         {
             m_LifePoints = 0;
