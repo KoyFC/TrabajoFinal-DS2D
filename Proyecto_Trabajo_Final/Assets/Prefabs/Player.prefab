@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Lantern: {fileID: 7721312724340656334}
   m_LanternHinge: {fileID: 1397733227353135100}
   m_LanternRenderer0: {fileID: 3999988617766219634}
-  m_LanternRenderer1: {fileID: 4762913406311501609}
+  m_LanternRenderer1: {fileID: 2824242463620872678}
   m_LanternRenderer2: {fileID: 4714795447190074860}
   m_LanternColors:
   - {r: 1, g: 1, b: 1, a: 1}
@@ -315,6 +315,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3703211132947144419, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703211132947144419, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_Name
       value: Lantern
@@ -422,8 +430,68 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5929314412509918803, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2824242463620872678}
   m_SourcePrefab: {fileID: 100100000, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+--- !u!1 &1144207648302485885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5929314412509918803, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+  m_PrefabInstance: {fileID: 6748682250400507694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &2824242463620872678
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144207648302485885}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 98
+  m_Sprite: {fileID: 21300000, guid: 301ea39d54eeed841b9188f2f9c92e2a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 19, y: 29.25}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!4 &2341831609106990817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9067990912491168207, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
@@ -437,11 +505,6 @@ SpriteRenderer:
 --- !u!212 &4714795447190074860 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2073471923425088194, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-  m_PrefabInstance: {fileID: 6748682250400507694}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4762913406311501609 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2283718920282023943, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
   m_PrefabInstance: {fileID: 6748682250400507694}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7721312724340656334 stripped
