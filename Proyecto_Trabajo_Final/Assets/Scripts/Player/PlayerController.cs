@@ -461,6 +461,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
+            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
+        }
+        
         if (collision.CompareTag("DeathBox"))
         {
             m_LifePoints = 0;

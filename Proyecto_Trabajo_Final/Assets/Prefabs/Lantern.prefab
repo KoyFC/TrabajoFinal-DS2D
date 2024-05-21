@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3703211132947144419}
   - component: {fileID: 2283718920282023943}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,8 @@ GameObject:
   - component: {fileID: 9067990912491168207}
   - component: {fileID: 7650193773402818652}
   - component: {fileID: 8673226895933263831}
-  m_Layer: 6
+  - component: {fileID: 3637424309186593309}
+  m_Layer: 8
   m_Name: Lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,6 +192,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &3637424309186593309
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931571845485850592}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 19.0625, y: 31.625}
+  m_Direction: 0
 --- !u!1 &5929314412509918803
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4785478280860660273}
   - component: {fileID: 5276643013761370555}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1473790611573352392}
   - component: {fileID: 2073471923425088194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
