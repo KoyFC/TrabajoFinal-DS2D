@@ -301,8 +301,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
         {
-            m_CurrentSpeed = m_DefaultSpeed * 1.1f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 0.19f;
+            m_CurrentSpeed = m_DefaultSpeed * 1.08f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 0.92f;
             m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
         else 
@@ -495,14 +495,13 @@ public class PlayerController : MonoBehaviour
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
             m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.1f);
             m_Animator.SetTrigger("JumpPressed");
-            
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
         {
             // Invert the player's gravity and its sprite vertically
             m_Rigidbody2D.gravityScale *= -1;
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
-            m_DefaultJumpForce *= -1;
+            m_CurrentJumpForce *= -1;
         }
 
         
