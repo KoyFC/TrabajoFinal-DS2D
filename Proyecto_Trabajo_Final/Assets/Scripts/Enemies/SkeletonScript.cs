@@ -6,6 +6,7 @@ public class SkeletonScript : EnemyScript
 {
     private Animator m_Animator;
     private CapsuleCollider2D m_Collider;
+    private BoxCollider2D m_BoxCollider;
     private Rigidbody2D m_Rigidbody;
     
 
@@ -37,9 +38,9 @@ public class SkeletonScript : EnemyScript
         m_SpawnPoint = transform.position;
 
         m_Player = GameObject.FindGameObjectWithTag("Player");
-        m_PlayerController = m_Player.GetComponent<PlayerController>();
         m_Animator = GetComponent<Animator>();
         m_Collider = GetComponent<CapsuleCollider2D>();
+        m_BoxCollider = GetComponent<BoxCollider2D>();
         m_Rigidbody = GetComponent<Rigidbody2D>();
         if (m_SkeletonBehaviour == SKELETON_BEHAVIOUR.PATROL_POINT)
         {
@@ -79,11 +80,6 @@ public class SkeletonScript : EnemyScript
         if (m_CurrentLifePoints <= 0)
         {
             DestroySkeleton();
-        }
-
-        if (m_PlayerController.m_ReviveTriggered)
-        {
-            Respawn();
         }
     }
 
@@ -231,20 +227,12 @@ public class SkeletonScript : EnemyScript
 
     private void DestroySkeleton()
     {
+        m_CanMove = false;
         m_Collider.enabled = false;
-        m_Collider.enabled = false;
-        if (m_Rigidbody.bodyType != RigidbodyType2D.Static)
-        {
-            m_Rigidbody.velocity = Vector2.zero;
-        }
+        m_BoxCollider.enabled = false;
         //m_Animator.SetTrigger("Dead");
-        m_Rigidbody.isKinematic = true;
-        Invoke("DeactivateSkeleton", 1f);
-    }
-
-    private void DeactivateSkeleton()
-    {
-        gameObject.SetActive(false);
+        m_Rigidbody.bodyType = RigidbodyType2D.Static;
+        Destroy(gameObject, 1);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

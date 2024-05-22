@@ -34,7 +34,6 @@ public class EnemyScript : MonoBehaviour
         m_CurrentLifePoints = m_MaxLifePoints;
         m_SpawnPoint = transform.position;
         m_Player = GameObject.FindGameObjectWithTag("Player");
-        m_PlayerController = m_Player.GetComponent<PlayerController>();
     }
 
     public virtual void GetDamage(int damage)
@@ -43,12 +42,5 @@ public class EnemyScript : MonoBehaviour
         {
             m_CurrentLifePoints--;
         }
-    }
-
-    public virtual void Respawn()
-    {
-        m_CurrentLifePoints = m_MaxLifePoints;
-        transform.position = m_SpawnPoint;
-        gameObject.SetActive(true);
     }
 }
