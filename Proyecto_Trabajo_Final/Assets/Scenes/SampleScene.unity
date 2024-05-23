@@ -2936,7 +2936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
-  m_PlayerController: {fileID: 4849892373119046640}
   m_CurrentLifePoints: 0
   m_MaxLifePoints: 3
   m_DamageDealtToPlayer: 1
@@ -5154,6 +5153,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7321430502051384894, guid: 3bd30875982caec4490a10b9016cfa81, type: 3}
   m_PrefabInstance: {fileID: 2118470151}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1811811612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1144207648302485885, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+  m_PrefabInstance: {fileID: 4849892373119046633}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1811811617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811811612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913739baf9d5aae409c41c90685b8bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultLightDamage: 1
+  m_CurrentLightDamage: 0
 --- !u!1 &1835785113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7321430502051384894, guid: 3bd30875982caec4490a10b9016cfa81, type: 3}
@@ -5827,6 +5845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1144207648302485885, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_TagString
+      value: Lamp
+      objectReference: {fileID: 0}
     - target: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.95
@@ -5907,27 +5929,27 @@ PrefabInstance:
       propertyPath: m_FlameAnimators.Array.data[4]
       value: 
       objectReference: {fileID: 1176505133}
+    - target: {fileID: 5632077941819758947, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721312724340656334, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_TagString
+      value: Lamp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1144207648302485885, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1811811617}
   m_SourcePrefab: {fileID: 100100000, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
 --- !u!4 &4849892373119046634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
   m_PrefabInstance: {fileID: 4849892373119046633}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4849892373119046640 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-  m_PrefabInstance: {fileID: 4849892373119046633}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474585977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 137e5b0bba05c1347ace49511796ec34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

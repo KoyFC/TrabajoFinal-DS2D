@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3637424309186593309}
   m_Layer: 8
   m_Name: Lantern
-  m_TagString: Untagged
+  m_TagString: Lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 1405417531134574157}
   m_Layer: 9
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -334,7 +334,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5929314412509918803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

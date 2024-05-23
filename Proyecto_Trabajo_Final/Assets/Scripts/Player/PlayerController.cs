@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public Renderer m_LanternRenderer1; // The lantern's light is divided into two shapes, thus 2 renderers
     public Renderer m_LanternRenderer2;
     private PolygonCollider2D m_LightCollider;
+    private LightDamageScript m_LightDamageScript;
     public Color[] m_LanternColors; // Set of colors that the lantern can have
     public float m_DefaultActionCooldown = 1.5f;
     private float m_CurrentActionCooldown;
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
+        m_LightDamageScript = m_Lantern.GetComponentInChildren<LightDamageScript>();
         m_LightCollider = m_Lantern.GetComponentInChildren<PolygonCollider2D>();
         //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
@@ -450,12 +452,14 @@ public class PlayerController : MonoBehaviour
         {
             if (m_LanternRenderer0.material.color != m_LanternColors[0])
             {
+                m_PlayerRenderer.material.color = m_LanternColors[0];
                 m_LanternRenderer0.material.color = m_LanternColors[0];
                 m_LanternRenderer1.material.color = m_LanternColors[0];
                 m_LanternRenderer2.material.color = m_LanternColors[0];
             }
             else 
             {
+                m_PlayerRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
                 m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
                 m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
                 m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
@@ -500,19 +504,26 @@ public class PlayerController : MonoBehaviour
             // Attack
             if (m_LanternActive)
             {
+                m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage;
                 m_LightCollider.enabled = true;
-                m_LightCollider.enabled = false;
+                StartCoroutine(DeactivateLanternCollider());
             }
             m_CurrentActionCooldown = m_DefaultActionCooldown;
         }
         if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
         {
-            // Attack with 2x damage
-            m_CurrentActionCooldown = m_DefaultActionCooldown * 1.5f;
+            if (m_LanternActive)
+            {
+                m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage * 2;
+                m_LightCollider.enabled = true;
+                m_CurrentActionCooldown = m_DefaultActionCooldown * 1.5f;
+                StartCoroutine(DeactivateLanternCollider());
+            }
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
         {
             // Invincible for 0.8 seconds
+            m_LightDamageScript.m_CurrentLightDamage = 0;
             m_InvencibleAfterHit = true;
             m_RemainingInvencibleAfterHitDuration = 0.8f;
             m_CurrentActionCooldown = m_DefaultActionCooldown;
@@ -520,6 +531,7 @@ public class PlayerController : MonoBehaviour
         else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
         {
             // Jump that doesn't consume extra jumps
+            m_LightDamageScript.m_CurrentLightDamage = 0;
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
             m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.1f);
 
@@ -533,6 +545,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
         {
+            m_LightDamageScript.m_CurrentLightDamage = 0;
             // Invert the player's gravity and its sprite vertically
             m_Rigidbody2D.gravityScale *= -1;
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
@@ -547,6 +560,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(m_CurrentActionCooldown);
         m_CanPerformLanternAction = true;
+    }
+
+    private IEnumerator DeactivateLanternCollider()
+    {
+        yield return new WaitForSeconds(0.1f);
+        m_LightCollider.enabled = false;
     }
 
 

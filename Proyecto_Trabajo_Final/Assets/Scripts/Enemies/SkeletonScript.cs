@@ -38,6 +38,7 @@ public class SkeletonScript : EnemyScript
         m_SpawnPoint = transform.position;
 
         m_Player = GameObject.FindGameObjectWithTag("Player");
+        m_LightDamageScript = m_Player.GetComponentInChildren<LightDamageScript>();
         m_Animator = GetComponent<Animator>();
         m_Collider = GetComponent<CapsuleCollider2D>();
         m_BoxCollider = GetComponent<BoxCollider2D>();
@@ -248,6 +249,14 @@ public class SkeletonScript : EnemyScript
         if (m_SkeletonBehaviour == SKELETON_BEHAVIOUR.PATROL_COLLISION || m_SkeletonBehaviour == SKELETON_BEHAVIOUR.FOLLOW_PLAYER)
         {
             GoingRight = !GoingRight;
+        }
+
+        if (collision.gameObject.CompareTag("Lamp"))
+        {
+            m_LightDamageScript = collision.gameObject.GetComponent<LightDamageScript>();
+            GetDamage(m_LightDamageScript.m_CurrentLightDamage); 
+            // Why does this give the error object reference not set to an instance of an object?
+            // Because the PlayerController script is not attached to the lamp object.
         }
     }
 }
