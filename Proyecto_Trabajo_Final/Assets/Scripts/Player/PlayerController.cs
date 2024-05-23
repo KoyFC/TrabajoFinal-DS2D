@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_MousePosition;
     private Animator m_Animator;
     private SpriteRenderer m_PlayerRenderer;
+    public GameObject m_JumpParticlesPrefab;
+    public GameObject m_JumpParticlesSpawn;
 
     [Header("Life and UI")]
     public int m_MaxLifePoints = 5;
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
-        m_LightCollider = m_Lantern.GetComponent<PolygonCollider2D>();
+        m_LightCollider = m_Lantern.GetComponentInChildren<PolygonCollider2D>();
         //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
     }
@@ -233,8 +235,15 @@ public class PlayerController : MonoBehaviour
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
             m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce);
             m_RemainingExtraJumps--;
+            SummonAirJumpParticles();
             m_Animator.SetTrigger("JumpPressed");
         }
+    }
+
+    private void SummonAirJumpParticles()
+    {
+        // Instantiate the jump particles prefab rotated 90 degrees
+        Instantiate(m_JumpParticlesPrefab, m_JumpParticlesSpawn.transform.position, Quaternion.Euler(0, 0, 90));        
     }
 
     private void HandleAnimations()
@@ -263,9 +272,17 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("ActiveLantern");
         }
-        if (m_LeftClickPressed && m_CanPerformLanternAction)
+
+        if (m_LeftClickPressed && m_CanPerformLanternAction && m_LanternActive)
         {
-            m_Animator.SetTrigger("LanternAction");
+            m_Animator.SetTrigger("LanternAction");  
+        }
+        else if (m_LeftClickPressed && m_CanPerformLanternAction && !m_LanternActive)
+        {
+            if (m_PlayerRenderer.material.color != m_LanternColors[0] && m_PlayerRenderer.material.color != m_LanternColors[1])
+            {
+                m_Animator.SetTrigger("LanternAction");
+            }
         }
     }
 
@@ -476,6 +493,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         m_CanPerformLanternAction = false;
+        m_Animator.ResetTrigger("LanternAction"); // Without this line, when spamming click, the animation will play twice
 
         if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White
         {
@@ -504,6 +522,12 @@ public class PlayerController : MonoBehaviour
             // Jump that doesn't consume extra jumps
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
             m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.1f);
+
+            if (!m_IsGrounded)
+            {
+                SummonAirJumpParticles();
+            }
+
             m_Animator.SetTrigger("JumpPressed");
             m_CurrentActionCooldown = m_DefaultActionCooldown;
         }

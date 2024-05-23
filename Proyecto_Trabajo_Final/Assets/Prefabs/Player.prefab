@@ -35,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1868380509737135664}
   - {fileID: 1397733227353135100}
   - {fileID: 5506363686676608244}
   m_Father: {fileID: 0}
@@ -58,6 +59,8 @@ MonoBehaviour:
   m_DefaultMaxExtraJumps: 0
   m_KnockbackForce: 200
   m_ReviveTriggered: 0
+  m_JumpParticlesPrefab: {fileID: 7295471739157409381, guid: 7904386efeb95e3419e8812ecb110048, type: 3}
+  m_JumpParticlesSpawn: {fileID: 2199322235715976734}
   m_MaxLifePoints: 8
   m_LifePoints: 8
   m_InvencibleAfterHitDuration: 1
@@ -242,6 +245,37 @@ CapsuleCollider2D:
   m_Offset: {x: -0.084811985, y: -0.10438442}
   m_Size: {x: 1.0213963, y: 1.7912312}
   m_Direction: 0
+--- !u!1 &2199322235715976734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1868380509737135664}
+  m_Layer: 6
+  m_Name: JumpParticlesSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1868380509737135664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199322235715976734}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1526876865135671546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2507028571827624769
 GameObject:
   m_ObjectHideFlags: 0
