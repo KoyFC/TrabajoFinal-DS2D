@@ -398,8 +398,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5929314412509918803, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6192477033696601497}
   m_SourcePrefab: {fileID: 100100000, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+--- !u!1 &1144207648302485885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5929314412509918803, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+  m_PrefabInstance: {fileID: 6748682250400507694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6192477033696601497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144207648302485885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913739baf9d5aae409c41c90685b8bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultLightDamage: 1
+  m_CurrentLightDamage: 1
 --- !u!212 &2136694232720839192 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4615964034895230262, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
