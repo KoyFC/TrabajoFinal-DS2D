@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     private bool m_InvencibleAfterHit;
     public float m_InvencibleAfterHitDuration;
     private float m_RemainingInvencibleAfterHitDuration;
+    private bool m_NoControlAfterHit;
+    private float m_NoControlAfterHitDuration;
+    private float m_RemainingNoControlAfterHitDuration;
 
     [Header("Ground check variables")]
     public Transform m_GroundCheck;
@@ -94,6 +97,7 @@ public class PlayerController : MonoBehaviour
     {
         m_LifePoints = m_MaxLifePoints;
         m_CanMove = true;
+        m_NoControlAfterHit = false;
         m_IsDead = false;
         m_GoingRight = true;
         m_RemainingExtraJumps = m_DefaultMaxExtraJumps;
@@ -105,6 +109,7 @@ public class PlayerController : MonoBehaviour
         m_LightCollider = m_Lantern.GetComponentInChildren<PolygonCollider2D>();
         //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
+        m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 3/4;
     }
 
     void Update()
@@ -117,14 +122,18 @@ public class PlayerController : MonoBehaviour
             HandleAnimations();
             HandleLife();
             HandleInvincibility();
-            SwitchPlayerColor();
             HandlePlayerBenefits();
 
             if (m_LanternActive)
             {
                 AimLantern();
             }
-            SwitchLanternColor();
+
+            if (m_CanPerformLanternAction)
+            {
+                SwitchPlayerColor();
+                SwitchLanternColor();
+            }
         }
     }
 
@@ -132,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInputs()
     {
-        if (m_CanMove)
+        if (!m_NoControlAfterHit)
         {
             m_Movement.x = Input.GetAxis("Horizontal");
             m_Movement.y = Input.GetAxisRaw("Vertical");
@@ -161,6 +170,11 @@ public class PlayerController : MonoBehaviour
                 0, 
                 m_GroundLayer); // Create a temporal square box to check if the player is grounded
         }
+        if (m_NoControlAfterHit && m_CanPerformLanternAction)
+        {
+            m_Animator.SetTrigger("ForceIdle");
+            return;
+        }
         
         // Determine the speed multiplier based on whether the player is running or not
         float speedMultiplier;
@@ -183,7 +197,7 @@ public class PlayerController : MonoBehaviour
             
             m_Rigidbody2D.velocity = resultingVelocity;
         }
-        else // If the player is not able to move, the velocity is set to zero
+        else // If the player can't move, the velocity is set to 0
         {
             m_Rigidbody2D.velocity = Vector2.zero;
         }
@@ -350,8 +364,9 @@ public class PlayerController : MonoBehaviour
         {
             m_LifePoints -= damage;
             m_InvencibleAfterHit = true;
+            m_NoControlAfterHit = true;
 
-            if (enemyXPos <= transform.position.x)
+            if (enemyXPos < transform.position.x)
             {
                 m_Rigidbody2D.AddForce((Vector2.right + Vector2.up) * m_KnockbackForce);
             }
@@ -364,6 +379,19 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInvincibility()
     {
+        if (m_NoControlAfterHit)
+        {
+            if (m_RemainingNoControlAfterHitDuration > Mathf.Epsilon) // This is basically > 0
+            {
+                m_RemainingNoControlAfterHitDuration -= Time.deltaTime;
+            }
+            else
+            {
+                m_RemainingNoControlAfterHitDuration = m_NoControlAfterHitDuration;
+                m_NoControlAfterHit = false;
+            }
+        }
+
         if (m_InvencibleAfterHit)
         {
             if (m_RemainingInvencibleAfterHitDuration > Mathf.Epsilon) // This is basically > 0
@@ -522,10 +550,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
         {
-            // Invincible for 0.8 seconds
+            // Invincible for 0.8 seconds, but can't move during most of it (the player is still allowed to move a bit before the invincibility ends)
             m_LightDamageScript.m_CurrentLightDamage = 0;
             m_InvencibleAfterHit = true;
-            m_RemainingInvencibleAfterHitDuration = 0.8f;
+            m_NoControlAfterHit = true;
+            m_RemainingInvencibleAfterHitDuration = m_DefaultActionCooldown * 0.8f;
             m_CurrentActionCooldown = m_DefaultActionCooldown;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
@@ -533,7 +562,7 @@ public class PlayerController : MonoBehaviour
             // Jump that doesn't consume extra jumps
             m_LightDamageScript.m_CurrentLightDamage = 0;
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-            m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.1f);
+            m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.35f);
 
             if (!m_IsGrounded)
             {
@@ -576,18 +605,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
+            m_Rigidbody2D.velocity = Vector2.zero;
             ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
-            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
-        }
-
         if (collision.CompareTag("DeathBox"))
         {
             m_LifePoints = 0;

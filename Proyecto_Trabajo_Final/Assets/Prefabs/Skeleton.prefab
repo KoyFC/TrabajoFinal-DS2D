@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3906030346155945731}
+  - component: {fileID: 4640775570305903395}
   - component: {fileID: 2452751291227600333}
   - component: {fileID: 4766054785022623651}
   - component: {fileID: 2653773845171125770}
   - component: {fileID: 1876888443074467613}
-  - component: {fileID: 4640775570305903395}
+  - component: {fileID: 5997655800431297302}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -36,6 +37,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4640775570305903395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2559207078411772475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9e6607fa1f90144bdcc7b96b091261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player: {fileID: 0}
+  m_CurrentLifePoints: 3
+  m_MaxLifePoints: 3
+  m_DamageDealtToPlayer: 1
+  m_SpawnPoint: {x: 0, y: 0, z: 0}
+  m_GoingRight: 0
+  m_SkeletonBehaviour: 1
+  m_SkeletonSpeed: 1
+  m_FollowDistance: 5
+  m_PatrolPoints: []
 --- !u!212 &2452751291227600333
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -171,26 +194,48 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.11}
   m_Size: {x: 1, y: 1.8}
   m_Direction: 0
---- !u!114 &4640775570305903395
-MonoBehaviour:
+--- !u!61 &5997655800431297302
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2559207078411772475}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9e6607fa1f90144bdcc7b96b091261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Player: {fileID: 0}
-  m_PlayerController: {fileID: 0}
-  m_CurrentLifePoints: 3
-  m_MaxLifePoints: 3
-  m_DamageDealtToPlayer: 1
-  m_SpawnPoint: {x: 0, y: 0, z: 0}
-  m_GoingRight: 0
-  m_SkeletonBehaviour: 1
-  m_SkeletonSpeed: 1
-  m_FollowDistance: 5
-  m_PatrolPoints: []
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.45578778, y: -0.11054134}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.15430498, y: 1.2142141}
+  m_EdgeRadius: 0

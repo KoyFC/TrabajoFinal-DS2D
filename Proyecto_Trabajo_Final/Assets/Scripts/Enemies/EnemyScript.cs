@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public GameObject m_Player;
-    public LightDamageScript m_LightDamageScript;
     public int m_CurrentLifePoints;
     public int m_MaxLifePoints = 3;
     public int m_DamageDealtToPlayer = 1;
@@ -34,14 +33,13 @@ public class EnemyScript : MonoBehaviour
         m_CurrentLifePoints = m_MaxLifePoints;
         m_SpawnPoint = transform.position;
         m_Player = GameObject.FindGameObjectWithTag("Player");
-        m_LightDamageScript = m_Player.GetComponentInChildren<LightDamageScript>();
     }
 
     public virtual void GetDamage(int damage)
     {
         if (m_CurrentLifePoints > 0)
         {
-            m_CurrentLifePoints--;
+            m_CurrentLifePoints -= damage;
         }
     }
 }

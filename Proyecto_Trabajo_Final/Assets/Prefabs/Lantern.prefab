@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 4785478280860660273}
   - component: {fileID: 5276643013761370555}
   - component: {fileID: 4615964034895230262}
+  - component: {fileID: 771431579773076883}
   - component: {fileID: 1405417531134574157}
   m_Layer: 9
   m_Name: Light
@@ -327,6 +328,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &771431579773076883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929314412509918803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913739baf9d5aae409c41c90685b8bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultLightDamage: 1
+  m_CurrentLightDamage: 0
 --- !u!60 &1405417531134574157
 PolygonCollider2D:
   m_ObjectHideFlags: 0
