@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private int m_CurrentMaxExtraJumps;
 
     public float m_KnockbackForce;
+    private float m_CurrentKnockbackForce;
     private bool m_CanMove;
     private bool m_IsDead;
     public bool m_ReviveTriggered;
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
         m_LightCollider = m_Lantern.GetComponentInChildren<PolygonCollider2D>();
         //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
-        m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 3/4;
+        m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
     }
 
     void Update()
@@ -368,11 +369,11 @@ public class PlayerController : MonoBehaviour
 
             if (enemyXPos < transform.position.x)
             {
-                m_Rigidbody2D.AddForce((Vector2.right + Vector2.up) * m_KnockbackForce);
+                m_Rigidbody2D.AddForce((Vector2.right + Vector2.up) * m_CurrentKnockbackForce);
             }
             else
             {
-                m_Rigidbody2D.AddForce((Vector2.left + Vector2.up) * m_KnockbackForce);
+                m_Rigidbody2D.AddForce((Vector2.left + Vector2.up) * m_CurrentKnockbackForce);
             }
         }
     }
@@ -536,7 +537,7 @@ public class PlayerController : MonoBehaviour
                 m_LightCollider.enabled = true;
                 StartCoroutine(DeactivateLanternCollider());
             }
-            m_CurrentActionCooldown = m_DefaultActionCooldown;
+            m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
         }
         if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
         {
@@ -544,7 +545,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage * 2;
                 m_LightCollider.enabled = true;
-                m_CurrentActionCooldown = m_DefaultActionCooldown * 1.5f;
+                m_CurrentActionCooldown = m_DefaultActionCooldown * 0.6f;
                 StartCoroutine(DeactivateLanternCollider());
             }
         }
@@ -607,6 +608,7 @@ public class PlayerController : MonoBehaviour
             EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
             m_Rigidbody2D.velocity = Vector2.zero;
             ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
+            m_CurrentKnockbackForce = m_KnockbackForce;
         }
     }
 

@@ -247,7 +247,7 @@ MonoBehaviour:
   m_DamageDealtToPlayer: 1
   m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_GoingRight: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 3537385788276588395}
   m_SkeletonBehaviour: 1
   m_SkeletonSpeed: 1
   m_FollowDistance: 5
