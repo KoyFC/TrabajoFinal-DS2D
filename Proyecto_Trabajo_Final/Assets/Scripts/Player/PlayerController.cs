@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
+    public Animator m_LanternActionAnimator;
     private SpriteRenderer m_PlayerRenderer;
     public GameObject m_JumpParticlesPrefab;
     public GameObject m_JumpParticlesSpawn;
@@ -475,6 +476,21 @@ public class PlayerController : MonoBehaviour
             m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
             m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
             m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
+            switch (m_CurrentColorIndex)
+                {
+                    case 1:
+                        m_LanternActionAnimator.SetTrigger("1");
+                        break;
+                    case 2:
+                        m_LanternActionAnimator.SetTrigger("2");
+                        break;
+                    case 3:
+                        m_LanternActionAnimator.SetTrigger("3");
+                        break;
+                    case 4:
+                        m_LanternActionAnimator.SetTrigger("4");
+                        break;
+                }
         }
 
         if (m_AlternateColorPressed) // If the left mouse button is pressed, the color will be set to the default color
@@ -485,6 +501,7 @@ public class PlayerController : MonoBehaviour
                 m_LanternRenderer0.material.color = m_LanternColors[0];
                 m_LanternRenderer1.material.color = m_LanternColors[0];
                 m_LanternRenderer2.material.color = m_LanternColors[0];
+                m_LanternActionAnimator.SetTrigger("0");
             }
             else 
             {
@@ -492,6 +509,21 @@ public class PlayerController : MonoBehaviour
                 m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
                 m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
                 m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
+                switch (m_CurrentColorIndex)
+                {
+                    case 1:
+                        m_LanternActionAnimator.SetTrigger("1");
+                        break;
+                    case 2:
+                        m_LanternActionAnimator.SetTrigger("2");
+                        break;
+                    case 3:
+                        m_LanternActionAnimator.SetTrigger("3");
+                        break;
+                    case 4:
+                        m_LanternActionAnimator.SetTrigger("4");
+                        break;
+                }
             }
         }
     }
@@ -535,6 +567,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage;
                 m_LightCollider.enabled = true;
+                
                 StartCoroutine(DeactivateLanternCollider());
             }
             m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
@@ -546,6 +579,7 @@ public class PlayerController : MonoBehaviour
                 m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage * 2;
                 m_LightCollider.enabled = true;
                 m_CurrentActionCooldown = m_DefaultActionCooldown * 0.6f;
+                
                 StartCoroutine(DeactivateLanternCollider());
             }
         }
@@ -556,6 +590,7 @@ public class PlayerController : MonoBehaviour
             m_InvencibleAfterHit = true;
             m_NoControlAfterHit = true;
             m_RemainingInvencibleAfterHitDuration = m_DefaultActionCooldown * 0.8f;
+            
             m_CurrentActionCooldown = m_DefaultActionCooldown;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
@@ -571,6 +606,7 @@ public class PlayerController : MonoBehaviour
             }
 
             m_Animator.SetTrigger("JumpPressed");
+            
             m_CurrentActionCooldown = m_DefaultActionCooldown;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
@@ -580,6 +616,7 @@ public class PlayerController : MonoBehaviour
             m_Rigidbody2D.gravityScale *= -1;
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
             m_DefaultJumpForce *= -1;
+            
             m_CurrentActionCooldown = 0.8f;
         }
 

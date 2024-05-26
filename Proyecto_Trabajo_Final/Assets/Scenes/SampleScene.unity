@@ -5680,6 +5680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossGhost Pivot
       objectReference: {fileID: 0}
+    - target: {fileID: 1746732535942296359, guid: fd4208f53b4e40b4482e306c8be320f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7293607239039446946, guid: fd4208f53b4e40b4482e306c8be320f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

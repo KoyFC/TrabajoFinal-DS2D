@@ -64,9 +64,12 @@ public class BossGhostScript : EnemyScript
 
         if (m_CurrentLifePoints <= 0)
         {
+            if (m_CanMove)
+            {
+                Invoke("DestroyBoss", 2);
+            }
             m_CanMove = false;
             m_Collider.enabled = false;
-            Invoke("DestroyBoss", 2);
             m_Animator.SetTrigger("Dead");
         }
     }
@@ -191,7 +194,7 @@ public class BossGhostScript : EnemyScript
 
     public void DestroyBoss()
     {
-        Instantiate(m_DeathParticlesPrefab, transform.position, Quaternion.Euler(0, 0, 90));  
+        Instantiate(m_DeathParticlesPrefab, new Vector3(transform.position.x - 0.85f, transform.position.y + 0.85f, transform.position.z) , Quaternion.Euler(0, 0, 90));  
         Destroy(gameObject, 1);
     }
 

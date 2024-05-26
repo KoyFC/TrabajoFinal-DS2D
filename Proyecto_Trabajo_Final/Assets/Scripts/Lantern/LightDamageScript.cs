@@ -12,7 +12,7 @@ public class LightDamageScript : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             // Intento conseguir el componente SlimeController del objeto con el que colisiono
-            EnemyScript thisEnemy = other.GetComponent<EnemyScript>();
+            EnemyScript thisEnemy = other.GetComponentInParent<EnemyScript>();
             // Si no es null, significa que el object tiene el componente SlimeController;
             if (thisEnemy != null)
             {
