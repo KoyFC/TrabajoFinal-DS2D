@@ -605,9 +605,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            EnemyScript thisEnemy = collision.gameObject.GetComponent<EnemyScript>();
+            EnemyScript thisEnemy = collision.gameObject.GetComponentInParent<EnemyScript>();
             m_Rigidbody2D.velocity = Vector2.zero;
-            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
+            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x); // This line says object reference not set to an instance of an object, why?
             m_CurrentKnockbackForce = m_KnockbackForce;
         }
     }

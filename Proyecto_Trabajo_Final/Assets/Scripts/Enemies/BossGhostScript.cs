@@ -31,11 +31,17 @@ public class BossGhostScript : EnemyScript
     {
         m_CurrentLifePoints = m_MaxLifePoints;
         m_BossGhostCurrentSpeed = m_BossGhostMaxSpeed;
+        m_GoingRight = false;
         m_Player = GameObject.FindGameObjectWithTag("Player");
-        m_Collider = GetComponent<CapsuleCollider2D>();
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Collider = GetComponentInChildren<CapsuleCollider2D>();
+        m_Rigidbody2D = GetComponentInChildren<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
         m_CanMove = true;
+
+        if (m_BossGhostBehaviour == BOSS_GHOST_BEHAVIOUR.PATROL_POINT)
+        {
+            CheckIfFlipNeeded();
+        }
 
         InvokeRepeating("ScarePlayer", 3, 5);
     }
@@ -60,10 +66,9 @@ public class BossGhostScript : EnemyScript
         {
             m_CanMove = false;
             m_Collider.enabled = false;
+            Invoke("DestroyBoss", 2);
             m_Animator.SetTrigger("Dead");
         }
-
-        // Invoke repeatedly after a certain amount of time the function to scare the player
     }
 
     private void PatrolPoints(float dt)
@@ -106,23 +111,22 @@ public class BossGhostScript : EnemyScript
         transform.position = Vector2.MoveTowards(
             this.transform.position,
             m_Player.transform.position,
-            (m_BossGhostCurrentSpeed * 0.75f) * dt);
-        
+            (m_BossGhostCurrentSpeed * 0.5f) * dt);
 
         if (direction.x < 0)
-        {
-            if (GoingRight)
             {
-                GoingRight = !GoingRight;
+                if (GoingRight)
+                {
+                    GoingRight = !GoingRight;
+                }
             }
-        }
-        else
-        {
-            if (!GoingRight)
+            else
             {
-                GoingRight = !GoingRight;
+                if (!GoingRight)
+                {
+                    GoingRight = !GoingRight;
+                }
             }
-        }
     }
 
 
@@ -165,6 +169,7 @@ public class BossGhostScript : EnemyScript
         if (m_BossGhostBehaviour == BOSS_GHOST_BEHAVIOUR.IDLE) return;
 
         m_Animator.SetTrigger("Scare");
+        m_CanMove = false;
 
         // Change behaviour from point to follow and viceversa each time it scares the player
         if (m_BossGhostBehaviour == BOSS_GHOST_BEHAVIOUR.PATROL_POINT)
@@ -175,11 +180,13 @@ public class BossGhostScript : EnemyScript
         {
             m_BossGhostBehaviour = BOSS_GHOST_BEHAVIOUR.PATROL_POINT;
         }
+        StartCoroutine(EnableMovement());
     }
 
-    public void ToggleCanMove()
+    private IEnumerator EnableMovement()
     {
-        m_CanMove = !m_CanMove;
+        yield return new WaitForSeconds(0.8f);
+        m_CanMove = true;
     }
 
     public void DestroyBoss()
