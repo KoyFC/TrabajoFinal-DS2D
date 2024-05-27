@@ -459,9 +459,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern
       objectReference: {fileID: 0}
-    - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_Intensity
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 48.721775
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 67.1614
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 3.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 5.35
       objectReference: {fileID: 0}
     - target: {fileID: 9067990912491168207, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_LocalPosition.x
