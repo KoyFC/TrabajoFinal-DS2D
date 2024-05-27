@@ -54,7 +54,6 @@ MonoBehaviour:
   m_PatrolPoints:
   - {fileID: 0}
   - {fileID: 0}
-  m_Animator: {fileID: 0}
   m_DeathParticlesPrefab: {fileID: 7295471739157409381, guid: 7904386efeb95e3419e8812ecb110048, type: 3}
   m_BossGhostBehaviour: 1
   m_BossGhostMaxSpeed: 6

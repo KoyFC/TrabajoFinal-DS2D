@@ -116,13 +116,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        HandleLife();
         if (!m_IsDead)
         {
             HandleInputs();
             HandleMovement();
             HandleJump();
             HandleAnimations();
-            HandleLife();
             HandleInvincibility();
             HandlePlayerBenefits();
 
