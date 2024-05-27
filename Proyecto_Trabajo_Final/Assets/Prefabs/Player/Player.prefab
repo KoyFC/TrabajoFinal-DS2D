@@ -66,6 +66,7 @@ MonoBehaviour:
   m_MaxLifePoints: 8
   m_LifePoints: 8
   m_InvencibleAfterHitDuration: 1
+  m_CurrentColorIndicator: {fileID: 0}
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
     serializedVersion: 2
@@ -458,6 +459,10 @@ PrefabInstance:
     - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_Name
       value: Lantern
+      objectReference: {fileID: 0}
+    - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_Intensity

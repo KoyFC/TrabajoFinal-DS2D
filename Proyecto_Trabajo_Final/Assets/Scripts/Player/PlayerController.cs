@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private bool m_NoControlAfterHit;
     private float m_NoControlAfterHitDuration;
     private float m_RemainingNoControlAfterHitDuration;
+    public GameObject m_CurrentColorIndicator;
 
     [Header("Ground check variables")]
     public Transform m_GroundCheck;
@@ -109,6 +111,7 @@ public class PlayerController : MonoBehaviour
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
         m_LightDamageScript = m_Lantern.GetComponentInChildren<LightDamageScript>();
         m_LightCollider = m_Lantern.GetComponentInChildren<PolygonCollider2D>();
+        m_CurrentColorIndicator = GameObject.FindGameObjectWithTag("ColorIndicator");
         //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
         m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
@@ -476,6 +479,7 @@ public class PlayerController : MonoBehaviour
             m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
             m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
             m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
+            m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
             switch (m_CurrentColorIndex)
                 {
                     case 1:
