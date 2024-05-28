@@ -25868,7 +25868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 964323637}
   - component: {fileID: 964323636}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DeathHitboxSpikes1
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
@@ -27474,7 +27474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1899467132}
   - component: {fileID: 1899467131}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DeathHitbox
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
@@ -28122,7 +28122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2129639266}
   - component: {fileID: 2129639265}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DeathHitboxSpikes2
   m_TagString: DeathBox
   m_Icon: {fileID: 0}

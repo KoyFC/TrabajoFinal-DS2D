@@ -3741,7 +3741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 110511836}
   - component: {fileID: 110511835}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spikes 1
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
@@ -3943,7 +3943,7 @@ GameObject:
   - component: {fileID: 281186034}
   - component: {fileID: 281186033}
   - component: {fileID: 281186035}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FallHitbox
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
@@ -27537,7 +27537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1437015298}
   - component: {fileID: 1437015297}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spikes 2
   m_TagString: DeathBox
   m_Icon: {fileID: 0}
