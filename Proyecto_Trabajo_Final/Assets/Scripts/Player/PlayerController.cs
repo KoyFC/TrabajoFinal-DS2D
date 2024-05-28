@@ -65,15 +65,17 @@ public class PlayerController : MonoBehaviour
     [Header("Lantern variables")]
     public GameObject m_Lantern;
     public Transform m_LanternHinge; // The hinge that the lantern will rotate around
-    public Renderer m_LanternRenderer0; // The lantern's main renderer
-    public Renderer m_LanternRenderer1; // The lantern's light is divided into two shapes, thus 2 renderers
-    public Renderer m_LanternRenderer2;
-    private PolygonCollider2D m_LightCollider;
-    private LightDamageScript m_LightDamageScript;
-    public Color[] m_LanternColors; // Set of colors that the lantern can have
+    public Renderer m_LanternRenderer; // The lantern's main renderer
     public float m_DefaultActionCooldown = 1.5f;
     private float m_CurrentActionCooldown;
     public bool m_CanPerformLanternAction;
+
+    [Header("Lantern light variables")]
+    private PolygonCollider2D m_LightCollider;
+    private LightDamageScript m_LightDamageScript;
+    public Color[] m_LanternColors; // Set of colors that the lantern can have
+    public GameObject m_LightObject1;
+    public GameObject m_LightObject2;
 
     private int m_CurrentColorIndex; // Index of the current color in the array
     public int m_UnlockedColors; // Number of colors that the player has unlocked
@@ -311,7 +313,7 @@ public class PlayerController : MonoBehaviour
     {
         if (m_LanternActive)
         {
-            m_PlayerRenderer.material.color = m_LanternRenderer0.material.color;
+            m_PlayerRenderer.material.color = m_LanternRenderer.material.color;
         }
         else if (!m_LanternActive && m_SitPressed)
         {
@@ -476,22 +478,29 @@ public class PlayerController : MonoBehaviour
         if (m_RightClickPressed) // If the right mouse button is pressed, the color will cycle through the unlocked colors (excluding default)
         {
             SelectNextColor();
-            m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
-            m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
-            m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
             m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
-            switch (m_CurrentColorIndex)
+
+            m_LanternRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
+            switch (m_CurrentColorIndex) // Rather than copying the color from the array, the color is set directly because it is otherwise unnoticable
                 {
                     case 1:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
                         m_LanternActionAnimator.SetTrigger("1");
                         break;
                     case 2:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
                         m_LanternActionAnimator.SetTrigger("2");
                         break;
                     case 3:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
                         m_LanternActionAnimator.SetTrigger("3");
                         break;
                     case 4:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
                         m_LanternActionAnimator.SetTrigger("4");
                         break;
                 }
@@ -499,32 +508,38 @@ public class PlayerController : MonoBehaviour
 
         if (m_AlternateColorPressed) // If the left mouse button is pressed, the color will be set to the default color
         {
-            if (m_LanternRenderer0.material.color != m_LanternColors[0])
+            if (m_LanternRenderer.material.color != m_LanternColors[0])
             {
                 m_PlayerRenderer.material.color = m_LanternColors[0];
-                m_LanternRenderer0.material.color = m_LanternColors[0];
-                m_LanternRenderer1.material.color = m_LanternColors[0];
-                m_LanternRenderer2.material.color = m_LanternColors[0];
+                m_LanternRenderer.material.color = m_LanternColors[0];
+                m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 1, 1, 1);
+                m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 1, 1, 1);
                 m_LanternActionAnimator.SetTrigger("0");
             }
             else 
             {
                 m_PlayerRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
-                m_LanternRenderer0.material.color = m_LanternColors[m_CurrentColorIndex];
-                m_LanternRenderer1.material.color = m_LanternColors[m_CurrentColorIndex];
-                m_LanternRenderer2.material.color = m_LanternColors[m_CurrentColorIndex];
+                m_LanternRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
                 switch (m_CurrentColorIndex)
                 {
                     case 1:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
                         m_LanternActionAnimator.SetTrigger("1");
                         break;
                     case 2:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
                         m_LanternActionAnimator.SetTrigger("2");
                         break;
                     case 3:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
                         m_LanternActionAnimator.SetTrigger("3");
                         break;
                     case 4:
+                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
+                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
                         m_LanternActionAnimator.SetTrigger("4");
                         break;
                 }

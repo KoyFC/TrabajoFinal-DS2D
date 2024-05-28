@@ -63,8 +63,8 @@ MonoBehaviour:
   m_LanternActionAnimator: {fileID: 9052352788508659451}
   m_JumpParticlesPrefab: {fileID: 7295471739157409381, guid: 7904386efeb95e3419e8812ecb110048, type: 3}
   m_JumpParticlesSpawn: {fileID: 2199322235715976734}
-  m_MaxLifePoints: 8
-  m_LifePoints: 8
+  m_MaxLifePoints: 5
+  m_LifePoints: 5
   m_InvencibleAfterHitDuration: 1
   m_CurrentColorIndicator: {fileID: 0}
   m_GroundCheck: {fileID: 5506363686676608244}
@@ -73,17 +73,17 @@ MonoBehaviour:
     m_Bits: 128
   m_Lantern: {fileID: 7721312724340656334}
   m_LanternHinge: {fileID: 1397733227353135100}
-  m_LanternRenderer0: {fileID: 3999988617766219634}
-  m_LanternRenderer1: {fileID: 2136694232720839192}
-  m_LanternRenderer2: {fileID: 4714795447190074860}
+  m_LanternRenderer: {fileID: 3999988617766219634}
+  m_DefaultActionCooldown: 1.5
+  m_CanPerformLanternAction: 0
   m_LanternColors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0.54901963, b: 0.54901963, a: 1}
   - {r: 0.54901963, g: 0.54901963, b: 1, a: 1}
   - {r: 0.54901963, g: 1, b: 0.54901963, a: 1}
   - {r: 1, g: 1, b: 0.23529412, a: 1}
-  m_DefaultActionCooldown: 1.5
-  m_CanPerformLanternAction: 0
+  m_LightObject1: {fileID: 4278943296003670453}
+  m_LightObject2: {fileID: 9108421056972834822}
   m_UnlockedColors: 5
 --- !u!114 &4325455037375292649
 MonoBehaviour:
@@ -456,6 +456,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1397733227353135100}
     m_Modifications:
+    - target: {fileID: 1405417531134574157, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580490505936105256, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_Name
+      value: Lamp Light 2D
+      objectReference: {fileID: 0}
     - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_Name
       value: Lantern
@@ -464,29 +472,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_Intensity
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_PointLightInnerAngle
-      value: 48.721775
-      objectReference: {fileID: 0}
-    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_PointLightOuterAngle
-      value: 67.1614
-      objectReference: {fileID: 0}
-    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 3.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 5997674353185284076, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 5.35
+    - target: {fileID: 7406730896105907867, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+      propertyPath: m_Name
+      value: Point Light 2D
       objectReference: {fileID: 0}
     - target: {fileID: 9067990912491168207, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -529,15 +517,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8555659482290966704, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+    - {fileID: 2315578278792206029, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
---- !u!212 &2136694232720839192 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4615964034895230262, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-  m_PrefabInstance: {fileID: 6748682250400507694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2341831609106990817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9067990912491168207, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
@@ -548,13 +533,18 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7650193773402818652, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
   m_PrefabInstance: {fileID: 6748682250400507694}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &4714795447190074860 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2073471923425088194, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+--- !u!1 &4278943296003670453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7406730896105907867, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
   m_PrefabInstance: {fileID: 6748682250400507694}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7721312724340656334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+  m_PrefabInstance: {fileID: 6748682250400507694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9108421056972834822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2580490505936105256, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
   m_PrefabInstance: {fileID: 6748682250400507694}
   m_PrefabAsset: {fileID: 0}
