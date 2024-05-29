@@ -25,8 +25,9 @@ public class EnemyScript : MonoBehaviour
                 transform.localScale *= new Vector2(-1, 1);
             }
             m_GoingRight = value;
+
             m_healthBar.transform.localScale = new Vector3
-                (m_GoingRight ? 1 : -1,
+                (m_GoingRight ? (-m_healthBar.transform.localScale.x) : (m_healthBar.transform.localScale.x),
                 m_healthBar.transform.localScale.y,
                 m_healthBar.transform.localScale.z);
         }
