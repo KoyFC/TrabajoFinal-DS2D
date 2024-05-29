@@ -350,33 +350,30 @@ public class PlayerController : MonoBehaviour
     {
         if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
         {
-            m_CurrentSpeed = m_DefaultSpeed * 0.85f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 0.95f;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+            m_CurrentSpeed = m_DefaultSpeed * 0.9f;
+            m_CurrentJumpForce = m_DefaultJumpForce;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
         {
-            m_CurrentSpeed = m_DefaultSpeed * 0.925f;
+            m_CurrentSpeed = m_DefaultSpeed;
             m_CurrentJumpForce = m_DefaultJumpForce;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
         {
-            m_CurrentSpeed = m_DefaultSpeed * 0.9f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 1.1f;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps + 1;
+            m_CurrentSpeed = m_DefaultSpeed * 0.95f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 1.05f;
+            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps + 1; // DEBUG: REMOVE AFTER TESTING
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
         {
-            m_CurrentSpeed = m_DefaultSpeed * 1.08f;
-            m_CurrentJumpForce = m_DefaultJumpForce * 0.92f;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+            m_CurrentSpeed = m_DefaultSpeed * 1.05f;
+            m_CurrentJumpForce = m_DefaultJumpForce * 0.95f;
         }
         else 
         {
             m_CurrentSpeed = m_DefaultSpeed;
             m_CurrentJumpForce = m_DefaultJumpForce;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
+            //m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
     }
 
