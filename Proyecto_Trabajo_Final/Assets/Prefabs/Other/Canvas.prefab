@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 1922186564377547697}
   m_Layer: 5
   m_Name: CuerrentColorFrame
-  m_TagString: ColorIndicator
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
