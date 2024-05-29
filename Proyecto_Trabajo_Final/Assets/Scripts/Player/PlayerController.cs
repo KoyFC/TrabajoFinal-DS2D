@@ -151,7 +151,6 @@ public class PlayerController : MonoBehaviour
         if (!m_NoControlAfterHit)
         {
             m_Movement.x = Input.GetAxis("Horizontal");
-            m_Movement.y = Input.GetAxisRaw("Vertical");
             m_RunPressed = Input.GetKey(KeyCode.LeftShift);
             m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
             m_SitPressed = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftControl);
@@ -182,7 +181,7 @@ public class PlayerController : MonoBehaviour
                 0, 
                 m_GroundLayer); // Create a temporal square box to check if the player is grounded
         }
-        if (m_NoControlAfterHit && m_CanPerformLanternAction)
+        if (m_NoControlAfterHit && m_CanPerformLanternAction) // This is basically just for when the player uses the blue ability
         {
             m_Animator.SetTrigger("ForceIdle");
             return;
@@ -323,6 +322,27 @@ public class PlayerController : MonoBehaviour
         else if (!m_LanternActive && m_SitPressed)
         {
             m_PlayerRenderer.material.color = m_LanternColors[0];
+        }
+
+        if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White icon
+        {
+            m_LanternActionAnimator.SetTrigger("0");
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red icon
+        {
+            m_LanternActionAnimator.SetTrigger("1");
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue  
+        {
+            m_LanternActionAnimator.SetTrigger("2");
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green icon
+        {
+            m_LanternActionAnimator.SetTrigger("3");
+        }
+        else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow icon
+        {
+            m_LanternActionAnimator.SetTrigger("4");
         }
     }
 
@@ -508,22 +528,18 @@ public class PlayerController : MonoBehaviour
                     case 1:
                         m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
                         m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
-                        m_LanternActionAnimator.SetTrigger("1");
                         break;
                     case 2:
                         m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
                         m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
-                        m_LanternActionAnimator.SetTrigger("2");
                         break;
                     case 3:
                         m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
                         m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
-                        m_LanternActionAnimator.SetTrigger("3");
                         break;
                     case 4:
                         m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
                         m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
-                        m_LanternActionAnimator.SetTrigger("4");
                         break;
                 }
 
@@ -603,22 +619,20 @@ public class PlayerController : MonoBehaviour
         m_CanPerformLanternAction = false;
         m_Animator.ResetTrigger("LanternAction"); // Without this line, when spamming click, the animation will play twice
 
-        if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White
+        if (m_LanternActive)
         {
-            // Attack
-            if (m_LanternActive)
+            if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White
             {
+                // Attack
                 m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage;
                 m_LightCollider.enabled = true;
                 
                 StartCoroutine(DeactivateLanternCollider());
+                m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
             }
-            m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
-        }
-        if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
-        {
-            if (m_LanternActive)
+            else if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
             {
+                
                 m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage * 2;
                 m_LightCollider.enabled = true;
                 m_CurrentActionCooldown = m_DefaultActionCooldown * 0.6f;
@@ -626,7 +640,8 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(DeactivateLanternCollider());
             }
         }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
+        
+        if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
         {
             // Invincible for 0.8 seconds, but can't move during most of it (the player is still allowed to move a bit before the invincibility ends)
             m_LightDamageScript.m_CurrentLightDamage = 0;
@@ -692,7 +707,7 @@ public class PlayerController : MonoBehaviour
         {
             EnemyScript thisEnemy = collision.gameObject.GetComponentInParent<EnemyScript>();
             m_Rigidbody2D.velocity = Vector2.zero;
-            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x); // This line says object reference not set to an instance of an object, why?
+            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
             m_CurrentKnockbackForce = m_KnockbackForce;
         }
     }
