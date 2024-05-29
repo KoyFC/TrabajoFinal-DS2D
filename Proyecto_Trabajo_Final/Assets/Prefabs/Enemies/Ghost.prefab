@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83db461e66ab55c42a6d3d33341cf31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_healthBar: {fileID: 0}
   m_Player: {fileID: 0}
-  m_CurrentLifePoints: 0
-  m_MaxLifePoints: 3
+  m_CurrentLifePoints: 5
+  m_MaxLifePoints: 5
   m_DamageDealtToPlayer: 1
   m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_GoingRight: 0

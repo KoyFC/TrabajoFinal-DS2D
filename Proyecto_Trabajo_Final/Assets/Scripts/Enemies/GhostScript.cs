@@ -109,7 +109,7 @@ public class GhostScript : EnemyScript
         transform.position = Vector2.MoveTowards(
             this.transform.position,
             m_Player.transform.position,
-            (m_GhostCurrentSpeed * 0.5f) * dt);
+            (m_GhostCurrentSpeed) * dt);
 
         if (m_Direction.x < 0)
             {
@@ -176,6 +176,16 @@ public class GhostScript : EnemyScript
         {
             m_CanMove = false;
             DestroyGhost();
+        }
+        if (m_CurrentLifePoints < m_MaxLifePoints)
+        {
+            m_Animator.SetBool("Furious", true);
+            m_GhostCurrentSpeed = m_GhostMaxSpeed * 1.3f;
+        }
+        else
+        {
+            m_Animator.SetBool("Furious", false);
+            m_GhostCurrentSpeed = m_GhostMaxSpeed;
         }
     }
 
