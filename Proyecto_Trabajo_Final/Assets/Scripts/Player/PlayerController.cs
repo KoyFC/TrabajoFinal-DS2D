@@ -58,9 +58,9 @@ public class PlayerController : MonoBehaviour
     private bool m_JumpPressed;
     private bool m_SitPressed;
     private bool m_SummonLanternPressed;
-    private bool m_AlternateColorPressed;
     private bool m_LeftClickPressed;
     private bool m_RightClickPressed;
+    private float m_MouseWheel;
 
     [Header("Lantern variables")]
     public GameObject m_Lantern;
@@ -156,9 +156,9 @@ public class PlayerController : MonoBehaviour
             m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
             m_SitPressed = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftControl);
             m_SummonLanternPressed = Input.GetKeyDown(KeyCode.E);
-            m_AlternateColorPressed = Input.GetKeyDown(KeyCode.Q);
             m_LeftClickPressed = Input.GetMouseButtonDown(0);
             m_RightClickPressed = Input.GetMouseButtonDown(1);
+            m_MouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         }
     }
 
@@ -475,9 +475,28 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchLanternColor()
     {
-        if (m_RightClickPressed) // If the right mouse button is pressed, the color will cycle through the unlocked colors (excluding default)
+        // Extra checks to avoid out of bounds errors
+
+        if (m_UnlockedColors >= m_LanternColors.Length) 
         {
-            SelectNextColor();
+            m_UnlockedColors = m_LanternColors.Length;
+        }
+        else if (m_UnlockedColors < 1)
+        {
+            m_UnlockedColors = 1;
+        }
+
+        if (m_MouseWheel != 0) // If the mouse wheel is scrolled, the color will cycle through the unlocked colors (excluding default)
+        {
+            if (m_MouseWheel < 0)
+            {
+                SelectNextColor();
+            }
+            else if (m_MouseWheel > 0)
+            {
+                SelectPreviousColor();
+            }
+            
             m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
 
             m_LanternRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
@@ -506,7 +525,7 @@ public class PlayerController : MonoBehaviour
                 }
         }
 
-        if (m_AlternateColorPressed) // If the left mouse button is pressed, the color will be set to the default color
+        if (m_RightClickPressed) // If the right mouse button is pressed, the color will be set to the default color and back to the last color used
         {
             if (m_LanternRenderer.material.color != m_LanternColors[0])
             {
@@ -549,23 +568,24 @@ public class PlayerController : MonoBehaviour
 
     private void SelectNextColor() // Select the next color in the array checking how many colors the player has unlocked.  
     {
-        // Extra checks to avoid out of bounds errors
-
-        if (m_UnlockedColors >= m_LanternColors.Length) 
-        {
-            m_UnlockedColors = m_LanternColors.Length;
-        }
-        else if (m_UnlockedColors < 1)
-        {
-            m_UnlockedColors = 1;
-        }
-
         if (m_UnlockedColors > 1) // If the number of unlocked colors is 1 (just the default), the color will not change.
         {
             m_CurrentColorIndex++;
             if (m_CurrentColorIndex >= m_UnlockedColors)
             {
                 m_CurrentColorIndex = 1; // The color will never loop back to 0 since it is reserved for the default color, accesed with another key.
+            }
+        }
+    }
+
+    private void SelectPreviousColor()
+    {
+        if (m_UnlockedColors > 1)
+        {
+            m_CurrentColorIndex--;
+            if (m_CurrentColorIndex < 1)
+            {
+                m_CurrentColorIndex = m_UnlockedColors - 1;
             }
         }
     }

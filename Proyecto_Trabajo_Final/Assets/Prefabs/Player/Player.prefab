@@ -456,14 +456,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1397733227353135100}
     m_Modifications:
-    - target: {fileID: 1405417531134574157, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2580490505936105256, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_Name
-      value: Lamp Light 2D
-      objectReference: {fileID: 0}
     - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_Name
       value: Lantern
@@ -471,10 +463,6 @@ PrefabInstance:
     - target: {fileID: 3931571845485850592, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7406730896105907867, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-      propertyPath: m_Name
-      value: Point Light 2D
       objectReference: {fileID: 0}
     - target: {fileID: 9067990912491168207, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -517,9 +505,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8555659482290966704, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
-    - {fileID: 2315578278792206029, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a744e39c02ea0004aab4d0ff95c2aaf5, type: 3}
