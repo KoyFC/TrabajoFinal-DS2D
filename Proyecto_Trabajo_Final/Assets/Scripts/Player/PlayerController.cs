@@ -660,8 +660,8 @@ public class PlayerController : MonoBehaviour
             // Invert the player's gravity and its sprite vertically
             m_Rigidbody2D.gravityScale *= -1;
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
             m_Lantern.transform.localScale = new Vector2(m_Lantern.transform.localScale.x, m_Lantern.transform.localScale.y * -1);
-            // Flip the lantern sprite
             m_LanternRenderer.flipY = !m_LanternRenderer.flipY;
 
             m_DefaultJumpForce *= -1;
