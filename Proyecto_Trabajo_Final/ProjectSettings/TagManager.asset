@@ -8,6 +8,7 @@ TagManager:
   - DeathBox
   - Lamp
   - ColorIndicator
+  - HealthBar
   layers:
   - Default
   - TransparentFX
