@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    public HealthBar m_healthBar;
     public GameObject m_Player;
     public int m_CurrentLifePoints;
     public int m_MaxLifePoints = 3;
@@ -24,6 +25,10 @@ public class EnemyScript : MonoBehaviour
                 transform.localScale *= new Vector2(-1, 1);
             }
             m_GoingRight = value;
+            m_healthBar.transform.localScale = new Vector3
+                (m_GoingRight ? 1 : -1,
+                m_healthBar.transform.localScale.y,
+                m_healthBar.transform.localScale.z);
         }
     }
 

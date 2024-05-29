@@ -11,4 +11,5 @@ public class HealthBar : MonoBehaviour
     {
         barImage.fillAmount = m_CurrentLifePoints / m_MaxLifePoints;
     }
+
 }

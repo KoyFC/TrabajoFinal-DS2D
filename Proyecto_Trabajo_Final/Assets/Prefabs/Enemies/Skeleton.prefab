@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3537385788276588395}
   m_Layer: 0
   m_Name: HealthBar
-  m_TagString: Untagged
+  m_TagString: HealthBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,13 +241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e6607fa1f90144bdcc7b96b091261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_healthBar: {fileID: 0}
   m_Player: {fileID: 0}
   m_CurrentLifePoints: 3
   m_MaxLifePoints: 3
   m_DamageDealtToPlayer: 1
   m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_GoingRight: 0
-  healthBar: {fileID: 3537385788276588395}
   m_SkeletonBehaviour: 1
   m_SkeletonSpeed: 1
   m_FollowDistance: 5

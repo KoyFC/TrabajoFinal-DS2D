@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SkeletonScript : EnemyScript
 {
-    [SerializeField] private HealthBar healthBar;
-    
     private Animator m_Animator;
     private CapsuleCollider2D m_Collider;
     private BoxCollider2D m_BoxCollider;
@@ -39,7 +37,7 @@ public class SkeletonScript : EnemyScript
         m_CurrentLifePoints = m_MaxLifePoints;
         m_SpawnPoint = transform.position;
         m_GoingRight = false;
-        healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
 
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_Animator = GetComponent<Animator>();
@@ -51,6 +49,7 @@ public class SkeletonScript : EnemyScript
             CheckIfFlipNeeded();
         }
         m_ShouldFollow = false;
+
     }
 
     // Update is called once per frame
@@ -213,7 +212,7 @@ public class SkeletonScript : EnemyScript
     {
         base.GetDamage(howMuchDamage);
         m_Animator.SetTrigger("Damaged");
-        healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         // If helath is less than or equal to 0, destroy the skeleton
         if (m_CurrentLifePoints <= 0)
         {
