@@ -50,7 +50,6 @@ public class GhostScript : EnemyScript
         float dt = Time.deltaTime;
 
         m_Direction = m_Player.transform.position - transform.position;
-        Debug.Log(m_Direction);
         if (m_FollowDistance.x > Mathf.Abs(m_Direction.x) && m_FollowDistance.y > Mathf.Abs(m_Direction.y))
         {
             m_GhostBehaviour = GHOST_BEHAVIOUR.FOLLOW_PLAYER;

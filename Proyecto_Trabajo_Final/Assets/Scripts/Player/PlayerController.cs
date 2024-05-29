@@ -632,6 +632,8 @@ public class PlayerController : MonoBehaviour
             m_LightDamageScript.m_CurrentLightDamage = 0;
             m_InvencibleAfterHit = true;
             m_NoControlAfterHit = true;
+            m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
+            m_Movement.x = 0;
             m_RemainingInvencibleAfterHitDuration = m_DefaultActionCooldown * 0.8f;
             
             m_CurrentActionCooldown = m_DefaultActionCooldown;
@@ -671,7 +673,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(m_CurrentActionCooldown);
         m_CanPerformLanternAction = true;
     }
-
     private IEnumerator DeactivateLanternCollider()
     {
         yield return new WaitForSeconds(0.1f);
