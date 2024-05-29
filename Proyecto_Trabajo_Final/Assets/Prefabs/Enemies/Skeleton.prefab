@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9e6607fa1f90144bdcc7b96b091261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_healthBar: {fileID: 0}
+  m_healthBar: {fileID: 3537385788276588395}
   m_Player: {fileID: 0}
   m_CurrentLifePoints: 3
   m_MaxLifePoints: 3
