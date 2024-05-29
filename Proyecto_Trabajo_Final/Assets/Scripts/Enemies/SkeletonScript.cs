@@ -242,7 +242,12 @@ public class SkeletonScript : EnemyScript
 
     public void ToggleCanMove()
     {
-        m_CanMove = !m_CanMove;
+        m_CanMove = false;
+        Invoke("CanMoveAgain", 0.4f);
+    }
+    private void CanMoveAgain()
+    {
+        m_CanMove = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
