@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     [Header("Lantern variables")]
     public GameObject m_Lantern;
     public Transform m_LanternHinge; // The hinge that the lantern will rotate around
-    public Renderer m_LanternRenderer; // The lantern's main renderer
+    public SpriteRenderer m_LanternRenderer; // The lantern's main renderer
     public float m_DefaultActionCooldown = 1.5f;
     private float m_CurrentActionCooldown;
     public bool m_CanPerformLanternAction;
@@ -502,8 +502,6 @@ public class PlayerController : MonoBehaviour
                 SelectPreviousColor();
             }
             
-            m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
-
             m_LanternRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
             switch (m_CurrentColorIndex) // Rather than copying the color from the array, the color is set directly because it is otherwise unnoticable
                 {
@@ -528,6 +526,8 @@ public class PlayerController : MonoBehaviour
                         m_LanternActionAnimator.SetTrigger("4");
                         break;
                 }
+
+            m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
         }
 
         if (m_RightClickPressed) // If the right mouse button is pressed, the color will be set to the default color and back to the last color used
@@ -660,6 +660,10 @@ public class PlayerController : MonoBehaviour
             // Invert the player's gravity and its sprite vertically
             m_Rigidbody2D.gravityScale *= -1;
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+            m_Lantern.transform.localScale = new Vector2(m_Lantern.transform.localScale.x, m_Lantern.transform.localScale.y * -1);
+            // Flip the lantern sprite
+            m_LanternRenderer.flipY = !m_LanternRenderer.flipY;
+
             m_DefaultJumpForce *= -1;
             
             m_CurrentActionCooldown = 0.8f;
