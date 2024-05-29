@@ -212,6 +212,7 @@ public class SkeletonScript : EnemyScript
     public override void GetDamage(int howMuchDamage)
     {
         base.GetDamage(howMuchDamage);
+        m_Animator.SetTrigger("Damaged");
         healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         // If helath is less than or equal to 0, destroy the skeleton
         if (m_CurrentLifePoints <= 0)
@@ -234,9 +235,14 @@ public class SkeletonScript : EnemyScript
         m_CanMove = false;
         m_Collider.enabled = false;
         m_BoxCollider.enabled = false;
-        //m_Animator.SetTrigger("Dead");
+        m_Animator.SetTrigger("Die");
         m_Rigidbody.bodyType = RigidbodyType2D.Static;
         Destroy(gameObject, 1);
+    }
+
+    public void ToggleCanMove()
+    {
+        m_CanMove = !m_CanMove;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -244,6 +250,14 @@ public class SkeletonScript : EnemyScript
         if (m_SkeletonBehaviour == SKELETON_BEHAVIOUR.PATROL_COLLISION || m_SkeletonBehaviour == SKELETON_BEHAVIOUR.FOLLOW_PLAYER)
         {
             GoingRight = !GoingRight;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeathBox"))
+        {
+            m_CurrentLifePoints = 0;
         }
     }
 }

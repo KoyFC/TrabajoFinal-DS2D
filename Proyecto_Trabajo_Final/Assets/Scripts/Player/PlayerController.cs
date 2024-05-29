@@ -164,7 +164,12 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleCanMove()
     {
-        m_CanMove = !m_CanMove;
+        m_CanMove = false;
+        Invoke("CanMoveAgain", 0.4f);
+    }
+    private void CanMoveAgain()
+    {
+        m_CanMove = true;
     }
 
     private void HandleMovement()
@@ -577,7 +582,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void SelectPreviousColor()
     {
         if (m_UnlockedColors > 1)

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
-  m_CurrentLifePoints: 3
-  m_MaxLifePoints: 3
+  m_CurrentLifePoints: 20
+  m_MaxLifePoints: 20
   m_DamageDealtToPlayer: 1
   m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_GoingRight: 0
