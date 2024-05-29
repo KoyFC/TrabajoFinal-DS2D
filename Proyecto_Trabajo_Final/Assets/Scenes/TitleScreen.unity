@@ -999,9 +999,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613433802}
-        m_TargetAssemblyTypeName: Level4, Assembly-CSharp
-        m_MethodName: Jugar
+      - m_Target: {fileID: 1613433800}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Level4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3438,7 +3438,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 2060681310}
   m_HandleRect: {fileID: 276342233}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -50
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
@@ -3749,10 +3749,6 @@ GameObject:
   - component: {fileID: 1613433797}
   - component: {fileID: 1613433796}
   - component: {fileID: 1613433800}
-  - component: {fileID: 1613433804}
-  - component: {fileID: 1613433803}
-  - component: {fileID: 1613433802}
-  - component: {fileID: 1613433801}
   - component: {fileID: 1613433805}
   m_Layer: 0
   m_Name: Canvas
@@ -3858,54 +3854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf93d19b093c4a443b22fc20cb92f3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1613433801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613433795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc1f04956efa6a54cb194b0beb8ca22e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1613433802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613433795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe757205469bfc4887fc123d353ac4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1613433803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613433795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf3b5e288bf52849ad4deb57e0e3914, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1613433804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613433795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88001124aa7da341acb37eb25443398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1613433805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4002,9 +3950,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613433804}
-        m_TargetAssemblyTypeName: Level2, Assembly-CSharp
-        m_MethodName: Jugar
+      - m_Target: {fileID: 1613433800}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Level2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4350,8 +4298,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1613433800}
-        m_TargetAssemblyTypeName: TitleScreen, Assembly-CSharp
-        m_MethodName: Jugar
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Level1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4586,9 +4534,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613433803}
-        m_TargetAssemblyTypeName: Level3, Assembly-CSharp
-        m_MethodName: Jugar
+      - m_Target: {fileID: 1613433800}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Level3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5116,7 +5064,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1613433801}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Level5, Assembly-CSharp
         m_MethodName: Jugar
         m_Mode: 1
