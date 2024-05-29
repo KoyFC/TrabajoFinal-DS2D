@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (!m_LanternActive && m_SitPressed)
         {
-            m_PlayerRenderer.material.color = m_LanternColors[0];
+            m_PlayerRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
         }
 
         if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White icon
@@ -548,7 +548,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_RightClickPressed) // If the right mouse button is pressed, the color will be set to the default color and back to the last color used
         {
-            if (m_LanternRenderer.material.color != m_LanternColors[0])
+            if (m_PlayerRenderer.material.color != m_LanternColors[0]) 
             {
                 m_PlayerRenderer.material.color = m_LanternColors[0];
                 m_LanternRenderer.material.color = m_LanternColors[0];
