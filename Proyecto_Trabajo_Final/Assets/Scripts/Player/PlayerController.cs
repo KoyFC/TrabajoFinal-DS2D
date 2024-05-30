@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player variables")]
     private Rigidbody2D m_Rigidbody2D;
     private Vector2 m_Movement;
+    public bool m_ActivateBossFight;
 
     public float m_DefaultSpeed = 5.0f;
     private float m_CurrentSpeed;
@@ -118,7 +119,6 @@ public class PlayerController : MonoBehaviour
         m_CurrentColorIndicator = GameObject.FindGameObjectWithTag("ColorIndicator");
         m_NextColorIndicator = GameObject.FindGameObjectWithTag("NextColor");
         m_PreviousColorIndicator = GameObject.FindGameObjectWithTag("PreviousColor");
-        //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
         m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
     }
@@ -602,7 +602,7 @@ public class PlayerController : MonoBehaviour
                 m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
                 m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
             }
-            else if (m_CurrentColorIndex == 1 && m_UnlockedColors > 2)
+            else if ((m_CurrentColorIndex == 0 || m_CurrentColorIndex == 1) && m_UnlockedColors > 2)
             {
                 m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex + 1];
                 m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[m_UnlockedColors - 1];
@@ -754,9 +754,18 @@ public class PlayerController : MonoBehaviour
         // TODO: Implement a trigger that gives the player a new color
         if (collision.CompareTag("ColorPickup"))
         {
-            m_UnlockedColors = 1;
+            m_UnlockedColors++;
             m_Animator.SetTrigger("ActiveLantern");
             Destroy(collision.gameObject);
+        }
+
+        if (collision.CompareTag("BossTrigger"))
+        {
+            // Deactivate the box collider and activate the capsule collider
+            collision.GetComponent<BoxCollider2D>().enabled = false;
+            collision.GetComponent<CapsuleCollider2D>().enabled = true;
+            collision.GetComponent<SpriteRenderer>().enabled = true;
+            m_ActivateBossFight = true;
         }
         SetFrameColors();
     }

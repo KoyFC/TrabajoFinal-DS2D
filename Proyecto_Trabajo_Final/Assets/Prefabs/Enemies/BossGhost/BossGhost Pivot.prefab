@@ -58,10 +58,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_DeathParticlesPrefab: {fileID: 7295471739157409381, guid: 7904386efeb95e3419e8812ecb110048, type: 3}
-  m_BossGhostBehaviour: 1
+  m_BossGhostBehaviour: 0
   m_BossGhostMaxSpeed: 10
   m_BossGhostCurrentSpeed: 0
-  m_StunnedTime: 0.1
+  m_StunnedTime: 0.2
 --- !u!1001 &3038196347215059543
 PrefabInstance:
   m_ObjectHideFlags: 0

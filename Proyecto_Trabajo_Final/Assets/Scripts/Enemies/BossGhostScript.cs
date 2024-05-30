@@ -30,7 +30,6 @@ public class BossGhostScript : EnemyScript
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("ScarePlayer", 2.5f, 5);
         m_CurrentLifePoints = m_MaxLifePoints;
         m_BossGhostCurrentSpeed = m_BossGhostMaxSpeed;
         m_GoingRight = false;
@@ -51,6 +50,12 @@ public class BossGhostScript : EnemyScript
     void Update()
     {
         float dt = Time.deltaTime;
+        if (m_Player.GetComponent<PlayerController>().m_ActivateBossFight)
+        {
+            InvokeRepeating("ScarePlayer", 3, 5);
+            m_BossGhostBehaviour = BOSS_GHOST_BEHAVIOUR.PATROL_POINT;
+            m_Player.GetComponent<PlayerController>().m_ActivateBossFight = false;
+        }
 
         switch (m_BossGhostBehaviour)
         {

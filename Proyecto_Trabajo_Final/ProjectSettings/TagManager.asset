@@ -13,6 +13,7 @@ TagManager:
   - PreviousColor
   - NextColor
   - ColorPickup
+  - BossTrigger
   layers:
   - Default
   - TransparentFX
