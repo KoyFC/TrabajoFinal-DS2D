@@ -8,6 +8,7 @@ public class BossGhostScript : EnemyScript
     private Rigidbody2D m_Rigidbody2D;
     public Transform[] m_PatrolPoints;
     private Animator m_Animator;
+    private SpriteRenderer m_SpriteRenderer;
     public GameObject m_DeathParticlesPrefab;
 
     public enum BOSS_GHOST_BEHAVIOUR
@@ -21,7 +22,7 @@ public class BossGhostScript : EnemyScript
     // Variables
     public float m_BossGhostMaxSpeed = 2;
     public float m_BossGhostCurrentSpeed;
-    public float m_KnockbackForce;
+    public float m_StunnedTime = 0.5f;
 
     private int m_CurrentPatrolPointIndex = 0;
     private bool m_CanMove;
@@ -29,6 +30,7 @@ public class BossGhostScript : EnemyScript
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("ScarePlayer", 2.5f, 5);
         m_CurrentLifePoints = m_MaxLifePoints;
         m_BossGhostCurrentSpeed = m_BossGhostMaxSpeed;
         m_GoingRight = false;
@@ -36,14 +38,13 @@ public class BossGhostScript : EnemyScript
         m_Collider = GetComponentInChildren<CapsuleCollider2D>();
         m_Rigidbody2D = GetComponentInChildren<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
+        m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_CanMove = true;
 
         if (m_BossGhostBehaviour == BOSS_GHOST_BEHAVIOUR.PATROL_POINT)
         {
             CheckIfFlipNeeded();
         }
-
-        InvokeRepeating("ScarePlayer", 3, 5);
     }
 
     // Update is called once per frame
@@ -114,7 +115,7 @@ public class BossGhostScript : EnemyScript
         transform.position = Vector2.MoveTowards(
             this.transform.position,
             m_Player.transform.position,
-            (m_BossGhostCurrentSpeed * 0.5f) * dt);
+            (m_BossGhostCurrentSpeed * 0.4f) * dt);
 
         if (direction.x < 0)
             {
@@ -164,6 +165,9 @@ public class BossGhostScript : EnemyScript
     public override void GetDamage(int howMuchDamage)
     {
         base.GetDamage(howMuchDamage);
+        m_CanMove = false;
+        m_Animator.SetTrigger("Damaged");
+        StartCoroutine(StunnedAfterHit());
     }
 
 
@@ -198,20 +202,10 @@ public class BossGhostScript : EnemyScript
         Destroy(gameObject, 1);
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator StunnedAfterHit()
     {
-        if (collision.gameObject.tag == "Lamp")
-        {
-            // Deal knockback to the ghost
-            if (collision.transform.position.x < transform.position.x)
-            {
-                m_Rigidbody2D.AddForce((Vector2.right + Vector2.up) * m_KnockbackForce / 2);
-            }
-            else
-            {
-                m_Rigidbody2D.AddForce((Vector2.left + Vector2.up) * m_KnockbackForce / 2);
-            }
-        }
+        yield return new WaitForSeconds(m_StunnedTime);
+        m_CanMove = true;
+        m_SpriteRenderer.color = Color.white;
     }
 }

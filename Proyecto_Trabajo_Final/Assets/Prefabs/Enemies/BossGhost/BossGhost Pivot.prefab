@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22806e520344724894e5c782eb56c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_healthBar: {fileID: 0}
   m_Player: {fileID: 0}
   m_CurrentLifePoints: 20
   m_MaxLifePoints: 20
@@ -54,11 +55,13 @@ MonoBehaviour:
   m_PatrolPoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_DeathParticlesPrefab: {fileID: 7295471739157409381, guid: 7904386efeb95e3419e8812ecb110048, type: 3}
   m_BossGhostBehaviour: 1
-  m_BossGhostMaxSpeed: 6
+  m_BossGhostMaxSpeed: 10
   m_BossGhostCurrentSpeed: 0
-  m_KnockbackForce: 500
+  m_StunnedTime: 0.1
 --- !u!1001 &3038196347215059543
 PrefabInstance:
   m_ObjectHideFlags: 0
