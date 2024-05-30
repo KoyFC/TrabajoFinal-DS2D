@@ -46,7 +46,9 @@ public class PlayerController : MonoBehaviour
     private bool m_NoControlAfterHit;
     private float m_NoControlAfterHitDuration;
     private float m_RemainingNoControlAfterHitDuration;
-    public GameObject m_CurrentColorIndicator;
+    private GameObject m_CurrentColorIndicator;
+    private GameObject m_NextColorIndicator;
+    private GameObject m_PreviousColorIndicator;
 
     [Header("Ground check variables")]
     public Transform m_GroundCheck;
@@ -114,6 +116,8 @@ public class PlayerController : MonoBehaviour
         m_LightDamageScript = m_Lantern.GetComponentInChildren<LightDamageScript>();
         m_LightCollider = m_Lantern.GetComponentInChildren<PolygonCollider2D>();
         m_CurrentColorIndicator = GameObject.FindGameObjectWithTag("ColorIndicator");
+        m_NextColorIndicator = GameObject.FindGameObjectWithTag("NextColor");
+        m_PreviousColorIndicator = GameObject.FindGameObjectWithTag("PreviousColor");
         //m_UnlockedColors = 1; // The player will always start with the default color unlocked
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
         m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
@@ -519,29 +523,29 @@ public class PlayerController : MonoBehaviour
             {
                 SelectPreviousColor();
             }
-            
+
             m_LanternRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
             switch (m_CurrentColorIndex) // Rather than copying the color from the array, the color is set directly because it is otherwise unnoticable
-                {
-                    case 1:
-                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
-                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
-                        break;
-                    case 2:
-                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
-                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
-                        break;
-                    case 3:
-                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
-                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
-                        break;
-                    case 4:
-                        m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
-                        m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
-                        break;
-                }
+            {
+                case 1:
+                    m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
+                    m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0, 0, 1);
+                    break;
+                case 2:
+                    m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
+                    m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 0, 1, 1);
+                    break;
+                case 3:
+                    m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
+                    m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(0, 1, 0, 1);
+                    break;
+                case 4:
+                    m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
+                    m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 0.92f, 0.016f, 1);
+                    break;
+            }
 
-            m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
+            SetFrameColors();
         }
 
         if (m_RightClickPressed) // If the right mouse button is pressed, the color will be set to the default color and back to the last color used
@@ -583,6 +587,36 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SetFrameColors() // Set the colors of the lantern frames
+    {
+        m_CurrentColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
+            if (m_UnlockedColors == 1)
+            {
+                m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[0];
+                m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[0];
+            }
+            else if (m_UnlockedColors == 2)
+            {
+                m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
+                m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex];
+            }
+            else if (m_CurrentColorIndex == 1 && m_UnlockedColors > 2)
+            {
+                m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex + 1];
+                m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[m_UnlockedColors - 1];
+            }
+            else if (m_CurrentColorIndex == m_UnlockedColors - 1 && m_UnlockedColors > 2)
+            {
+                m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[1];
+                m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[m_UnlockedColors - 2];
+            }
+            else 
+            {
+                m_NextColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex + 1];
+                m_PreviousColorIndicator.GetComponent<Image>().color = m_LanternColors[m_CurrentColorIndex - 1];
+            }
     }
 
     private void SelectNextColor() // Select the next color in the array checking how many colors the player has unlocked.  
@@ -716,6 +750,9 @@ public class PlayerController : MonoBehaviour
         {
             m_LifePoints = 0;
         }
+
+        // TODO: Implement a trigger that gives the player a new color
+        SetFrameColors();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

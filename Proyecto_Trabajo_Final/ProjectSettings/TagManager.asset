@@ -10,6 +10,8 @@ TagManager:
   - ColorIndicator
   - HealthBar
   - Spikes
+  - PreviousColor
+  - NextColor
   layers:
   - Default
   - TransparentFX
