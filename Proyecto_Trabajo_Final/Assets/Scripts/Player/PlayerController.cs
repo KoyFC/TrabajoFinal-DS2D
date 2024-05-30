@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
                 AimLantern();
             }
 
-            if (m_CanPerformLanternAction)
+            if (m_CanPerformLanternAction && m_UnlockedColors > 1)
             {
                 SwitchPlayerColor();
                 SwitchLanternColor();
@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("SitPressed");
         }
 
-        if (m_SummonLanternPressed)
+        if (m_SummonLanternPressed && m_UnlockedColors > 0) 
         {
             m_Animator.SetTrigger("ActiveLantern");
         }
@@ -510,7 +510,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (m_UnlockedColors < 1)
         {
-            m_UnlockedColors = 1;
+            m_UnlockedColors = 0;
         }
 
         if (m_MouseWheel != 0) // If the mouse wheel is scrolled, the color will cycle through the unlocked colors (excluding default)
@@ -752,6 +752,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // TODO: Implement a trigger that gives the player a new color
+        if (collision.CompareTag("ColorPickup"))
+        {
+            m_UnlockedColors = 1;
+            m_Animator.SetTrigger("ActiveLantern");
+            Destroy(collision.gameObject);
+        }
         SetFrameColors();
     }
 

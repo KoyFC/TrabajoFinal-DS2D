@@ -12,6 +12,7 @@ TagManager:
   - Spikes
   - PreviousColor
   - NextColor
+  - ColorPickup
   layers:
   - Default
   - TransparentFX
