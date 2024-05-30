@@ -9,6 +9,7 @@ TagManager:
   - Lamp
   - ColorIndicator
   - HealthBar
+  - Spikes
   layers:
   - Default
   - TransparentFX

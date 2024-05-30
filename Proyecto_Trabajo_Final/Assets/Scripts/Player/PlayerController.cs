@@ -248,6 +248,7 @@ public class PlayerController : MonoBehaviour
         if (m_IsGrounded)
         {
             m_RemainingExtraJumps = m_CurrentMaxExtraJumps;
+            m_Animator.ResetTrigger("JumpPressed");
         }
 
         // We handle the animation here since it is related to the jump and would require extra checks in the HandleAnimations method
@@ -302,7 +303,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_LeftClickPressed && m_CanPerformLanternAction && m_LanternActive)
         {
-            m_Animator.SetTrigger("LanternAction");  
+            m_Animator.SetTrigger("LanternAction");
         }
         else if (m_LeftClickPressed && m_CanPerformLanternAction && !m_LanternActive)
         {
@@ -712,6 +713,14 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DeathBox"))
+        {
+            m_LifePoints = 0;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Spikes") && !m_InvencibleAfterHit)
         {
             m_LifePoints = 0;
         }

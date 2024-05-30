@@ -25365,7 +25365,7 @@ GameObject:
   - component: {fileID: 964323636}
   m_Layer: 10
   m_Name: DeathHitboxSpikes1
-  m_TagString: DeathBox
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26712,7 +26712,7 @@ GameObject:
   - component: {fileID: 2129639265}
   m_Layer: 10
   m_Name: DeathHitboxSpikes2
-  m_TagString: DeathBox
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
