@@ -26,10 +26,8 @@ public class EnemyScript : MonoBehaviour
             }
             m_GoingRight = value;
 
-            m_healthBar.transform.localScale = new Vector3
-                (m_GoingRight ? (-m_healthBar.transform.localScale.x) : (m_healthBar.transform.localScale.x),
-                m_healthBar.transform.localScale.y,
-                m_healthBar.transform.localScale.z);
+            // Flip the health bar at the same time as the enemy sprite to prevent the health bar from being flipped
+            m_healthBar.transform.localScale *= new Vector2(-1, 1); 
         }
     }
 
