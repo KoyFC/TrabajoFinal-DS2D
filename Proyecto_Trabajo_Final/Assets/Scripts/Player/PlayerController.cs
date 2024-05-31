@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool m_CanMove;
     private bool m_IsDead;
     public bool m_ReviveTriggered;
+    private bool m_NewAbilityUnlocked;
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
@@ -105,12 +106,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_LifePoints = m_MaxLifePoints;
-        m_CanMove = true;
+        m_CanMove = false;
+        Invoke("CanMoveAgain", 1);
         m_NoControlAfterHit = false;
         m_IsDead = false;
         m_GoingRight = true;
         m_RemainingExtraJumps = m_DefaultMaxExtraJumps;
         m_CanPerformLanternAction = true;
+        m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
+        m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
+
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
@@ -119,8 +124,6 @@ public class PlayerController : MonoBehaviour
         m_CurrentColorIndicator = GameObject.FindGameObjectWithTag("ColorIndicator");
         m_NextColorIndicator = GameObject.FindGameObjectWithTag("NextColor");
         m_PreviousColorIndicator = GameObject.FindGameObjectWithTag("PreviousColor");
-        m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
-        m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
     }
 
     void Update()
@@ -513,7 +516,7 @@ public class PlayerController : MonoBehaviour
             m_UnlockedColors = 0;
         }
 
-        if (m_MouseWheel != 0) // If the mouse wheel is scrolled, the color will cycle through the unlocked colors (excluding default)
+        if (m_MouseWheel != 0 || m_NewAbilityUnlocked) // If the mouse wheel is scrolled, the color will cycle through the unlocked colors (excluding default)
         {
             if (m_MouseWheel < 0)
             {
@@ -751,11 +754,16 @@ public class PlayerController : MonoBehaviour
             m_LifePoints = 0;
         }
 
-        // TODO: Implement a trigger that gives the player a new color
         if (collision.CompareTag("ColorPickup"))
         {
             m_UnlockedColors++;
+            m_CurrentColorIndex = m_UnlockedColors - 1;
+            SetFrameColors();
+            m_LanternActive = false;
+            m_CurrentActionCooldown = m_DefaultActionCooldown;
+
             m_Animator.SetTrigger("ActiveLantern");
+            Invoke("ToggleNewAbility", 0.4f);
             Destroy(collision.gameObject);
         }
 
@@ -765,9 +773,20 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<BoxCollider2D>().enabled = false;
             collision.GetComponent<CapsuleCollider2D>().enabled = true;
             collision.GetComponent<SpriteRenderer>().enabled = true;
+            m_LifePoints = 7;
             m_ActivateBossFight = true;
         }
-        SetFrameColors();
+    }
+
+    private void ToggleNewAbility()
+    {
+        m_NewAbilityUnlocked = true;
+        Invoke("StopNewAbility", 0.1f);
+    }
+
+    private void StopNewAbility()
+    {
+        m_NewAbilityUnlocked = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

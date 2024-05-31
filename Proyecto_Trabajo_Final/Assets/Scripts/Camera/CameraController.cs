@@ -11,6 +11,14 @@ public class CameraController : MonoBehaviour
 
     public Vector3 m_TargetPosition;
 
+    void Start()
+    {
+        transform.position = new Vector3(
+            m_Target.transform.position.x + m_HorizontalOffset,
+            m_Target.transform.position.y + 1,
+            transform.position.z);
+    }
+
     private void FixedUpdate()
     {
         // Posicion de destino == posicion del player en X e Y

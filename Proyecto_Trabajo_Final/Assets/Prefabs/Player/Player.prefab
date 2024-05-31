@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnPoint: {fileID: 0}
+  m_ActivateBossFight: 0
   m_DefaultSpeed: 2.4
   m_RunSpeedMultiplier: 1.5
   m_DefaultJumpForce: 825
@@ -67,7 +68,6 @@ MonoBehaviour:
   m_MaxLifePoints: 5
   m_LifePoints: 5
   m_InvencibleAfterHitDuration: 1
-  m_CurrentColorIndicator: {fileID: 0}
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
     serializedVersion: 2

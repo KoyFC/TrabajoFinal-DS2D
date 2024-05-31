@@ -3676,6 +3676,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3407215577074676669, guid: bb42b5581f11caf41975072a6e313158, type: 3}
+      propertyPath: m_MaxLifePoints
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407215577074676669, guid: bb42b5581f11caf41975072a6e313158, type: 3}
+      propertyPath: m_CurrentLifePoints
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5626675852259876806, guid: bb42b5581f11caf41975072a6e313158, type: 3}
       propertyPath: m_LocalPosition.x
       value: 99.34979
@@ -26133,7 +26141,7 @@ GameObject:
   - component: {fileID: 781554437}
   - component: {fileID: 781554436}
   - component: {fileID: 781554435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LanternOnTable
   m_TagString: ColorPickup
   m_Icon: {fileID: 0}
@@ -26398,6 +26406,14 @@ PrefabInstance:
     - target: {fileID: 2084018208284003258, guid: bb42b5581f11caf41975072a6e313158, type: 3}
       propertyPath: m_Name
       value: Ghost (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407215577074676669, guid: bb42b5581f11caf41975072a6e313158, type: 3}
+      propertyPath: m_MaxLifePoints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407215577074676669, guid: bb42b5581f11caf41975072a6e313158, type: 3}
+      propertyPath: m_CurrentLifePoints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5626675852259876806, guid: bb42b5581f11caf41975072a6e313158, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27032,13 +27048,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 3407215577074676669, guid: bb42b5581f11caf41975072a6e313158, type: 3}
+      propertyPath: m_MaxLifePoints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407215577074676669, guid: bb42b5581f11caf41975072a6e313158, type: 3}
+      propertyPath: m_CurrentLifePoints
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5626675852259876806, guid: bb42b5581f11caf41975072a6e313158, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.45
+      value: 92.33
       objectReference: {fileID: 0}
     - target: {fileID: 5626675852259876806, guid: bb42b5581f11caf41975072a6e313158, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 5626675852259876806, guid: bb42b5581f11caf41975072a6e313158, type: 3}
       propertyPath: m_LocalPosition.z
