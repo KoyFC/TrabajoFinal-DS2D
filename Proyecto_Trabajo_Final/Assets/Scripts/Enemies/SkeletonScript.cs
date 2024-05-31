@@ -262,6 +262,7 @@ public class SkeletonScript : EnemyScript
         if (collision.CompareTag("DeathBox"))
         {
             m_CurrentLifePoints = 0;
+            m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         }
     }
 }

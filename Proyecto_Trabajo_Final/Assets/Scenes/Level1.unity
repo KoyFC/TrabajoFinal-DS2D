@@ -27161,6 +27161,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3227790689210495888, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Flames.Array.data[0]
       value: 
@@ -27201,6 +27205,14 @@ PrefabInstance:
       propertyPath: m_FlameAnimators.Array.data[4]
       value: 
       objectReference: {fileID: 800207649}
+    - target: {fileID: 5632077941819758947, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721312724340656334, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
