@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 630953364468195873}
   - component: {fileID: 3896750525892312868}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: ShadowBall
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b96717e925990542b15ef6d5b8cdeec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LifePoints: 2
+  m_LifePoints: 1
   m_DamageDealtToPlayer: 2
-  m_ProyectileSpeed: 8
+  m_ProyectileSpeed: 5
 --- !u!212 &8103031350397264995
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 60
-  m_Sprite: {fileID: -828048692, guid: 2a18bc96860b8224fae49da28a587fd6, type: 3}
+  m_Sprite: {fileID: -465776417, guid: de059967218adc046866305e63529ba1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,7 +113,7 @@ Animator:
   m_GameObject: {fileID: 4355155321510691358}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e39b5e94d1b9ee945b696e86679f8258, type: 2}
+  m_Controller: {fileID: 9100000, guid: 08cb98779bd2cb0449494df0b5cc34b8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -175,8 +175,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.5641353, b: 0, a: 1}
-  m_Intensity: 7.93
+  m_Color: {r: 0.61626476, g: 0, b: 0.7830189, a: 1}
+  m_Intensity: 13.16
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightOuterRadius: 1.35
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

@@ -59,7 +59,15 @@ public class BossProyectileScript : MonoBehaviour
             if (playerController.m_InvencibleAfterHit && playerController.m_PlayerRenderer.material.color == playerController.m_LanternColors[2] && playerController.m_Movement.x == 0)
             {
                 WizardScript wizard = GameObject.FindGameObjectWithTag("Boss").GetComponent<WizardScript>();
-                wizard.GetDamage(m_DamageDealtToPlayer);
+                ShadowWizardScript shadowWizard = GameObject.FindGameObjectWithTag("Boss").GetComponent<ShadowWizardScript>();
+                if (wizard != null)
+                {
+                    wizard.GetDamage(m_DamageDealtToPlayer);
+                }
+                else if (shadowWizard != null)
+                {
+                    shadowWizard.GetDamage(m_DamageDealtToPlayer);
+                }
             }
         }
     }
