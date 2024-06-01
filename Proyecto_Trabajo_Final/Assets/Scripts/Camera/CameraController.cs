@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform m_Target;
+    private Transform m_Target;
     public float m_HorizontalOffset;
     public float m_HorizontalSpeed;
     public float m_StopCamera = -5;
@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        m_Target = GameObject.FindGameObjectWithTag("Player").transform;
+
         transform.position = new Vector3(
             m_Target.transform.position.x + m_HorizontalOffset,
             m_Target.transform.position.y + 1,

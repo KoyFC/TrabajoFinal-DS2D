@@ -23,7 +23,6 @@ public class ShadowWizardScript : EnemyScript
     // Variables
     public float m_StunnedTime = 0.5f;
     private bool m_CanMove;
-    private int m_CurrentTeleportPointIndex = 0;
     public int m_TimesUntilKnockback = 2;
     public int m_TimesItGotHit = 0;
     public float m_JumpForce;
@@ -80,8 +79,6 @@ public class ShadowWizardScript : EnemyScript
         {
             m_Animator.SetBool("Jumping", false);
         }
-
-        CheckIfFlipNeeded();
     }
 
     private void CheckIfFlipNeeded()
@@ -100,6 +97,8 @@ public class ShadowWizardScript : EnemyScript
     {
         base.GetDamage(howMuchDamage);
         m_CanMove = false;
+        CheckIfFlipNeeded();
+
         m_Animator.SetTrigger("Damaged");
         Attack();
         StartCoroutine(StunnedAfterHit());
@@ -107,24 +106,44 @@ public class ShadowWizardScript : EnemyScript
         m_TimesItGotHit++;
         if (m_TimesItGotHit >= m_TimesUntilKnockback)
         {
-            if (m_Player.transform.position.x < transform.position.x)
-            {
-                m_Rigidbody2D.AddForce((Vector2.up + Vector2.left) * m_KnockbackForce * m_Rigidbody2D.gravityScale);
-            }
-            else
-            {
-                m_Rigidbody2D.AddForce((Vector2.up + Vector2.right) * m_KnockbackForce * m_Rigidbody2D.gravityScale);
-            }
+            GetKnockback();
             m_TimesItGotHit = 0;
         }
 
-        if (m_CurrentLifePoints <= m_MaxLifePoints / 2 && !m_TriggerPhase2)
+        if (m_CurrentLifePoints <= m_MaxLifePoints * 0.625f && !m_TriggerPhase2)
         {
             m_TimesUntilKnockback = 1;
             m_TriggerPhase2 = true;
-            InvokeRepeating("Jump", 2, 11);
-            InvokeRepeating("AttackWithProyectile", 5, 4);
+            InvokeRepeating("Jump", 0, 16);
+            InvokeRepeating("AttackWithProyectile", 5, 7);
+            InvokeRepeating("GetKnockback", 2, 3);
         }
+    }
+
+    private void GetKnockback()
+    {
+        if (m_Rigidbody2D.gravityScale > 0)
+            {
+                if (m_Player.transform.position.x < transform.position.x)
+                {
+                    m_Rigidbody2D.AddForce((Vector2.up + Vector2.left) * m_KnockbackForce);
+                }
+                else
+                {
+                    m_Rigidbody2D.AddForce((Vector2.up + Vector2.right) * m_KnockbackForce);
+                }
+            }
+            else
+            {
+                if (m_Player.transform.position.x < transform.position.x)
+                {
+                    m_Rigidbody2D.AddForce((Vector2.down + Vector2.left) * m_KnockbackForce);
+                }
+                else
+                {
+                    m_Rigidbody2D.AddForce((Vector2.down + Vector2.right) * m_KnockbackForce);
+                }
+            }
     }
 
     private void Attack()

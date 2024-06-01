@@ -4138,7 +4138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bff56e9a2c8a2c479e548dcdd3e26e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 4849892373119046634}
   m_HorizontalOffset: 3
   m_HorizontalSpeed: 2
   m_StopCamera: -5
@@ -4754,11 +4753,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
---- !u!4 &4849892373119046634 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-  m_PrefabInstance: {fileID: 4849892373119046633}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6735719752010843007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4821,9 +4815,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1952050341}
+  - {fileID: 519420032}
   - {fileID: 1872355534}
   - {fileID: 830121370}
-  - {fileID: 519420032}
   - {fileID: 417973393}
   - {fileID: 4849892373119046633}
   - {fileID: 1075273007}

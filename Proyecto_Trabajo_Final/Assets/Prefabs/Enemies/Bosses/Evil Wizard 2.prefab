@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_healthBar: {fileID: 0}
   m_Player: {fileID: 0}
-  m_CurrentLifePoints: 30
-  m_MaxLifePoints: 30
+  m_CurrentLifePoints: 50
+  m_MaxLifePoints: 50
   m_DamageDealtToPlayer: 1
   m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_GoingRight: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_TimesUntilKnockback: 2
   m_TimesItGotHit: 0
   m_JumpForce: 200
-  m_KnockbackForce: 95
+  m_KnockbackForce: 600
   m_GroundCheck: {fileID: 1634853919047681931}
   m_GroundLayer:
     serializedVersion: 2

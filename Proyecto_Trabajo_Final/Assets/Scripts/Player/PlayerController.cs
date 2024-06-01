@@ -64,7 +64,9 @@ public class PlayerController : MonoBehaviour
     private bool m_SummonLanternPressed;
     private bool m_LeftClickPressed;
     private bool m_RightClickPressed;
+    private bool m_MouseWheelPressed;
     private float m_MouseWheel;
+    private bool m_AttackingWithMouseWheel;
 
     [Header("Lantern variables")]
     public GameObject m_Lantern;
@@ -164,6 +166,7 @@ public class PlayerController : MonoBehaviour
             m_SummonLanternPressed = Input.GetKeyDown(KeyCode.E);
             m_LeftClickPressed = Input.GetMouseButtonDown(0);
             m_RightClickPressed = Input.GetMouseButtonDown(1);
+            m_MouseWheelPressed = Input.GetMouseButtonDown(2);
             m_MouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         }
     }
@@ -319,6 +322,12 @@ public class PlayerController : MonoBehaviour
                 m_Animator.SetTrigger("LanternAction");
             }
         }
+        else if (m_MouseWheelPressed && m_CanPerformLanternAction && m_LanternActive)
+        {
+            m_Animator.SetTrigger("LanternAction");
+            m_LanternActionAnimator.SetTrigger("0");
+            m_AttackingWithMouseWheel = true;
+        }
     }
 
     public void SwitchPlayerColor()
@@ -332,25 +341,32 @@ public class PlayerController : MonoBehaviour
             m_PlayerRenderer.material.color = m_LanternColors[m_CurrentColorIndex];
         }
 
-        if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White icon
+        if (!m_AttackingWithMouseWheel)
+        {
+            if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White icon
+            {
+                m_LanternActionAnimator.SetTrigger("0");
+            }
+            else if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red icon
+            {
+                m_LanternActionAnimator.SetTrigger("1");
+            }
+            else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue  
+            {
+                m_LanternActionAnimator.SetTrigger("2");
+            }
+            else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green icon
+            {
+                m_LanternActionAnimator.SetTrigger("3");
+            }
+            else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow icon
+            {
+                m_LanternActionAnimator.SetTrigger("4");
+            }
+        }
+        else 
         {
             m_LanternActionAnimator.SetTrigger("0");
-        }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red icon
-        {
-            m_LanternActionAnimator.SetTrigger("1");
-        }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue  
-        {
-            m_LanternActionAnimator.SetTrigger("2");
-        }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green icon
-        {
-            m_LanternActionAnimator.SetTrigger("3");
-        }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow icon
-        {
-            m_LanternActionAnimator.SetTrigger("4");
         }
     }
 
@@ -559,7 +575,6 @@ public class PlayerController : MonoBehaviour
                 m_LanternRenderer.material.color = m_LanternColors[0];
                 m_LightObject1.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 1, 1, 1);
                 m_LightObject2.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = new Color(1, 1, 1, 1);
-                m_LanternActionAnimator.SetTrigger("0");
             }
             else 
             {
@@ -654,74 +669,85 @@ public class PlayerController : MonoBehaviour
         m_CanPerformLanternAction = false;
         m_Animator.ResetTrigger("LanternAction"); // Without this line, when spamming click, the animation will play twice
 
-        if (m_LanternActive)
+        if (m_AttackingWithMouseWheel)
         {
-            if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White
+            m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage;
+            m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
+            Attack();
+            m_AttackingWithMouseWheel = false;
+        }
+        else
+        {
+            if (m_LanternActive)
             {
-                // Attack
-                m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage;
-                m_LightCollider.enabled = true;
-                
-                StartCoroutine(DeactivateLanternCollider());
-                m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
+                if (m_PlayerRenderer.material.color == m_LanternColors[0]) // White
+                {
+                    // Attack
+                    m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage;
+                    m_CurrentActionCooldown = m_DefaultActionCooldown * 0.3f;
+                    Attack();
+                }
+                else if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
+                {
+                    
+                    m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage * 2;
+                    m_CurrentActionCooldown = m_DefaultActionCooldown * 0.6f;
+                    Attack();
+                }
             }
-            else if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
+            
+            if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
             {
+                // Invincible for 0.8 seconds, but can't move during most of it (the player is still allowed to move a bit before the invincibility ends)
+                m_LightDamageScript.m_CurrentLightDamage = 0;
+                m_InvencibleAfterHit = true;
+                m_NoControlAfterHit = true;
+                m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
+                m_Movement.x = 0;
+                m_RemainingInvencibleAfterHitDuration = m_DefaultActionCooldown * 0.8f;
                 
-                m_LightDamageScript.m_CurrentLightDamage = m_LightDamageScript.m_DefaultLightDamage * 2;
-                m_LightCollider.enabled = true;
-                m_CurrentActionCooldown = m_DefaultActionCooldown * 0.6f;
+                m_CurrentActionCooldown = m_DefaultActionCooldown;
+            }
+            else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
+            {
+                // Jump that doesn't consume extra jumps
+                m_LightDamageScript.m_CurrentLightDamage = 0;
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+                m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.35f);
+
+                if (!m_IsGrounded)
+                {
+                    SummonAirJumpParticles();
+                }
+
+                m_Animator.SetTrigger("JumpPressed");
                 
-                StartCoroutine(DeactivateLanternCollider());
+                m_CurrentActionCooldown = m_DefaultActionCooldown;
+            }
+            else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
+            {
+                m_LightDamageScript.m_CurrentLightDamage = 0;
+                // Invert the player's gravity and its sprite vertically
+                m_Rigidbody2D.gravityScale *= -1;
+                transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+                m_Lantern.transform.localScale = new Vector2(m_Lantern.transform.localScale.x, m_Lantern.transform.localScale.y * -1);
+                m_LanternRenderer.flipY = !m_LanternRenderer.flipY;
+
+                m_DefaultJumpForce *= -1;
+                
+                m_CurrentActionCooldown = 0.8f;
             }
         }
         
-        if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
-        {
-            // Invincible for 0.8 seconds, but can't move during most of it (the player is still allowed to move a bit before the invincibility ends)
-            m_LightDamageScript.m_CurrentLightDamage = 0;
-            m_InvencibleAfterHit = true;
-            m_NoControlAfterHit = true;
-            m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
-            m_Movement.x = 0;
-            m_RemainingInvencibleAfterHitDuration = m_DefaultActionCooldown * 0.8f;
-            
-            m_CurrentActionCooldown = m_DefaultActionCooldown;
-        }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[3]) // Green
-        {
-            // Jump that doesn't consume extra jumps
-            m_LightDamageScript.m_CurrentLightDamage = 0;
-            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-            m_Rigidbody2D.AddForce(Vector2.up * m_CurrentJumpForce * 1.35f);
-
-            if (!m_IsGrounded)
-            {
-                SummonAirJumpParticles();
-            }
-
-            m_Animator.SetTrigger("JumpPressed");
-            
-            m_CurrentActionCooldown = m_DefaultActionCooldown;
-        }
-        else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
-        {
-            m_LightDamageScript.m_CurrentLightDamage = 0;
-            // Invert the player's gravity and its sprite vertically
-            m_Rigidbody2D.gravityScale *= -1;
-            transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
-            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-            m_Lantern.transform.localScale = new Vector2(m_Lantern.transform.localScale.x, m_Lantern.transform.localScale.y * -1);
-            m_LanternRenderer.flipY = !m_LanternRenderer.flipY;
-
-            m_DefaultJumpForce *= -1;
-            
-            m_CurrentActionCooldown = 0.8f;
-        }
-
         StartCoroutine(LanternCooldown());
     }
 
+    private void Attack()
+    {
+        m_LightCollider.enabled = true;
+        StartCoroutine(DeactivateLanternCollider());
+    }
     private IEnumerator LanternCooldown()
     {
         yield return new WaitForSeconds(m_CurrentActionCooldown);
