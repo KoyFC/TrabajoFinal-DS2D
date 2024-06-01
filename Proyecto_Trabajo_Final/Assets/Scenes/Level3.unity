@@ -62280,9 +62280,17 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 3253686850756254511, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4251783243346473007, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933684950084809445, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5723721529104776963, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
       propertyPath: m_Pivot.x
