@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player variables")]
     private Rigidbody2D m_Rigidbody2D;
-    private Vector2 m_Movement;
+    public Vector2 m_Movement;
     public bool m_ActivateBossFight;
 
     public float m_DefaultSpeed = 5.0f;
@@ -35,14 +35,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 m_MousePosition;
     private Animator m_Animator;
     public Animator m_LanternActionAnimator;
-    private SpriteRenderer m_PlayerRenderer;
+    public SpriteRenderer m_PlayerRenderer;
     public GameObject m_JumpParticlesPrefab;
     public GameObject m_JumpParticlesSpawn;
 
     [Header("Life and UI")]
     public int m_MaxLifePoints = 5;
     public int m_LifePoints;
-    private bool m_InvencibleAfterHit;
+    public bool m_InvencibleAfterHit;
     public float m_InvencibleAfterHitDuration;
     private float m_RemainingInvencibleAfterHitDuration;
     private bool m_NoControlAfterHit;
@@ -750,6 +750,11 @@ public class PlayerController : MonoBehaviour
             if (thisBossProyectile != null)
             {
                 ReceiveDamage(thisBossProyectile.m_DamageDealtToPlayer, collision.transform.position.x);
+            }
+
+            if (m_InvencibleAfterHit && m_PlayerRenderer.material.color == m_LanternColors[2] && m_Movement.x == 0)
+            {
+                thisEnemy.GetDamage(thisEnemy.m_DamageDealtToPlayer);
             }
             m_CurrentKnockbackForce = m_KnockbackForce;
         }

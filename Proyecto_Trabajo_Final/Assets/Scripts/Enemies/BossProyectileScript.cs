@@ -55,6 +55,12 @@ public class BossProyectileScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject, 0.15f);
+            PlayerController playerController = m_Player.GetComponent<PlayerController>();
+            if (playerController.m_InvencibleAfterHit && playerController.m_PlayerRenderer.material.color == playerController.m_LanternColors[2] && playerController.m_Movement.x == 0)
+            {
+                WizardScript wizard = GameObject.FindGameObjectWithTag("Boss").GetComponent<WizardScript>();
+                wizard.GetDamage(m_DamageDealtToPlayer);
+            }
         }
     }
 }
