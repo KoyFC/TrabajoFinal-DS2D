@@ -738,11 +738,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss"))
         {
             EnemyScript thisEnemy = collision.gameObject.GetComponentInParent<EnemyScript>();
+            BossProyectileScript thisBossProyectile = collision.gameObject.GetComponent<BossProyectileScript>();
             m_Rigidbody2D.velocity = Vector2.zero;
-            ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
+            if (thisEnemy != null)
+            {
+                ReceiveDamage(thisEnemy.m_DamageDealtToPlayer, collision.transform.position.x);
+            }
+            if (thisBossProyectile != null)
+            {
+                ReceiveDamage(thisBossProyectile.m_DamageDealtToPlayer, collision.transform.position.x);
+            }
             m_CurrentKnockbackForce = m_KnockbackForce;
         }
     }
