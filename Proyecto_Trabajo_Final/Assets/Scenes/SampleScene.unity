@@ -4659,7 +4659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_ActivateBossFight
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_CurrentColorIndicator
@@ -4772,22 +4772,6 @@ PrefabInstance:
       value: EvilWizard1
       objectReference: {fileID: 0}
     - target: {fileID: 5131404376685977393, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
-      propertyPath: m_SummonPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131404376685977393, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
-      propertyPath: m_SummonPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131404376685977393, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
-      propertyPath: m_SummonPoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131404376685977393, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
-      propertyPath: m_SummonPoints.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5131404376685977393, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
       propertyPath: m_TeleportPoints.Array.data[0]
       value: 
       objectReference: {fileID: 915209550}
@@ -4834,10 +4818,6 @@ PrefabInstance:
     - target: {fileID: 7665554217134014845, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8294824897581316637, guid: 4ef468566b19b9242beec06be7e8b8c0, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

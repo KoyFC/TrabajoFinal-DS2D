@@ -21,19 +21,17 @@ public class WizardScript : EnemyScript
     public WIZARD_BEHAVIOUR m_WizardBehaviour = WIZARD_BEHAVIOUR.IDLE;
 
     // Variables
-    public float m_WizardMaxSpeed = 2;
-    public float m_WizardCurrentSpeed;
     public float m_StunnedTime = 0.5f;
     private bool m_CanMove;
     private int m_CurrentTeleportPointIndex = 0;
     public int m_TimesUntilTeleport = 3;
     public int m_TimesItGotHit = 0;
+    private bool m_TriggerPhase2 = false;
 
     // Start is called before the first frame update
     void Start()
     {
         m_CurrentLifePoints = m_MaxLifePoints;
-        m_WizardCurrentSpeed = m_WizardMaxSpeed;
         m_GoingRight = true;
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_Collider = GetComponent<CapsuleCollider2D>();
@@ -41,6 +39,7 @@ public class WizardScript : EnemyScript
         m_Animator = GetComponent<Animator>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_CanMove = true;
+        m_TriggerPhase2 = false;
     }
 
     // Update is called once per frame
@@ -92,6 +91,14 @@ public class WizardScript : EnemyScript
         {
             m_Animator.SetTrigger("Teleport");
             m_TimesItGotHit = 0;
+        }
+
+        if (m_CurrentLifePoints <= m_MaxLifePoints / 2 && !m_TriggerPhase2)
+        {
+            m_TimesUntilTeleport = 2;
+            m_TriggerPhase2 = true;
+            m_Animator.SetTrigger("StartPhase2");
+            InvokeRepeating("Attack", 2, 3);
         }
     }
 
