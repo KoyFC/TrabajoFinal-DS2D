@@ -33,6 +33,7 @@ public class BossGhostScript : EnemyScript
         m_CurrentLifePoints = m_MaxLifePoints;
         m_BossGhostCurrentSpeed = m_BossGhostMaxSpeed;
         m_GoingRight = false;
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_Collider = GetComponentInChildren<CapsuleCollider2D>();
         m_Rigidbody2D = GetComponentInChildren<Rigidbody2D>();
@@ -127,6 +128,7 @@ public class BossGhostScript : EnemyScript
                 if (GoingRight)
                 {
                     GoingRight = !GoingRight;
+                    m_healthBar.transform.localScale *= new Vector2(-1, 1);
                 }
             }
             else
@@ -134,6 +136,7 @@ public class BossGhostScript : EnemyScript
                 if (!GoingRight)
                 {
                     GoingRight = !GoingRight;
+                    m_healthBar.transform.localScale *= new Vector2(-1, 1);
                 }
             }
     }
@@ -147,6 +150,7 @@ public class BossGhostScript : EnemyScript
             if (GoingRight)
             {
                 GoingRight = !GoingRight;
+                m_healthBar.transform.localScale *= new Vector2(-1, 1);
             }
         }
         else
@@ -154,6 +158,7 @@ public class BossGhostScript : EnemyScript
             if (!GoingRight)
             {
                 GoingRight = !GoingRight;
+                m_healthBar.transform.localScale *= new Vector2(-1, 1);
             }
         }
     }
@@ -172,6 +177,7 @@ public class BossGhostScript : EnemyScript
         base.GetDamage(howMuchDamage);
         m_CanMove = false;
         m_Animator.SetTrigger("Damaged");
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         StartCoroutine(StunnedAfterHit());
     }
 

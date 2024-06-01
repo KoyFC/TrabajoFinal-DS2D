@@ -122,28 +122,29 @@ public class ShadowWizardScript : EnemyScript
 
     private void GetKnockback()
     {
+        CheckIfFlipNeeded();
         if (m_Rigidbody2D.gravityScale > 0)
+        {
+            if (m_Player.transform.position.x < transform.position.x)
             {
-                if (m_Player.transform.position.x < transform.position.x)
-                {
-                    m_Rigidbody2D.AddForce((Vector2.up + Vector2.left) * m_KnockbackForce);
-                }
-                else
-                {
-                    m_Rigidbody2D.AddForce((Vector2.up + Vector2.right) * m_KnockbackForce);
-                }
+                m_Rigidbody2D.AddForce((Vector2.up + Vector2.left) * m_KnockbackForce);
             }
             else
             {
-                if (m_Player.transform.position.x < transform.position.x)
-                {
-                    m_Rigidbody2D.AddForce((Vector2.down + Vector2.left) * m_KnockbackForce);
-                }
-                else
-                {
-                    m_Rigidbody2D.AddForce((Vector2.down + Vector2.right) * m_KnockbackForce);
-                }
+                m_Rigidbody2D.AddForce((Vector2.up + Vector2.right) * m_KnockbackForce);
             }
+        }
+        else
+        {
+            if (m_Player.transform.position.x < transform.position.x)
+            {
+                m_Rigidbody2D.AddForce((Vector2.down + Vector2.left) * m_KnockbackForce);
+            }
+            else
+            {
+                m_Rigidbody2D.AddForce((Vector2.down + Vector2.right) * m_KnockbackForce);
+            }
+        }
     }
 
     private void Attack()

@@ -6,7 +6,12 @@ using UnityEngine.Audio;
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
-    
+
+    private void Start()
+    {
+        ChangeVolume(-25);
+    }
+
     public void FullScreen(bool fullScreen)
     {
         Screen.fullScreen = fullScreen;

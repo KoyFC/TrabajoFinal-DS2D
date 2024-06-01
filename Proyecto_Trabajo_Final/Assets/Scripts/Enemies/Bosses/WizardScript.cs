@@ -33,6 +33,7 @@ public class WizardScript : EnemyScript
     {
         m_CurrentLifePoints = m_MaxLifePoints;
         m_GoingRight = true;
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_Collider = GetComponent<CapsuleCollider2D>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -72,10 +73,12 @@ public class WizardScript : EnemyScript
         if (m_Player.transform.position.x < transform.position.x && m_GoingRight)
         {
             GoingRight = false;
+            m_healthBar.transform.localScale *= new Vector2(-1, 1);
         }
         else if (m_Player.transform.position.x > transform.position.x && !m_GoingRight)
         {
             GoingRight = true;
+            m_healthBar.transform.localScale *= new Vector2(-1, 1);
         }
     }
 
@@ -84,6 +87,7 @@ public class WizardScript : EnemyScript
         base.GetDamage(howMuchDamage);
         m_CanMove = false;
         m_Animator.SetTrigger("Damaged");
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         StartCoroutine(StunnedAfterHit());
 
         m_TimesItGotHit++;
