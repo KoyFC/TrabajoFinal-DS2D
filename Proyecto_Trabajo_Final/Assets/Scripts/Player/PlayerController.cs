@@ -358,7 +358,7 @@ public class PlayerController : MonoBehaviour
     {
         if (m_PlayerRenderer.material.color == m_LanternColors[1]) // Red
         {
-            m_CurrentSpeed = m_DefaultSpeed * 0.9f;
+            m_CurrentSpeed = m_DefaultSpeed;
             m_CurrentJumpForce = m_DefaultJumpForce;
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[2]) // Blue
@@ -773,7 +773,7 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<BoxCollider2D>().enabled = false;
             collision.GetComponent<CapsuleCollider2D>().enabled = true;
             collision.GetComponent<SpriteRenderer>().enabled = true;
-            m_LifePoints = 7;
+            m_LifePoints = m_MaxLifePoints + 1;
             m_ActivateBossFight = true;
         }
     }

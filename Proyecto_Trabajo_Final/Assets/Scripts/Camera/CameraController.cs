@@ -8,7 +8,10 @@ public class CameraController : MonoBehaviour
     public float m_HorizontalOffset;
     public float m_HorizontalSpeed;
     public float m_StopCamera = -5;
-
+    public Vector2 m_BossArenaStart;
+    public Vector2 m_BossArenaEnd;
+    public float m_VerticalOffsetBossArena;
+    public Vector2 BossArenaCameraPosition;
     public Vector3 m_TargetPosition;
 
     void Start()
@@ -20,6 +23,31 @@ public class CameraController : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+        if (m_Target.transform.position.x > m_BossArenaStart.x && m_Target.transform.position.x < m_BossArenaEnd.x && m_Target.transform.position.y < m_BossArenaStart.y && m_Target.transform.position.y > m_BossArenaEnd.y)
+        {
+            m_TargetPosition = new Vector3(
+                BossArenaCameraPosition.x, 
+                m_Target.transform.position.y + m_VerticalOffsetBossArena, 
+                transform.position.z);
+
+            m_TargetPosition = new Vector3(
+                BossArenaCameraPosition.x,
+                m_TargetPosition.y,
+                m_TargetPosition.z);
+
+            transform.position = Vector3.Lerp(
+                transform.position, 
+                m_TargetPosition,
+                Time.deltaTime * m_HorizontalSpeed);
+        }
+        else
+        {
+            FollowPlayer();
+        }
+    }
+
+    private void FollowPlayer()
     {
         // Posicion de destino == posicion del player en X e Y
         m_TargetPosition = new Vector3(

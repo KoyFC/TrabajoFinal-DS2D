@@ -170,7 +170,7 @@ public class FlyingEnemyScript : EnemyScript
     {
         base.GetDamage(howMuchDamage);
         m_Animator.SetTrigger("Damaged");
-        //healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         if (m_CurrentLifePoints <= 0)
         {
             m_CanMove = false;
