@@ -30,13 +30,14 @@ public class PlayerController : MonoBehaviour
     public float m_KnockbackForce;
     private float m_CurrentKnockbackForce;
     private bool m_CanMove;
-    public bool m_IsDead;
+    private bool m_IsDead;
     public bool m_ReviveTriggered;
     private bool m_NewAbilityUnlocked;
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
     public Animator m_LanternActionAnimator;
+    public Animator m_ScreenTransitionAnimator;
     public SpriteRenderer m_PlayerRenderer;
     public GameObject m_JumpParticlesPrefab;
     public GameObject m_JumpParticlesSpawn;
@@ -427,6 +428,7 @@ public class PlayerController : MonoBehaviour
     {
         if (m_LifePoints <= 0 && !m_IsDead)
         {
+            Invoke("FadeInScreen", 0.8f);
             m_IsDead = true;
             m_CanMove = false;
             m_Animator.SetTrigger("Die");
@@ -480,6 +482,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void FadeInScreen()
+    {
+        m_ScreenTransitionAnimator.SetTrigger("FadeIN");
+    }
     
     public void TriggerRevival() // Called during death animation
     {
@@ -505,6 +512,7 @@ public class PlayerController : MonoBehaviour
         m_LifePoints = m_MaxLifePoints;
         m_IsDead = false;
         m_CanMove = true;
+        m_ScreenTransitionAnimator.SetTrigger("FadeOUT");
         // Reload the scene
         if (m_HasTriggeredBossFight)
         {

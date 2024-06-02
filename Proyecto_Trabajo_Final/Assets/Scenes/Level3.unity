@@ -46912,6 +46912,10 @@ PrefabInstance:
       propertyPath: m_UnlockedColors
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_ScreenTransitionAnimator
+      value: 
+      objectReference: {fileID: 1391666848}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -47444,6 +47448,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1391666848 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1203451908412471959, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+  m_PrefabInstance: {fileID: 1786539907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1405348799
 PrefabInstance:
   m_ObjectHideFlags: 0

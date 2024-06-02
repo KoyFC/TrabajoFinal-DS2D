@@ -34215,11 +34215,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6754783147033534207, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+--- !u!95 &1507450490 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1203451908412471959, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+  m_PrefabInstance: {fileID: 1507450489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1539685436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34675,6 +34684,10 @@ PrefabInstance:
       propertyPath: m_UnlockedColors
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_ScreenTransitionAnimator
+      value: 
+      objectReference: {fileID: 1507450490}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player

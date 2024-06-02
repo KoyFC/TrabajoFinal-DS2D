@@ -36756,6 +36756,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5463210640878511616, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
   m_PrefabInstance: {fileID: 405998243}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1152714722 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1203451908412471959, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+  m_PrefabInstance: {fileID: 405998243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1198478192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42396,6 +42401,10 @@ PrefabInstance:
       propertyPath: m_UnlockedColors
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_ScreenTransitionAnimator
+      value: 
+      objectReference: {fileID: 1152714722}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player

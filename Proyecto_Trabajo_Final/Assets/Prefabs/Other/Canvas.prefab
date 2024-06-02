@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 6626775690625465726}
   - component: {fileID: 1851495565534328263}
   - component: {fileID: 6754783147033534207}
-  - component: {fileID: 7074143129067518473}
+  - component: {fileID: 1203451908412471959}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -285,24 +285,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7074143129067518473
-MonoBehaviour:
+--- !u!95 &1203451908412471959
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976777466885351246}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e313c833076fb48aa401dcdd56f806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Panel: {fileID: 976777466885351246}
-  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_Colors:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 1}
-  m_Time: 0.5
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07c74d316eced4f47ad633a446f748f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1566780822386232302
 GameObject:
   m_ObjectHideFlags: 0
