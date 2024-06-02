@@ -850,10 +850,11 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<CapsuleCollider2D>().enabled = true;
             collision.GetComponent<SpriteRenderer>().enabled = true;
 
-            if (SceneManager.GetActiveScene().name == "Level4")
+            if (SceneManager.GetActiveScene().name == "Level4" || SceneManager.GetActiveScene().name == "Level5")
             {
                 m_UnlockedColors = 5;
                 m_LifePoints = m_MaxLifePoints + 2;
+                m_CurrentMaxExtraJumps = 1;
             }
             else 
             {

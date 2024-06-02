@@ -113,9 +113,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 96
-        width: 64
+        x: 0
+        y: 384
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -134,9 +134,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 0
-        width: 64
+        x: 96
+        y: 384
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -155,9 +155,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_3
       rect:
         serializedVersion: 2
-        x: 115
-        y: 0
-        width: 64
+        x: 288
+        y: 384
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -176,9 +176,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_2
       rect:
         serializedVersion: 2
-        x: 115
-        y: 96
-        width: 64
+        x: 192
+        y: 384
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -197,9 +197,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_4
       rect:
         serializedVersion: 2
-        x: 19
-        y: 192
-        width: 64
+        x: 0
+        y: 288
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -218,9 +218,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_5
       rect:
         serializedVersion: 2
-        x: 19
+        x: 96
         y: 288
-        width: 64
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -239,9 +239,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_6
       rect:
         serializedVersion: 2
-        x: 19
-        y: 384
-        width: 64
+        x: 192
+        y: 288
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -260,9 +260,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_7
       rect:
         serializedVersion: 2
-        x: 115
-        y: 192
-        width: 64
+        x: 288
+        y: 288
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -281,9 +281,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_8
       rect:
         serializedVersion: 2
-        x: 115
-        y: 288
-        width: 64
+        x: 0
+        y: 192
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -302,9 +302,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_9
       rect:
         serializedVersion: 2
-        x: 115
-        y: 384
-        width: 64
+        x: 96
+        y: 192
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -323,9 +323,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_10
       rect:
         serializedVersion: 2
-        x: 209
-        y: 384
-        width: 64
+        x: 192
+        y: 192
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -344,9 +344,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_11
       rect:
         serializedVersion: 2
-        x: 209
-        y: 288
-        width: 64
+        x: 288
+        y: 192
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -365,9 +365,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_12
       rect:
         serializedVersion: 2
-        x: 209
-        y: 192
-        width: 64
+        x: 0
+        y: 96
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -386,9 +386,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_13
       rect:
         serializedVersion: 2
-        x: 209
+        x: 96
         y: 96
-        width: 64
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -407,9 +407,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_14
       rect:
         serializedVersion: 2
-        x: 209
-        y: 0
-        width: 64
+        x: 192
+        y: 96
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -428,9 +428,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_15
       rect:
         serializedVersion: 2
-        x: 305
-        y: 384
-        width: 64
+        x: 288
+        y: 96
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -449,9 +449,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_16
       rect:
         serializedVersion: 2
-        x: 305
-        y: 288
-        width: 64
+        x: 0
+        y: 0
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -470,9 +470,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_17
       rect:
         serializedVersion: 2
-        x: 305
-        y: 192
-        width: 64
+        x: 96
+        y: 0
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -491,9 +491,9 @@ TextureImporter:
       name: Fire+Sparks-Sheet_18
       rect:
         serializedVersion: 2
-        x: 305
-        y: 96
-        width: 64
+        x: 192
+        y: 0
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -519,56 +519,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AnimationSheet_Character_0: -1282451991
-      AnimationSheet_Character_1: -923604462
-      AnimationSheet_Character_10: -758307519
-      AnimationSheet_Character_11: -282270251
-      AnimationSheet_Character_12: 1494650859
-      AnimationSheet_Character_13: -1619578303
-      AnimationSheet_Character_14: -689179025
-      AnimationSheet_Character_15: 2023186281
-      AnimationSheet_Character_16: -97985928
-      AnimationSheet_Character_17: -696162261
-      AnimationSheet_Character_18: -613950051
-      AnimationSheet_Character_19: -1018478494
-      AnimationSheet_Character_2: 926360877
-      AnimationSheet_Character_20: 1908842324
-      AnimationSheet_Character_21: -1595778451
-      AnimationSheet_Character_22: -1400854708
-      AnimationSheet_Character_23: 210461579
-      AnimationSheet_Character_24: 484988934
-      AnimationSheet_Character_25: -1454685860
-      AnimationSheet_Character_26: 784885312
-      AnimationSheet_Character_27: 16230045
-      AnimationSheet_Character_28: 2012246629
-      AnimationSheet_Character_29: -1745952697
-      AnimationSheet_Character_3: 450758009
-      AnimationSheet_Character_30: 276923149
-      AnimationSheet_Character_31: -2081047989
-      AnimationSheet_Character_32: 1370706400
-      AnimationSheet_Character_33: 998186273
-      AnimationSheet_Character_34: 328320238
-      AnimationSheet_Character_35: 219368613
-      AnimationSheet_Character_36: 1932480026
-      AnimationSheet_Character_37: 395817697
-      AnimationSheet_Character_38: 2113069262
-      AnimationSheet_Character_39: -590504784
-      AnimationSheet_Character_4: 2131226828
-      AnimationSheet_Character_40: 591842395
-      AnimationSheet_Character_41: 463000970
-      AnimationSheet_Character_42: 981888807
-      AnimationSheet_Character_43: -948054873
-      AnimationSheet_Character_44: -1777344651
-      AnimationSheet_Character_45: -117407278
-      AnimationSheet_Character_46: 800815960
-      AnimationSheet_Character_47: -770923395
-      AnimationSheet_Character_48: -853555458
-      AnimationSheet_Character_49: 1467749201
-      AnimationSheet_Character_5: 584292079
-      AnimationSheet_Character_6: -327181571
-      AnimationSheet_Character_7: 368688264
-      AnimationSheet_Character_8: -38255876
-      AnimationSheet_Character_9: -1407740323
       Fire+Sparks-Sheet_0: 210093598
       Fire+Sparks-Sheet_1: -2013457972
       Fire+Sparks-Sheet_10: -482851915

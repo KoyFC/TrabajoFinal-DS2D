@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
                 m_Target.transform.position.y + m_VerticalOffsetBossArena, 
                 transform.position.z);
 
-            if (SceneManager.GetActiveScene().name == "Level4")
+            if (SceneManager.GetActiveScene().name == "Level4"|| SceneManager.GetActiveScene().name == "Level5")
             {
                 m_TargetPosition = new Vector3(
                     m_Target.position.x,
