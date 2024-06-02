@@ -35791,7 +35791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bff56e9a2c8a2c479e548dcdd3e26e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 4849892373119046634}
   m_HorizontalOffset: 3
   m_HorizontalSpeed: 2
   m_StopCamera: -6
@@ -35854,8 +35853,8 @@ GameObject:
   m_Component:
   - component: {fileID: 553629843}
   m_Layer: 0
-  m_Name: Spawn Lvl1
-  m_TagString: Untagged
+  m_Name: Spawn Lvl2
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35869,7 +35868,7 @@ Transform:
   m_GameObject: {fileID: 553629842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8785768, y: 1.6171477, z: 0.042291418}
+  m_LocalPosition: {x: -2.8, y: -0.8, z: 0.042291418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42395,7 +42394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.9
+      value: -2.7
       objectReference: {fileID: 0}
     - target: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42478,11 +42477,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
---- !u!4 &4849892373119046634 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-  m_PrefabInstance: {fileID: 4849892373119046633}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

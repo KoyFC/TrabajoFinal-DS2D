@@ -11,7 +11,6 @@ public class BackgroundFollowCamera : MonoBehaviour
     {
         // Find the camera to follow using tag
         m_CameraToFollow = GameObject.FindGameObjectWithTag("MainCamera").transform;
-
     }
 
     // Update is called once per frame

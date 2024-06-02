@@ -15,6 +15,7 @@ TagManager:
   - ColorPickup
   - BossTrigger
   - Boss
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

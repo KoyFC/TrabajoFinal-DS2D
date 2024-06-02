@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
 {
     // Spawn variables
     public Transform m_SpawnPoint;
+    public static Transform m_BossArenaSpawnPoint;
 
     [Header("Player variables")]
     private Rigidbody2D m_Rigidbody2D;
     public Vector2 m_Movement;
     public bool m_ActivateBossFight;
+    private static bool m_HasTriggeredBossFight;
 
     public float m_DefaultSpeed = 5.0f;
     private float m_CurrentSpeed;
@@ -105,6 +107,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        if (m_HasTriggeredBossFight)
+        {
+            m_SpawnPoint = GameObject.FindGameObjectWithTag("BossTrigger").transform;
+            m_UnlockedColors++;
+        }
+        else 
+        {
+            m_SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+        }
+        transform.position = m_SpawnPoint.position;
+        m_HasTriggeredBossFight = false;
+    }
+
     void Start()
     {
         m_LifePoints = m_MaxLifePoints;
@@ -117,6 +134,8 @@ public class PlayerController : MonoBehaviour
         m_CanPerformLanternAction = true;
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
         m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
+        
+        
 
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
@@ -468,6 +487,14 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.velocity = Vector2.zero;
         transform.position = m_SpawnPoint.position;
         GoingRight = true;
+        if (m_HasTriggeredBossFight)
+        {
+            Invoke("StartRevival", 0.5f);
+        }
+        else 
+        {
+            Invoke("StartRevival", 1);
+        }
     }
 
     public void StartRevival() // Called during revival animation REMOVE
@@ -475,17 +502,12 @@ public class PlayerController : MonoBehaviour
         m_LifePoints = m_MaxLifePoints;
         m_IsDead = false;
         m_CanMove = true;
-    }
-
-    public void RespawnEnemies() // Also called during revival animation REMOVE
-    {
-        m_ReviveTriggered = true;
-        Invoke("EndRevival", 0.3f);
-    }
-
-    private void EndRevival() // REMOVE
-    {
-        m_ReviveTriggered = false;
+        // Reload the scene
+        if (m_HasTriggeredBossFight)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        
     }
 
 
@@ -809,12 +831,28 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("BossTrigger"))
         {
             // Deactivate the box collider and activate the capsule collider
-            collision.GetComponent<BoxCollider2D>().enabled = false;
-            collision.GetComponent<CapsuleCollider2D>().enabled = true;
-            collision.GetComponent<SpriteRenderer>().enabled = true;
-            m_LifePoints = m_MaxLifePoints + 1;
-            m_ActivateBossFight = true;
+            StartCoroutine(StartBossFight(collision));
+            
+            m_BossArenaSpawnPoint = collision.transform;
+            m_SpawnPoint = m_BossArenaSpawnPoint;
         }
+
+        if (collision.CompareTag("EndLevel"))
+        {
+            m_HasTriggeredBossFight = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    private IEnumerator StartBossFight(Collider2D collision)
+    {
+        yield return new WaitForSeconds(0.5f);
+        collision.GetComponent<BoxCollider2D>().enabled = false;
+        collision.GetComponent<CapsuleCollider2D>().enabled = true;
+        collision.GetComponent<SpriteRenderer>().enabled = true;
+        m_LifePoints = m_MaxLifePoints + 1;
+        m_ActivateBossFight = true;
+        m_HasTriggeredBossFight = true;
     }
 
     private void ToggleNewAbility()

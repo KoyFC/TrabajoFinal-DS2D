@@ -25904,7 +25904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bff56e9a2c8a2c479e548dcdd3e26e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 4849892373119046634}
   m_HorizontalOffset: 3
   m_HorizontalSpeed: 2
   m_StopCamera: -5
@@ -25978,7 +25977,7 @@ GameObject:
   - component: {fileID: 553629843}
   m_Layer: 0
   m_Name: Spawn Lvl1
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27335,11 +27334,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
---- !u!4 &4849892373119046634 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1526876865135671546, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-  m_PrefabInstance: {fileID: 4849892373119046633}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7328032473268483484
 PrefabInstance:
   m_ObjectHideFlags: 0
