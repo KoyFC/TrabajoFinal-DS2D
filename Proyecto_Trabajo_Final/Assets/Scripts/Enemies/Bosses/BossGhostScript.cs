@@ -41,6 +41,7 @@ public class BossGhostScript : EnemyScript
         m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_CanMove = true;
         m_ActivateHealthBar = false;
+        m_ActivateMusic = false;
 
         if (m_BossGhostBehaviour == BOSS_GHOST_BEHAVIOUR.PATROL_POINT)
         {
@@ -58,6 +59,7 @@ public class BossGhostScript : EnemyScript
             m_BossGhostBehaviour = BOSS_GHOST_BEHAVIOUR.PATROL_POINT;
             m_Player.GetComponent<PlayerController>().m_ActivateBossFight = false;
             m_ActivateHealthBar = true;
+            m_ActivateMusic = true;
         }
 
         switch (m_BossGhostBehaviour)

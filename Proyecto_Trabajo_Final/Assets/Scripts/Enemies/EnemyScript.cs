@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public int m_DamageDealtToPlayer = 1;
     public Vector3 m_SpawnPoint;
     public bool m_ActivateHealthBar;
+    public bool m_ActivateMusic;
 
     public bool m_GoingRight;
     public bool GoingRight
