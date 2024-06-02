@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShadowWizardScript : EnemyScript
+public class FinalWizardScript : EnemyScript
 {
     private CapsuleCollider2D m_Collider;
     private Rigidbody2D m_Rigidbody2D;
     public Transform m_InitialSummonPoint;
+    public Transform[] m_TeleportPoints;
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
     public GameObject m_ProyectilePrefab;
@@ -23,15 +24,13 @@ public class ShadowWizardScript : EnemyScript
     // Variables
     public float m_StunnedTime = 0.5f;
     private bool m_CanMove;
-    public int m_TimesUntilKnockback = 2;
+    public int m_TimesUntilTeleport = 4;
     public int m_TimesItGotHit = 0;
+    private int m_CurrentTeleportPointIndex = 0;
     public float m_JumpForce;
     public float m_KnockbackForce;
     private bool m_TriggerPhase2 = false; 
-
-    public Transform m_GroundCheck;
-    public LayerMask m_GroundLayer;
-    private bool m_IsGrounded;
+    private int m_CurrentProyectileIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +53,7 @@ public class ShadowWizardScript : EnemyScript
         float dt = Time.deltaTime;
         if (m_Player.GetComponent<PlayerController>().m_ActivateBossFight)
         {
+            InvokeRepeating("AttackWithProyectile", 2, 4);
             m_WizardBehaviour = WIZARD_BEHAVIOUR.BATTLE;
             m_Player.GetComponent<PlayerController>().m_ActivateBossFight = false;
             m_ActivateHealthBar = true;
@@ -70,17 +70,7 @@ public class ShadowWizardScript : EnemyScript
             m_Collider.enabled = false;
             m_Rigidbody2D.bodyType = RigidbodyType2D.Static;
         }
-
-        m_IsGrounded = Physics2D.OverlapBox(
-            m_GroundCheck.position, 
-            new Vector2(2, 0.35f), 
-            0, 
-            m_GroundLayer); // The same as the player's ground check
-
-        if (m_IsGrounded)
-        {
-            m_Animator.SetBool("Jumping", false);
-        }
+        CheckIfFlipNeeded();
     }
 
     private void CheckIfFlipNeeded()
@@ -99,93 +89,66 @@ public class ShadowWizardScript : EnemyScript
     {
         base.GetDamage(howMuchDamage);
         m_CanMove = false;
-        CheckIfFlipNeeded();
 
         m_Animator.SetTrigger("Damaged");
-        Attack();
         StartCoroutine(StunnedAfterHit());
 
         m_TimesItGotHit++;
-        if (m_TimesItGotHit >= m_TimesUntilKnockback)
+        if (m_TimesItGotHit >= m_TimesUntilTeleport)
         {
-            GetKnockback();
+            m_Animator.SetTrigger("Teleport");
             m_TimesItGotHit = 0;
         }
 
-        if (m_CurrentLifePoints <= m_MaxLifePoints * 0.625f && !m_TriggerPhase2)
+        if (m_CurrentLifePoints <= m_MaxLifePoints * 0.5f && !m_TriggerPhase2)
         {
-            m_TimesUntilKnockback = 1;
+            m_TimesUntilTeleport = 3;
             m_TriggerPhase2 = true;
-            InvokeRepeating("Jump", 0, 12);
-            InvokeRepeating("AttackWithProyectile", 5, 7);
+            InvokeRepeating("RepeatTeleport", 0, 5);
+            InvokeRepeating("AttackWithProyectile", 2, 2);
             InvokeRepeating("GetKnockback", 2, 3);
         }
     }
 
-    private void GetKnockback()
+    public void Teleport()
     {
-        CheckIfFlipNeeded();
-        if (m_Rigidbody2D.gravityScale > 0)
+        transform.position = m_TeleportPoints[m_CurrentTeleportPointIndex].position;
+        m_CurrentTeleportPointIndex++;
+        if (m_CurrentTeleportPointIndex >= m_TeleportPoints.Length)
         {
-            if (m_Player.transform.position.x < transform.position.x)
-            {
-                m_Rigidbody2D.AddForce((Vector2.up + Vector2.left) * m_KnockbackForce);
-            }
-            else
-            {
-                m_Rigidbody2D.AddForce((Vector2.up + Vector2.right) * m_KnockbackForce);
-            }
-        }
-        else
-        {
-            if (m_Player.transform.position.x < transform.position.x)
-            {
-                m_Rigidbody2D.AddForce((Vector2.down + Vector2.left) * m_KnockbackForce);
-            }
-            else
-            {
-                m_Rigidbody2D.AddForce((Vector2.down + Vector2.right) * m_KnockbackForce);
-            }
+            m_CurrentTeleportPointIndex = 0;
         }
     }
 
-    private void Attack()
+    private void RepeatTeleport()
     {
-        m_Animator.SetTrigger("Attack2");
-        m_CanMove = false;
-        StartCoroutine(EnableMovement());
+        m_Animator.SetTrigger("Teleport");
     }
+
     private void AttackWithProyectile()
     {
-        m_Animator.SetTrigger("Attack1");
+        m_Animator.SetTrigger("Attack");
     }
     public void SummonProyectile()
     {
-        if (m_CurrentLifePoints <= m_MaxLifePoints * 0.625f)
-        {
-            Instantiate(m_ProyectilePrefab2, m_InitialSummonPoint.position, Quaternion.identity);
-        }
-        else
+        if (m_CurrentProyectileIndex == 0)
         {
             Instantiate(m_ProyectilePrefab, m_InitialSummonPoint.position, Quaternion.identity);
         }
-    }
-
-    private void Jump()
-    {
-        m_Animator.SetBool("Jumping", true);
-        m_Rigidbody2D.AddForce(Vector2.up * m_Rigidbody2D.gravityScale * m_JumpForce);
-        Invoke("InvertGravity", 0.3f);
-    }
-    private void InvertGravity()
-    {
-        m_Rigidbody2D.gravityScale *= -1;
-        transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+        else
+        {
+            Instantiate(m_ProyectilePrefab2, m_InitialSummonPoint.position, Quaternion.identity);
+        }
+        m_CurrentProyectileIndex++;
+        if (m_CurrentProyectileIndex >= 2)
+        {
+            m_CurrentProyectileIndex = 0;
+        }
     }
 
     public void DestroyBoss()
     {
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 4);
     }
 
     private IEnumerator EnableMovement()
@@ -203,13 +166,6 @@ public class ShadowWizardScript : EnemyScript
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Attack();
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

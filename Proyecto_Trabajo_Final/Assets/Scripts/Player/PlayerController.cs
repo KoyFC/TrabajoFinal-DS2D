@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
         m_NoControlAfterHit = false;
         m_IsDead = false;
         m_GoingRight = true;
-        m_RemainingExtraJumps = m_DefaultMaxExtraJumps;
+        m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         m_CanPerformLanternAction = true;
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
         m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
@@ -410,7 +410,6 @@ public class PlayerController : MonoBehaviour
         {
             m_CurrentSpeed = m_DefaultSpeed * 0.95f;
             m_CurrentJumpForce = m_DefaultJumpForce * 1.05f;
-            m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps + 1; // DEBUG: REMOVE AFTER TESTING
         }
         else if (m_PlayerRenderer.material.color == m_LanternColors[4]) // Yellow
         {
@@ -421,7 +420,6 @@ public class PlayerController : MonoBehaviour
         {
             m_CurrentSpeed = m_DefaultSpeed;
             m_CurrentJumpForce = m_DefaultJumpForce;
-            //m_CurrentMaxExtraJumps = m_DefaultMaxExtraJumps;
         }
     }
 
