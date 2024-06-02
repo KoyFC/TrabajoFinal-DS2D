@@ -45,6 +45,7 @@ public class FinalWizardScript : EnemyScript
         m_CanMove = true;
         m_TriggerPhase2 = false;
         m_ActivateHealthBar = false;
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
     }
 
     // Update is called once per frame
@@ -78,10 +79,12 @@ public class FinalWizardScript : EnemyScript
         if (m_Player.transform.position.x < transform.position.x && m_GoingRight)
         {
             GoingRight = false;
+            m_healthBar.transform.localScale *= new Vector2(-1, 1);
         }
         else if (m_Player.transform.position.x > transform.position.x && !m_GoingRight)
         {
             GoingRight = true;
+            m_healthBar.transform.localScale *= new Vector2(-1, 1);
         }
     }
 
@@ -91,6 +94,7 @@ public class FinalWizardScript : EnemyScript
         m_CanMove = false;
 
         m_Animator.SetTrigger("Damaged");
+        m_healthBar.UpdateHealthBar(m_MaxLifePoints, m_CurrentLifePoints);
         StartCoroutine(StunnedAfterHit());
 
         m_TimesItGotHit++;
