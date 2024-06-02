@@ -276,11 +276,11 @@ MonoBehaviour:
   m_HorizontalOffset: 3
   m_HorizontalSpeed: 2
   m_StopCamera: -10.5
-  m_BossArenaStart: {x: 188, y: 12}
-  m_BossArenaEnd: {x: 214.5, y: -8.5}
-  m_VerticalOffsetBossArena: 4
-  BossArenaCameraPosition: {x: 201.49, y: -1}
-  m_TargetPosition: {x: 0, y: 0, z: 0}
+  m_BossArenaStart: {x: 281.25, y: 7.5}
+  m_BossArenaEnd: {x: 323.67, y: -6.5}
+  m_VerticalOffsetBossArena: 4.6
+  BossArenaCameraPosition: {x: 0, y: 0}
+  m_TargetPosition: {x: 300.3712, y: -0.69498444, z: -10}
 --- !u!81 &82879981
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ Transform:
   m_GameObject: {fileID: 374205719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 282.38, y: -4.16, z: 0.042291418}
+  m_LocalPosition: {x: -7.89, y: -1.21, z: 0.042291418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1744,8 +1744,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3734416, y: -0.006386517}
-  m_Size: {x: 2.0761693, y: 3.5139093}
+  m_Offset: {x: -0.24008179, y: 0.00016434988}
+  m_Size: {x: 1.8549805, y: 3.4771023}
   m_Direction: 0
 --- !u!61 &907761816
 BoxCollider2D:
@@ -1779,7 +1779,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.2370737, y: -0.025495768}
+  m_Offset: {x: -2.8896942, y: -0.025495768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1790,7 +1790,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7214241, y: 2.6024551}
+  m_Size: {x: 1.7469788, y: 2.6024551}
   m_EdgeRadius: 0
 --- !u!212 &907761817
 SpriteRenderer:
@@ -1852,13 +1852,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907761813}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 279.7, y: 0.2, z: -0.05325075}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 280.74, y: -1.48, z: -0.05325075}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1001 &930473972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49896,7 +49896,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 9
   m_Sprite: {fileID: -629431874, guid: da6a740231a57fd418b9f473aceb3ebe, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

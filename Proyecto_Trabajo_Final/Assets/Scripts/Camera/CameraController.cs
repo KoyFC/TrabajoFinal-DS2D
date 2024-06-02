@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -33,10 +34,20 @@ public class CameraController : MonoBehaviour
                 m_Target.transform.position.y + m_VerticalOffsetBossArena, 
                 transform.position.z);
 
-            m_TargetPosition = new Vector3(
-                BossArenaCameraPosition.x,
-                m_TargetPosition.y,
-                m_TargetPosition.z);
+            if (SceneManager.GetActiveScene().name == "Level4")
+            {
+                m_TargetPosition = new Vector3(
+                    m_Target.position.x,
+                    m_TargetPosition.y,
+                    m_TargetPosition.z);
+            }
+            else
+            {
+                m_TargetPosition = new Vector3(
+                    BossArenaCameraPosition.x,
+                    m_TargetPosition.y,
+                    m_TargetPosition.z);
+            }
 
             transform.position = Vector3.Lerp(
                 transform.position, 

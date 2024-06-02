@@ -849,7 +849,17 @@ public class PlayerController : MonoBehaviour
             collision.GetComponent<BoxCollider2D>().enabled = false;
             collision.GetComponent<CapsuleCollider2D>().enabled = true;
             collision.GetComponent<SpriteRenderer>().enabled = true;
-            m_LifePoints = m_MaxLifePoints + 1;
+
+            if (SceneManager.GetActiveScene().name == "Level4")
+            {
+                m_UnlockedColors = 5;
+                m_LifePoints = m_MaxLifePoints + 2;
+            }
+            else 
+            {
+                m_LifePoints = m_MaxLifePoints + 1;
+            }
+            
             m_ActivateBossFight = true;
             m_HasTriggeredBossFight = true;
             m_BossArenaSpawnPoint = collision.transform;
