@@ -213,8 +213,14 @@ public class BossGhostScript : EnemyScript
 
     public void DestroyBoss()
     {
+        Invoke("EnableNextLevel", 1);
         Instantiate(m_DeathParticlesPrefab, new Vector3(transform.position.x - 0.85f, transform.position.y + 0.85f, transform.position.z) , Quaternion.Euler(0, 0, 90));  
-        Destroy(gameObject, 1);
+    }
+
+    private void EnableNextLevel()
+    {
+        GameObject.FindGameObjectWithTag("EndLevel").GetComponent<BoxCollider2D>().enabled = true;
+        Destroy(gameObject, 2);
     }
 
     private IEnumerator StunnedAfterHit()

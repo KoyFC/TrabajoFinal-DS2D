@@ -220,4 +220,9 @@ public class ShadowWizardScript : EnemyScript
             AttackWithProyectile();
         }
     }
+
+    public void EnableNextLevel()
+    {
+        GameObject.FindGameObjectWithTag("EndLevel").GetComponent<BoxCollider2D>().enabled = true;
+    }
 }

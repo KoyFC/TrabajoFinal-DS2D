@@ -869,8 +869,14 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("EndLevel"))
         {
             m_HasTriggeredBossFight = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            m_ScreenTransitionAnimator.SetTrigger("FadeWHITE");
+            Invoke("GoToNextLevel", 1);
         }
+    }
+
+    private void GoToNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void ToggleNewAbility()

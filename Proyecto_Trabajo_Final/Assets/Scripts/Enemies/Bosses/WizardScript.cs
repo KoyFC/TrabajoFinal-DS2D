@@ -11,7 +11,6 @@ public class WizardScript : EnemyScript
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
     public GameObject m_ProyectilePrefab;
-    
 
     public enum WIZARD_BEHAVIOUR
     {
@@ -142,6 +141,11 @@ public class WizardScript : EnemyScript
     public void DestroyBoss()
     {
         Destroy(gameObject, 2);
+    }
+
+    public void EnableNextLevel()
+    {
+        GameObject.FindGameObjectWithTag("EndLevel").GetComponent<BoxCollider2D>().enabled = true;
     }
 
     private IEnumerator StunnedAfterHit()
