@@ -111,7 +111,15 @@ public class PlayerController : MonoBehaviour
     {
         if (m_HasTriggeredBossFight)
         {
-            m_SpawnPoint = GameObject.FindGameObjectWithTag("BossTrigger").transform;
+            m_HasTriggeredBossFight = false;
+            if (GameObject.FindGameObjectWithTag("BossTrigger") != null)
+            {
+                m_SpawnPoint = GameObject.FindGameObjectWithTag("BossTrigger").transform;
+            }
+            else
+            {
+                m_SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+            }
             m_UnlockedColors++;
         }
         else 
@@ -119,7 +127,6 @@ public class PlayerController : MonoBehaviour
             m_SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
         }
         transform.position = m_SpawnPoint.position;
-        m_HasTriggeredBossFight = false;
     }
 
     void Start()
