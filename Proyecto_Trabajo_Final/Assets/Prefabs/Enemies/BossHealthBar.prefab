@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 282271053046104942}
   m_Layer: 0
   m_Name: BossHealthBar
-  m_TagString: Untagged
+  m_TagString: HealthBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 5080508142787013662}
   m_Layer: 0
   m_Name: HealthBar
-  m_TagString: HealthBar
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

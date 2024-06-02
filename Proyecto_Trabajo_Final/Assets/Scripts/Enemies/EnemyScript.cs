@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour
     public int m_MaxLifePoints = 3;
     public int m_DamageDealtToPlayer = 1;
     public Vector3 m_SpawnPoint;
+    public bool m_ActivateHealthBar;
 
     public bool m_GoingRight;
     public bool GoingRight

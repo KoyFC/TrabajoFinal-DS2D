@@ -16,6 +16,7 @@ TagManager:
   - BossTrigger
   - Boss
   - SpawnPoint
+  - BossHealthBar
   layers:
   - Default
   - TransparentFX

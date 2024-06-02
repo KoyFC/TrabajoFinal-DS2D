@@ -135,8 +135,6 @@ public class PlayerController : MonoBehaviour
         m_RemainingInvencibleAfterHitDuration = m_InvencibleAfterHitDuration;
         m_NoControlAfterHitDuration = m_InvencibleAfterHitDuration * 0.75f;
         
-        
-
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_PlayerRenderer = GetComponent<SpriteRenderer>();
@@ -831,8 +829,12 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("BossTrigger"))
         {
             // Deactivate the box collider and activate the capsule collider
-            StartCoroutine(StartBossFight(collision));
-            
+            collision.GetComponent<BoxCollider2D>().enabled = false;
+            collision.GetComponent<CapsuleCollider2D>().enabled = true;
+            collision.GetComponent<SpriteRenderer>().enabled = true;
+            m_LifePoints = m_MaxLifePoints + 1;
+            m_ActivateBossFight = true;
+            m_HasTriggeredBossFight = true;
             m_BossArenaSpawnPoint = collision.transform;
             m_SpawnPoint = m_BossArenaSpawnPoint;
         }
@@ -847,12 +849,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator StartBossFight(Collider2D collision)
     {
         yield return new WaitForSeconds(0.5f);
-        collision.GetComponent<BoxCollider2D>().enabled = false;
-        collision.GetComponent<CapsuleCollider2D>().enabled = true;
-        collision.GetComponent<SpriteRenderer>().enabled = true;
-        m_LifePoints = m_MaxLifePoints + 1;
-        m_ActivateBossFight = true;
-        m_HasTriggeredBossFight = true;
+        
     }
 
     private void ToggleNewAbility()

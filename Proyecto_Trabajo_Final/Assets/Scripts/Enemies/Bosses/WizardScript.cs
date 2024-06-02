@@ -41,6 +41,7 @@ public class WizardScript : EnemyScript
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_CanMove = true;
         m_TriggerPhase2 = false;
+        m_ActivateHealthBar = false;
     }
 
     // Update is called once per frame
@@ -52,6 +53,7 @@ public class WizardScript : EnemyScript
             InvokeRepeating("Attack", 3, 2);
             m_WizardBehaviour = WIZARD_BEHAVIOUR.BATTLE;
             m_Player.GetComponent<PlayerController>().m_ActivateBossFight = false;
+            m_ActivateHealthBar = true;
         }
 
         if (m_CurrentLifePoints <= 0)

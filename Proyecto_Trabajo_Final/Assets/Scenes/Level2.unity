@@ -36494,6 +36494,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4332803930088233965, guid: a8753b0fc4d83584097d8a52d943fcd8, type: 3}
+      propertyPath: m_TagString
+      value: HealthBar
+      objectReference: {fileID: 0}
     - target: {fileID: 7854714315872127267, guid: a8753b0fc4d83584097d8a52d943fcd8, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -36501,6 +36505,10 @@ PrefabInstance:
     - target: {fileID: 8069451956809838373, guid: a8753b0fc4d83584097d8a52d943fcd8, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069451956809838373, guid: a8753b0fc4d83584097d8a52d943fcd8, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

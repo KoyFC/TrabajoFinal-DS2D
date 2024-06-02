@@ -5,20 +5,27 @@ using static BossGhostScript;
 
 public class BossHealthBarScript : MonoBehaviour
 {
-
     private GameObject m_Player;
+    private GameObject m_Boss;
     public GameObject m_HealthBar;
 
     private void Start()
     {
         m_Player = GameObject.FindGameObjectWithTag("Player");
+        m_Boss = GameObject.FindGameObjectWithTag("Boss");
     }
 
     private void Update()
     {
-        if (m_Player.GetComponent<PlayerController>().m_ActivateBossFight)
+        if (m_Boss.GetComponent<EnemyScript>().m_ActivateHealthBar)
         {
-            m_HealthBar.SetActive(true);
+            ShowHealthBar();
+            m_Boss.GetComponent<EnemyScript>().m_ActivateHealthBar = false;
         }
+    }
+
+    public void ShowHealthBar()
+    {
+        m_HealthBar.SetActive(true);
     }
 }
