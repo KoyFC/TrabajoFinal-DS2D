@@ -11,6 +11,7 @@ public class ShadowWizardScript : EnemyScript
     private Animator m_Animator;
     private SpriteRenderer m_SpriteRenderer;
     public GameObject m_ProyectilePrefab;
+    public GameObject m_ProyectilePrefab2;
     
 
     public enum WIZARD_BEHAVIOUR
@@ -116,7 +117,7 @@ public class ShadowWizardScript : EnemyScript
         {
             m_TimesUntilKnockback = 1;
             m_TriggerPhase2 = true;
-            InvokeRepeating("Jump", 0, 16);
+            InvokeRepeating("Jump", 0, 12);
             InvokeRepeating("AttackWithProyectile", 5, 7);
             InvokeRepeating("GetKnockback", 2, 3);
         }
@@ -161,7 +162,14 @@ public class ShadowWizardScript : EnemyScript
     }
     public void SummonProyectile()
     {
-        Instantiate(m_ProyectilePrefab, m_InitialSummonPoint.position, Quaternion.identity);
+        if (m_CurrentLifePoints <= m_MaxLifePoints * 0.625f)
+        {
+            Instantiate(m_ProyectilePrefab2, m_InitialSummonPoint.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(m_ProyectilePrefab, m_InitialSummonPoint.position, Quaternion.identity);
+        }
     }
 
     private void Jump()
