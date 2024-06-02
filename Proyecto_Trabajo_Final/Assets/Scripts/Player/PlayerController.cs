@@ -821,6 +821,10 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("ColorPickup"))
         {
             m_UnlockedColors++;
+            if (m_UnlockedColors == 4)
+            {
+                m_CurrentMaxExtraJumps = 1;
+            }
             m_CurrentColorIndex = m_UnlockedColors - 1;
             SetFrameColors();
             m_LanternActive = false;
@@ -849,12 +853,6 @@ public class PlayerController : MonoBehaviour
             m_HasTriggeredBossFight = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-    }
-
-    private IEnumerator StartBossFight(Collider2D collision)
-    {
-        yield return new WaitForSeconds(0.5f);
-        
     }
 
     private void ToggleNewAbility()
