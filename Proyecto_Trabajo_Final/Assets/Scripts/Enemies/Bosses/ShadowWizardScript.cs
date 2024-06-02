@@ -37,7 +37,7 @@ public class ShadowWizardScript : EnemyScript
     void Start()
     {
         m_CurrentLifePoints = m_MaxLifePoints;
-        m_GoingRight = true;
+        m_GoingRight = false;
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_Collider = GetComponent<CapsuleCollider2D>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
