@@ -25,6 +25,11 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Level4");
     }
 
+    public void Level5()
+    {
+        SceneManager.LoadScene("Level5");
+    }
+
     public void Salir()
     {
         Debug.Log("Salir...");

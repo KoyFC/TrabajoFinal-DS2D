@@ -27,6 +27,27 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (GamePaused)
+            {
+                Reset();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (GamePaused)
+            {
+                Close();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (GamePaused)
+            {
+                Resume();
+            }
+        }
     }
 
     public void Pause()
