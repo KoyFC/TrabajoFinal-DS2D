@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public float m_KnockbackForce;
     private float m_CurrentKnockbackForce;
     private bool m_CanMove;
-    private bool m_IsDead;
+    public bool m_IsDead;
     public bool m_ReviveTriggered;
     private bool m_NewAbilityUnlocked;
 
