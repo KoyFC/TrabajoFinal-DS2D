@@ -5,7 +5,6 @@ using UnityEngine;
 public class FinalWizardScript : EnemyScript
 {
     private CapsuleCollider2D m_Collider;
-    private Rigidbody2D m_Rigidbody2D;
     public Transform m_InitialSummonPoint;
     public Transform[] m_TeleportPoints;
     private Animator m_Animator;
@@ -39,7 +38,6 @@ public class FinalWizardScript : EnemyScript
         m_GoingRight = false;
         m_Player = GameObject.FindGameObjectWithTag("Player");
         m_Collider = GetComponent<CapsuleCollider2D>();
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_CanMove = true;
@@ -54,7 +52,7 @@ public class FinalWizardScript : EnemyScript
         float dt = Time.deltaTime;
         if (m_Player.GetComponent<PlayerController>().m_ActivateBossFight)
         {
-            InvokeRepeating("AttackWithProyectile", 2, 4);
+            InvokeRepeating("AttackWithProyectile", 2, 2.5f);
             m_WizardBehaviour = WIZARD_BEHAVIOUR.BATTLE;
             m_Player.GetComponent<PlayerController>().m_ActivateBossFight = false;
             m_ActivateHealthBar = true;
@@ -69,7 +67,6 @@ public class FinalWizardScript : EnemyScript
             }
             m_CanMove = false;
             m_Collider.enabled = false;
-            m_Rigidbody2D.bodyType = RigidbodyType2D.Static;
         }
         CheckIfFlipNeeded();
     }

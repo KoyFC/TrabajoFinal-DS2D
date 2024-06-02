@@ -824,7 +824,7 @@ PrefabInstance:
     - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_ScreenTransitionAnimator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1591113374}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -16957,6 +16957,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!95 &1591113374 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1203451908412471959, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
+  m_PrefabInstance: {fileID: 1122368291}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1631862832 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8437442416838395745, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
