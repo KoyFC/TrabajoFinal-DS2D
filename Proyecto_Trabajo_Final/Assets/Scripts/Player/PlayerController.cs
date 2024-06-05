@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     public Vector2 m_Movement;
     public bool m_ActivateBossFight;
-    private static bool m_HasTriggeredBossFight;
+    public static bool m_HasTriggeredBossFight;
 
     public float m_DefaultSpeed = 5.0f;
     private float m_CurrentSpeed;

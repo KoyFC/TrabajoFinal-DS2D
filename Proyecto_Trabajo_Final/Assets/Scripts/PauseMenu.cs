@@ -70,11 +70,13 @@ public class PauseMenu : MonoBehaviour
     {
         GamePaused = false;
         Time.timeScale = 1f;
+        PlayerController.m_HasTriggeredBossFight = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Close()
     {
+        PlayerController.m_HasTriggeredBossFight = false;
         SceneManager.LoadScene("TitleScreen");
     }
 }

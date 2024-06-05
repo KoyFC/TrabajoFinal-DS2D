@@ -7,9 +7,9 @@ public class ReturnMainMenu : MonoBehaviour
 {
     private void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.H))
         {
+            PlayerController.m_HasTriggeredBossFight = false;
             Close();
         }
     }
