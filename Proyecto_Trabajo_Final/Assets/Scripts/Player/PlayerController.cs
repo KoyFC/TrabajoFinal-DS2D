@@ -486,6 +486,16 @@ public class PlayerController : MonoBehaviour
     private void FadeInScreen()
     {
         m_ScreenTransitionAnimator.SetTrigger("FadeIN");
+        if (m_Rigidbody2D.gravityScale < 0)
+        {
+            m_Rigidbody2D.gravityScale *= -1;
+            transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+            m_Lantern.transform.localScale = new Vector2(m_Lantern.transform.localScale.x, m_Lantern.transform.localScale.y * -1);
+            m_LanternRenderer.flipY = !m_LanternRenderer.flipY;
+            m_DefaultJumpForce *= -1;
+
+        }
     }
     
     public void TriggerRevival() // Called during death animation
@@ -853,7 +863,14 @@ public class PlayerController : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Level4" || SceneManager.GetActiveScene().name == "Level5")
             {
                 m_UnlockedColors = 5;
-                m_LifePoints = m_MaxLifePoints + 2;
+                if (m_MaxLifePoints == 9)
+                {
+                    m_MaxLifePoints = 10;
+                }
+                else if (m_MaxLifePoints <= 8)
+                {
+                    m_LifePoints = m_MaxLifePoints + 2;
+                }
                 m_CurrentMaxExtraJumps = 1;
             }
             else 

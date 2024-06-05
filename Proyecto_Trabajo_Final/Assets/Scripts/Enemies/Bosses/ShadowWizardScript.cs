@@ -189,6 +189,7 @@ public class ShadowWizardScript : EnemyScript
 
     public void DestroyBoss()
     {
+        Invoke("EnableNextLevel", 1.8f);
         Destroy(gameObject, 2);
     }
 

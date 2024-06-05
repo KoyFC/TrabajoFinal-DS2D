@@ -27,6 +27,15 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (m_Target.GetComponent<Rigidbody2D>().gravityScale < 0 && m_VerticalOffsetBossArena > 0)
+        {
+            m_VerticalOffsetBossArena *= -1;
+        }
+        else if (m_Target.GetComponent<Rigidbody2D>().gravityScale > 0 && m_VerticalOffsetBossArena < 0)
+        {
+            m_VerticalOffsetBossArena *= -1;
+        }
+
         if (m_Target.transform.position.x > m_BossArenaStart.x && m_Target.transform.position.x < m_BossArenaEnd.x && m_Target.transform.position.y < m_BossArenaStart.y && m_Target.transform.position.y > m_BossArenaEnd.y)
         {
             m_TargetPosition = new Vector3(
