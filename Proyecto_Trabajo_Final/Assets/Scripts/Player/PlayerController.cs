@@ -836,6 +836,13 @@ public class PlayerController : MonoBehaviour
             m_LifePoints = 0;
         }
 
+        if (collision.CompareTag("CheckPoint"))
+        {
+            m_SpawnPoint = collision.transform;
+            collision.GetComponent<BoxCollider2D>().enabled = false;
+            collision.GetComponent<CapsuleCollider2D>().enabled = true;
+        }
+
         if (collision.CompareTag("ColorPickup"))
         {
             m_UnlockedColors++;
