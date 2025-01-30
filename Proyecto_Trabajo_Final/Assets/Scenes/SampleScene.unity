@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &98184137 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3048874990662091220, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
-  m_PrefabInstance: {fileID: 1075273007}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &104745933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3899,6 +3894,7 @@ MonoBehaviour:
   m_DamageDealtToPlayer: 1
   m_SpawnPoint: {x: 0, y: 0, z: 0}
   m_ActivateHealthBar: 0
+  m_ActivateMusic: 0
   m_GoingRight: 0
 --- !u!58 &480335769
 CircleCollider2D:
@@ -4433,11 +4429,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7704104594445288753, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
   m_PrefabInstance: {fileID: 1075273007}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1786876271 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5463210640878511616, guid: 480445b2c73e3504f84a5e735d3be316, type: 3}
-  m_PrefabInstance: {fileID: 1075273007}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1836717310
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,26 +4679,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_LifePoints
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_MaxLifePoints
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_ActivateBossFight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_DefaultMaxExtraJumps
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_CurrentColorIndicator
-      value: 
-      objectReference: {fileID: 98184137}
     - target: {fileID: 491233709579377969, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4772,26 +4743,6 @@ PrefabInstance:
       propertyPath: m_Flames.Array.data[4]
       value: 
       objectReference: {fileID: 1307386755}
-    - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_FlameAnimators.Array.data[0]
-      value: 
-      objectReference: {fileID: 1786876271}
-    - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_FlameAnimators.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_FlameAnimators.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_FlameAnimators.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4325455037375292649, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
-      propertyPath: m_FlameAnimators.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4808,6 +4759,10 @@ PrefabInstance:
     - target: {fileID: 2953718300381190044, guid: e71b06a1a49f89e43829011caf79705e, type: 3}
       propertyPath: m_Name
       value: Evil WIzard 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2953718300381190044, guid: e71b06a1a49f89e43829011caf79705e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8217388371569820799, guid: e71b06a1a49f89e43829011caf79705e, type: 3}
       propertyPath: m_LocalPosition.x

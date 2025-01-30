@@ -42825,9 +42825,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_LifePoints
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_SpawnPoint
       value: 
       objectReference: {fileID: 553629843}
+    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_MaxLifePoints
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_UnlockedColors
       value: 1

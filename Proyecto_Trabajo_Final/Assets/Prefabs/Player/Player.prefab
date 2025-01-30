@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1507257861194883707}
   - component: {fileID: 8464046458557171860}
   - component: {fileID: 1555454027264857477}
+  - component: {fileID: 5113052821556288474}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -55,6 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnPoint: {fileID: 0}
+  m_Movement: {x: 0, y: 0}
   m_ActivateBossFight: 0
   m_DefaultSpeed: 2.4
   m_RunSpeedMultiplier: 1.5
@@ -63,15 +65,19 @@ MonoBehaviour:
   m_KnockbackForce: 300
   m_ReviveTriggered: 0
   m_LanternActionAnimator: {fileID: 9052352788508659451}
+  m_ScreenTransitionAnimator: {fileID: 0}
+  m_PlayerRenderer: {fileID: 0}
   m_JumpParticlesPrefab: {fileID: 7295471739157409381, guid: 7904386efeb95e3419e8812ecb110048, type: 3}
   m_JumpParticlesSpawn: {fileID: 2199322235715976734}
-  m_MaxLifePoints: 5
-  m_LifePoints: 5
+  m_MaxLifePoints: 10
+  m_LifePoints: 10
+  m_InvencibleAfterHit: 0
   m_InvencibleAfterHitDuration: 1
   m_GroundCheck: {fileID: 5506363686676608244}
   m_GroundLayer:
     serializedVersion: 2
     m_Bits: 128
+  m_DeadZone: 0.4
   m_Lantern: {fileID: 7721312724340656334}
   m_LanternHinge: {fileID: 1397733227353135100}
   m_LanternRenderer: {fileID: 3999988617766219634}
@@ -108,12 +114,6 @@ MonoBehaviour:
   m_Colors:
   - {r: 0.7028302, g: 0.9705184, b: 1, a: 1}
   - {r: 1, g: 0.7264151, b: 0.24056602, a: 1}
-  m_FlameAnimators:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!212 &4990416500409293905
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -249,6 +249,93 @@ CapsuleCollider2D:
   m_Offset: {x: -0.084811985, y: -0.10438442}
   m_Size: {x: 1.0213963, y: 1.7912312}
   m_Direction: 0
+--- !u!114 &5113052821556288474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491233709579377969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 697e17e6750690d46a2992b4b62ac08e, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 450015246587204698}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDeviceChange
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5113052821556288474}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.PlayerInput,
+            Unity.InputSystem
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a97443d-ea77-4a12-81ae-0b6c7171f47f
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dfe4571a-6e7e-4962-ae5b-e33cca699f5a
+    m_ActionName: Player/Aim[/Mouse/position,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c134e81e-2889-4877-af05-78c40ab3079f
+    m_ActionName: Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ef7aa6f7-07b5-46fd-9ca3-d77833fb6cce
+    m_ActionName: Player/Run[/Keyboard/shift,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 41e9f68b-52e2-42ef-b841-afd0cbbc6edc
+    m_ActionName: Player/Summon[/Keyboard/e,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53b66b83-9823-4c45-8b00-7362aa8f6d89
+    m_ActionName: Player/Act[/Mouse/leftButton,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eafaaf1d-d444-4784-bf25-fa0b09790a84
+    m_ActionName: Player/Reset[/Mouse/rightButton,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 04227159-fc15-4d78-8fa7-175d02d4d0fd
+    m_ActionName: Player/Attack[/Mouse/middleButton,/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c5249f2f-8460-4d3a-b899-6721b7a3911f
+    m_ActionName: Player/ChangeColor[/Mouse/scroll/down,/Mouse/scroll/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce23271a-7e97-4b45-9772-f15b0ce86b3f
+    m_ActionName: Player/ChangeColorNext[/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce562ef5-d093-435c-92ef-143b12194f6f
+    m_ActionName: Player/ChangeColorPrev[/XInputControllerWindows/leftShoulder]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2199322235715976734
 GameObject:
   m_ObjectHideFlags: 0

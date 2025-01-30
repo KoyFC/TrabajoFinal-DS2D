@@ -53053,6 +53053,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
+      propertyPath: m_DefaultMaxExtraJumps
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450015246587204698, guid: dbbaba87e20a5d94ead6782856bb496c, type: 3}
       propertyPath: m_ScreenTransitionAnimator
       value: 
       objectReference: {fileID: 1507450490}

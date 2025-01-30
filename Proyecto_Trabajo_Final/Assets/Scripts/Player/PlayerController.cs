@@ -4,9 +4,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerInput))]
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
+    private Vector3 m_LastDirection;
     // Spawn variables
     public Transform m_SpawnPoint;
     public static Transform m_BossArenaSpawnPoint;
@@ -33,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private bool m_IsDead;
     public bool m_ReviveTriggered;
     private bool m_NewAbilityUnlocked;
+
+    private Vector2 m_Aim;
 
     private Vector3 m_MousePosition;
     private Animator m_Animator;
@@ -61,6 +69,11 @@ public class PlayerController : MonoBehaviour
     private bool m_IsGrounded;
 
     [Header("Input variables")]
+    [SerializeField] private float m_DeadZone = 0.4f;
+    private PlayerControls m_PlayerControls;
+    private PlayerInput m_PlayerInput;
+    private bool m_IsGamepad;
+
     private bool m_RunPressed;
     private bool m_JumpPressed;
     private bool m_SitPressed;
@@ -70,6 +83,7 @@ public class PlayerController : MonoBehaviour
     private bool m_MouseWheelPressed;
     private float m_MouseWheel;
     private bool m_AttackingWithMouseWheel;
+    private Vector3 m_AimDirection;
 
     [Header("Lantern variables")]
     public GameObject m_Lantern;
@@ -107,9 +121,30 @@ public class PlayerController : MonoBehaviour
             m_GoingRight = value; 
         }
     }
+    #endregion
+
+    #region Main Methods
+
+    private void OnEnable()
+    {
+        m_PlayerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        m_PlayerControls.Disable();
+    }
+
+    public void OnDeviceChange(PlayerInput playerInput)
+    {
+        m_IsGamepad = playerInput.currentControlScheme.Equals("Controller");
+    }
 
     void Awake()
     {
+        m_PlayerControls = new PlayerControls();
+        m_PlayerInput = GetComponent<PlayerInput>();
+
         if (m_HasTriggeredBossFight)
         {
             m_HasTriggeredBossFight = false;
@@ -132,6 +167,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        m_LastDirection = transform.position;
         m_LifePoints = m_MaxLifePoints;
         m_CanMove = false;
         Invoke("CanMoveAgain", 1);
@@ -178,12 +214,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Player Methods
     // --- PLAYER METHODS ---
 
     private void HandleInputs()
     {
         if (!m_NoControlAfterHit)
-        {
+        {/*
             m_Movement.x = Input.GetAxis("Horizontal");
             m_RunPressed = Input.GetKey(KeyCode.LeftShift);
             m_JumpPressed = Input.GetKeyDown(KeyCode.Space);
@@ -193,6 +232,37 @@ public class PlayerController : MonoBehaviour
             m_RightClickPressed = Input.GetMouseButtonDown(1);
             m_MouseWheelPressed = Input.GetMouseButtonDown(2);
             m_MouseWheel = Input.GetAxisRaw("Mouse ScrollWheel");
+            */
+
+            m_Movement = m_PlayerControls.Player.Movement.ReadValue<Vector2>();
+            m_JumpPressed = m_PlayerControls.Player.Jump.triggered;
+            m_RunPressed = m_PlayerControls.Player.Run.ReadValue<float>() > 0;
+            m_SummonLanternPressed = m_PlayerControls.Player.Summon.triggered;
+            m_LeftClickPressed = m_PlayerControls.Player.Act.triggered;
+            m_RightClickPressed = m_PlayerControls.Player.Reset.triggered;
+            m_MouseWheelPressed = m_PlayerControls.Player.Attack.triggered;
+            m_Aim = m_PlayerControls.Player.Aim.ReadValue<Vector2>();
+            
+
+            if (m_IsGamepad)
+            {
+                if (m_PlayerControls.Player.ChangeColorNext.triggered)
+                {
+                    m_MouseWheel = -1;
+                }
+                else if (m_PlayerControls.Player.ChangeColorPrev.triggered)
+                {
+                    m_MouseWheel = 1;
+                }
+                else 
+                {
+                    m_MouseWheel = 0;
+                }
+            }
+            else
+            {
+                m_MouseWheel = m_PlayerControls.Player.ChangeColor.ReadValue<float>();
+            }
         }
     }
 
@@ -249,12 +319,26 @@ public class PlayerController : MonoBehaviour
         }
         
         // Flip the player's sprite based on the mouse position only if the player is not running
-        m_MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (m_IsGamepad)
+        {
+            m_AimDirection = Vector3.right * m_Aim.x + Vector3.up * m_Aim.y;
+            if (m_AimDirection.sqrMagnitude > 0f && (Mathf.Abs(m_Aim.x) > m_DeadZone || Mathf.Abs(m_Aim.y) > m_DeadZone))
+            {
+                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, Vector3.forward);
+                m_MousePosition = rotation * m_AimDirection + transform.position;
+            }
+        }
+        else
+        {
+            m_MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        
         m_MousePosition.z = transform.position.z;
 
         if (m_LanternActive) // The player will flip based on the mouse position only if the lantern is active
         {
-            if (m_MousePosition.x > transform.position.x)
+            Debug.Log(m_LastDirection.x + " " + transform.position.x);
+            if (m_LastDirection.x + transform.position.x > transform.position.x)
             {
                 GoingRight = true;
             }
@@ -531,7 +615,9 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    #endregion
 
+    #region Lantern Methods
     // --- LANTERN METHODS ---
 
     public void SummonLantern() // Used in the animation event
@@ -550,16 +636,41 @@ public class PlayerController : MonoBehaviour
 
     private void AimLantern()
     {
-        Vector2 direction = m_MousePosition - transform.position;
+        Vector3 direction;
+
+        if (m_IsGamepad)
+        {
+            Vector2 aimInput = m_PlayerControls.Player.Aim.ReadValue<Vector2>();
+            if (aimInput.sqrMagnitude > 0f)
+            {
+                direction = new Vector3(aimInput.x, aimInput.y, 0).normalized;
+                m_LastDirection = direction;
+                m_MousePosition = transform.position + direction;
+            }
+            else
+            {
+                direction = m_LastDirection; // Use the last direction if no input
+            }
+        }
+        else
+        {
+            m_MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            m_MousePosition.z = transform.position.z;
+            direction = (m_MousePosition - transform.position).normalized;
+            m_LastDirection = direction;
+        }
+
+        // Rotate the lantern hinge smoothly towards the direction
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Adjusting the lantern angle to point in the right direction
+        // Adjust the angle based on the player's direction
         if (!GoingRight)
         {
-            // If the player is not going right, the angle is inverted
-            angle += (angle < 0) ? 180 : -180;
+            angle += 180;
         }
-        m_LanternHinge.rotation = Quaternion.Euler(0, 0, angle);
+
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+        m_LanternHinge.rotation = Quaternion.Lerp(m_LanternHinge.rotation, targetRotation, Time.deltaTime * 100);
     }
 
     private void SwitchLanternColor()
@@ -802,7 +913,9 @@ public class PlayerController : MonoBehaviour
         m_LightCollider.enabled = false;
     }
 
+    #endregion
 
+    #region Collision Methods
     // --- COLLISION METHODS ---
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -899,6 +1012,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Spikes") && !m_InvencibleAfterHit)
+        {
+            m_LifePoints = 0;
+        }
+    }
+
+    #endregion
+
     private void GoToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -913,13 +1036,5 @@ public class PlayerController : MonoBehaviour
     private void StopNewAbility()
     {
         m_NewAbilityUnlocked = false;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Spikes") && !m_InvencibleAfterHit)
-        {
-            m_LifePoints = 0;
-        }
     }
 }
